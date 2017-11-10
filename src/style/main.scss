@@ -1,0 +1,24 @@
+%abs {
+  position: absolute;
+  z-index: 1;
+}
+
+%rel {
+  position: relative;
+  z-index: 1;
+}
+
+
+$space: 10px;
+
+:global(.swiper-explain) {
+  @extend %abs;
+  left: 0;
+  bottom: 0;
+  width: calc(100% - 20px);
+  padding: $space;
+
+  background-color: rgba(black, .4);
+  color: white;
+  text-align: left;
+}
