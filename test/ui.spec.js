@@ -16,7 +16,7 @@ describe('ui spec', () => {
     }).load()
   ;
 
-  test('videoDefault.container.parentNode should be videoWrapper', () => {
-    expect(videoDefault.container.parentNode).toBe(videoWrapper);
+  test('videoDefault.mainContainer.parentNode should be videoWrapper', () => {
+    expect(videoDefault.mainContainer.parentNode).toBe(videoWrapper);
   });
 });

@@ -70,24 +70,129 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 9);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
+/***/ (function(module, exports) {
+
+// https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
+var global = module.exports = typeof window != 'undefined' && window.Math == Math
+  ? window : typeof self != 'undefined' && self.Math == Math ? self
+  // eslint-disable-next-line no-new-func
+  : Function('return this')();
+if (typeof __g == 'number') __g = global; // eslint-disable-line no-undef
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports) {
+
+module.exports = function (it) {
+  return typeof it === 'object' ? it !== null : typeof it === 'function';
+};
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Thank's IE8 for his funny defineProperty
+module.exports = !__webpack_require__(3)(function () {
+  return Object.defineProperty({}, 'a', { get: function () { return 7; } }).a != 7;
+});
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports) {
+
+module.exports = function (exec) {
+  try {
+    return !!exec();
+  } catch (e) {
+    return true;
+  }
+};
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports) {
+
+var core = module.exports = { version: '2.5.1' };
+if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// to indexed object, toObject with fallback for non-array-like ES3 strings
+var IObject = __webpack_require__(6);
+var defined = __webpack_require__(7);
+module.exports = function (it) {
+  return IObject(defined(it));
+};
+
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// fallback for non-array-like ES3 and non-enumerable old V8 strings
+var cof = __webpack_require__(27);
+// eslint-disable-next-line no-prototype-builtins
+module.exports = Object('z').propertyIsEnumerable(0) ? Object : function (it) {
+  return cof(it) == 'String' ? it.split('') : Object(it);
+};
+
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports) {
+
+// 7.2.1 RequireObjectCoercible(argument)
+module.exports = function (it) {
+  if (it == undefined) throw TypeError("Can't call method on  " + it);
+  return it;
+};
+
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports) {
+
+// 7.1.4 ToInteger
+var ceil = Math.ceil;
+var floor = Math.floor;
+module.exports = function (it) {
+  return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
+};
+
+
+/***/ }),
+/* 9 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_swiper_dist_css_swiper_css__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_swiper_dist_css_swiper_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_swiper_dist_css_swiper_css__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__style_main_scss__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__style_main_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__style_main_scss__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_swiper__ = __webpack_require__(3);
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_swiper_dist_css_swiper_css__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_swiper_dist_css_swiper_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_swiper_dist_css_swiper_css__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__style_main_scss__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__style_main_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__style_main_scss__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_swiper__ = __webpack_require__(41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_awesome_js_funcs_judgeBasic_isString__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_awesome_js_funcs_dom_addStyles__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_awesome_js_funcs_dom_siblingFilter__ = __webpack_require__(45);
+
 
 // style
-
 
 
 
@@ -97,124 +202,186 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 // template
 
 
+
+
 var AwesomeSwiper = function () {
-  function AwesomeSwiper(container, _ref) {
-    var _ref$loop = _ref.loop,
-        loop = _ref$loop === undefined ? true : _ref$loop,
-        _ref$autoplay = _ref.autoplay,
-        autoplay = _ref$autoplay === undefined ? {
-      delay: 5000
-    } : _ref$autoplay,
-        _ref$mousewheel = _ref.mousewheel,
-        mousewheel = _ref$mousewheel === undefined ? true : _ref$mousewheel,
-        _ref$pagination = _ref.pagination,
-        pagination = _ref$pagination === undefined ? {
-      type: 'default'
-    } : _ref$pagination,
-        _ref$navigation = _ref.navigation,
-        navigation = _ref$navigation === undefined ? {
-      type: 'default',
-      styles: {
-        nextEl: null,
-        prevEl: null
-      }
-    } : _ref$navigation;
+  function AwesomeSwiper() {
+    __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck___default()(this, AwesomeSwiper);
 
-    _classCallCheck(this, AwesomeSwiper);
-
-    // init container
-    this.container = isString(container) ? document.querySelector(container) : container;
-
-    this.container.classList.add('swiper-container');
-
-    this.swiper = null;
-    this.customConfig = {
-      loop: loop,
-      autoplay: autoplay,
-      mousewheel: mousewheel,
-      pagination: pagination,
-      navigation: navigation
+    // init mainContainer
+    this.el = {
+      mainContainer: null,
+      thumbsContainer: null,
+      pagination: null,
+      navigation: {}
     };
-    this.swiperConfig = {
-      loop: this.customConfig.loop,
-      mousewheel: this.customConfig.mousewheel
+    this.swiper = {};
+    this.config = {};
+  }
+
+  AwesomeSwiper.prototype.init = function init(container) {
+    var customMainConfig = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+    this.el.mainContainer = Object(__WEBPACK_IMPORTED_MODULE_5_awesome_js_funcs_judgeBasic_isString__["a" /* default */])(container) ? document.querySelector(container) : container;
+
+    var mainDefault = {
+      loop: false,
+      autoplay: 0,
+      mousewheel: true,
+      pagination: {
+        type: 'default'
+      },
+      navigation: {
+        type: 'white',
+        styles: {
+          nextEl: null,
+          prevEl: null
+        }
+      }
+    };
+
+    this.config.mainOrigin = __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign___default()({}, mainDefault, customMainConfig);
+
+    this.config.main = {
+      loop: this.config.mainOrigin.loop,
+      mousewheel: this.config.mainOrigin.mousewheel
     };
 
     // set customConfig.autoplay
-    if (this.customConfig.autoplay) {
-      this.swiperConfig.autoplay = this.customConfig.autoplay;
+    if (this.config.mainOrigin.autoplay) {
+      this.config.main.autoplay.delay = this.config.mainOrigin.autoplay;
     }
 
-    this.init();
-  }
-
-  AwesomeSwiper.prototype.init = function init() {
     this._initPagination();
     this._initNavigation();
 
-    this.swiper = new __WEBPACK_IMPORTED_MODULE_2_swiper__["a" /* default */](this.container, this.swiperConfig);
+    this.swiper.main = new __WEBPACK_IMPORTED_MODULE_4_swiper__["a" /* default */](this.el.mainContainer, this.config.main);
+
+    return this;
+  };
+
+  AwesomeSwiper.prototype.addThumbs = function addThumbs(thumbsContainer) {
+    var customThumbsConfig = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+    console.log('addThumbs');
+
+    this.el.thumbsContainer = Object(__WEBPACK_IMPORTED_MODULE_5_awesome_js_funcs_judgeBasic_isString__["a" /* default */])(thumbsContainer) ? document.querySelector(thumbsContainer) : thumbsContainer;
+
+    this.el.thumbsContainer.classList.add(__WEBPACK_IMPORTED_MODULE_3__style_main_scss___default.a.thumbsWrapper);
+
+    // config
+    var thumbsDefault = {
+      spaceBetween: 10,
+      slidesPerView: 'auto'
+    };
+
+    this.config.thumbs = __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign___default()({}, thumbsDefault, customThumbsConfig);
+
+    this.swiper.thumbs = new __WEBPACK_IMPORTED_MODULE_4_swiper__["a" /* default */](this.el.thumbsContainer, this.config.thumbs);
+
+    this.swiper.thumbs.slides[0].classList.add(__WEBPACK_IMPORTED_MODULE_3__style_main_scss___default.a.active);
+
+    this._thumbsCtrl();
+
+    return this;
+  };
+
+  AwesomeSwiper.prototype._thumbsCtrl = function _thumbsCtrl() {
+    var _this = this;
+
+    // mainSwiper ctrl
+    this.swiper.main.on('slideChange', function () {
+      console.log('mainSwiper slideChange');
+
+      var swiperIndex = _this.swiper.main.realIndex,
+          targetThumb = _this.swiper.thumbs.slides[swiperIndex];
+
+      // ui change
+      Object(__WEBPACK_IMPORTED_MODULE_7_awesome_js_funcs_dom_siblingFilter__["a" /* default */])(targetThumb, __WEBPACK_IMPORTED_MODULE_3__style_main_scss___default.a.active)[0].classList.remove(__WEBPACK_IMPORTED_MODULE_3__style_main_scss___default.a.active);
+      _this.swiper.thumbs.slides[swiperIndex].classList.add(__WEBPACK_IMPORTED_MODULE_3__style_main_scss___default.a.active);
+      _this.swiper.thumbs.slideTo(swiperIndex);
+    });
+
+    Array.prototype.slice.call(this.swiper.thumbs.slides).forEach(function (el, index) {
+      el.addEventListener('click', function () {
+        // ui change
+        Object(__WEBPACK_IMPORTED_MODULE_7_awesome_js_funcs_dom_siblingFilter__["a" /* default */])(el, __WEBPACK_IMPORTED_MODULE_3__style_main_scss___default.a.active)[0].classList.remove(__WEBPACK_IMPORTED_MODULE_3__style_main_scss___default.a.active);
+        _this.swiper.thumbs.slides[index].classList.add(__WEBPACK_IMPORTED_MODULE_3__style_main_scss___default.a.active);
+        _this.swiper.thumbs.slideTo(index);
+        _this.swiper.main.slideTo(index);
+      });
+    });
   };
 
   AwesomeSwiper.prototype._initPagination = function _initPagination() {
-    if (this.customConfig.pagination) {
+    if (this.config.mainOrigin.pagination) {
       // add to Dom
-      this.pagination = document.createElement('div');
-      this.pagination.classList.add('swiper-pagination');
-      this.container.appendChild(this.pagination);
+      this.el.pagination = document.createElement('div');
+      this.el.pagination.classList.add('swiper-pagination');
+      this.el.mainContainer.appendChild(this.el.pagination);
 
       // set swiperConfig
-      switch (this.customConfig.pagination.type) {
+      switch (this.config.mainOrigin.pagination.type) {
         case 'case':
           break;
 
         default:
-          this.swiperConfig.pagination = {
+          this.config.main.pagination = {
             el: '.swiper-pagination',
             clickable: true,
             dynamicBullets: true
           };
       }
+
+      // Fix Explain Space
+      this._fixExplainSpace();
     }
   };
 
+  AwesomeSwiper.prototype._fixExplainSpace = function _fixExplainSpace() {
+    Array.prototype.slice.apply(this.el.mainContainer.querySelectorAll('.swiper-explain')).forEach(function (el) {
+      el.classList.add(__WEBPACK_IMPORTED_MODULE_3__style_main_scss___default.a.bottomSpace);
+    });
+  };
+
   AwesomeSwiper.prototype._initNavigation = function _initNavigation() {
-    var _navigation = this.customConfig.navigation;
+    var _navigation = this.config.mainOrigin.navigation;
 
     if (_navigation) {
       // add to Dom
-      this.pagination = {
+      this.el.navigation = {
         nextEl: document.createElement('div'),
         prevEl: document.createElement('div')
       };
-      this.pagination.nextEl.classList.add('swiper-button-next');
-      this.pagination.prevEl.classList.add('swiper-button-prev');
+      this.el.navigation.nextEl.classList.add('swiper-button-next');
+      this.el.navigation.prevEl.classList.add('swiper-button-prev');
 
       switch (_navigation.type) {
         case 'white':
-          this.pagination.nextEl.classList.add('swiper-button-white');
-          this.pagination.prevEl.classList.add('swiper-button-white');
+          this.el.navigation.nextEl.classList.add('swiper-button-white');
+          this.el.navigation.prevEl.classList.add('swiper-button-white');
           break;
 
         case 'black':
-          this.pagination.nextEl.classList.add('swiper-button-black');
-          this.pagination.prevEl.classList.add('swiper-button-black');
+          this.el.navigation.nextEl.classList.add('swiper-button-black');
+          this.el.navigation.prevEl.classList.add('swiper-button-black');
           break;
 
         case 'custom':
           if (_navigation.styles.nextEl) {
-            _addStyles(this.pagination.nextEl, _navigation.styles.nextEl);
+            Object(__WEBPACK_IMPORTED_MODULE_6_awesome_js_funcs_dom_addStyles__["a" /* default */])(this.el.navigation.nextEl, _navigation.styles.nextEl);
           }
           if (_navigation.styles.prevEl) {
-            _addStyles(this.pagination.prevEl, _navigation.styles.prevEl);
+            Object(__WEBPACK_IMPORTED_MODULE_6_awesome_js_funcs_dom_addStyles__["a" /* default */])(this.el.navigation.prevEl, _navigation.styles.prevEl);
           }
           break;
       }
 
-      this.container.appendChild(this.pagination.nextEl);
-      this.container.appendChild(this.pagination.prevEl);
+      this.el.mainContainer.appendChild(this.el.navigation.nextEl);
+      this.el.mainContainer.appendChild(this.el.navigation.prevEl);
 
       // set swiperConfig
-      this.swiperConfig.navigation = {
+      this.config.main.navigation = {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev'
       };
@@ -227,36 +394,491 @@ var AwesomeSwiper = function () {
 /* harmony default export */ __webpack_exports__["default"] = (AwesomeSwiper);
 ;
 
-// private
-var _addStyles = function _addStyles(element, styles) {
-  for (var name in styles) {
-    element.style[name] = styles[name];
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = { "default": __webpack_require__(11), __esModule: true };
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(12);
+module.exports = __webpack_require__(4).Object.assign;
+
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// 19.1.3.1 Object.assign(target, source)
+var $export = __webpack_require__(13);
+
+$export($export.S + $export.F, 'Object', { assign: __webpack_require__(23) });
+
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var global = __webpack_require__(0);
+var core = __webpack_require__(4);
+var ctx = __webpack_require__(14);
+var hide = __webpack_require__(16);
+var PROTOTYPE = 'prototype';
+
+var $export = function (type, name, source) {
+  var IS_FORCED = type & $export.F;
+  var IS_GLOBAL = type & $export.G;
+  var IS_STATIC = type & $export.S;
+  var IS_PROTO = type & $export.P;
+  var IS_BIND = type & $export.B;
+  var IS_WRAP = type & $export.W;
+  var exports = IS_GLOBAL ? core : core[name] || (core[name] = {});
+  var expProto = exports[PROTOTYPE];
+  var target = IS_GLOBAL ? global : IS_STATIC ? global[name] : (global[name] || {})[PROTOTYPE];
+  var key, own, out;
+  if (IS_GLOBAL) source = name;
+  for (key in source) {
+    // contains in native
+    own = !IS_FORCED && target && target[key] !== undefined;
+    if (own && key in exports) continue;
+    // export native or passed
+    out = own ? target[key] : source[key];
+    // prevent global pollution for namespaces
+    exports[key] = IS_GLOBAL && typeof target[key] != 'function' ? source[key]
+    // bind timers to global for call from export context
+    : IS_BIND && own ? ctx(out, global)
+    // wrap global constructors for prevent change them in library
+    : IS_WRAP && target[key] == out ? (function (C) {
+      var F = function (a, b, c) {
+        if (this instanceof C) {
+          switch (arguments.length) {
+            case 0: return new C();
+            case 1: return new C(a);
+            case 2: return new C(a, b);
+          } return new C(a, b, c);
+        } return C.apply(this, arguments);
+      };
+      F[PROTOTYPE] = C[PROTOTYPE];
+      return F;
+    // make static versions for prototype methods
+    })(out) : IS_PROTO && typeof out == 'function' ? ctx(Function.call, out) : out;
+    // export proto methods to core.%CONSTRUCTOR%.methods.%NAME%
+    if (IS_PROTO) {
+      (exports.virtual || (exports.virtual = {}))[key] = out;
+      // export proto methods to core.%CONSTRUCTOR%.prototype.%NAME%
+      if (type & $export.R && expProto && !expProto[key]) hide(expProto, key, out);
+    }
   }
-},
-    isString = function isString(str) {
-  return typeof str === 'string' && str.constructor === String;
+};
+// type bitmap
+$export.F = 1;   // forced
+$export.G = 2;   // global
+$export.S = 4;   // static
+$export.P = 8;   // proto
+$export.B = 16;  // bind
+$export.W = 32;  // wrap
+$export.U = 64;  // safe
+$export.R = 128; // real proto method for `library`
+module.exports = $export;
+
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// optional / simple context binding
+var aFunction = __webpack_require__(15);
+module.exports = function (fn, that, length) {
+  aFunction(fn);
+  if (that === undefined) return fn;
+  switch (length) {
+    case 1: return function (a) {
+      return fn.call(that, a);
+    };
+    case 2: return function (a, b) {
+      return fn.call(that, a, b);
+    };
+    case 3: return function (a, b, c) {
+      return fn.call(that, a, b, c);
+    };
+  }
+  return function (/* ...args */) {
+    return fn.apply(that, arguments);
+  };
+};
+
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports) {
+
+module.exports = function (it) {
+  if (typeof it != 'function') throw TypeError(it + ' is not a function!');
+  return it;
+};
+
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var dP = __webpack_require__(17);
+var createDesc = __webpack_require__(22);
+module.exports = __webpack_require__(2) ? function (object, key, value) {
+  return dP.f(object, key, createDesc(1, value));
+} : function (object, key, value) {
+  object[key] = value;
+  return object;
+};
+
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var anObject = __webpack_require__(18);
+var IE8_DOM_DEFINE = __webpack_require__(19);
+var toPrimitive = __webpack_require__(21);
+var dP = Object.defineProperty;
+
+exports.f = __webpack_require__(2) ? Object.defineProperty : function defineProperty(O, P, Attributes) {
+  anObject(O);
+  P = toPrimitive(P, true);
+  anObject(Attributes);
+  if (IE8_DOM_DEFINE) try {
+    return dP(O, P, Attributes);
+  } catch (e) { /* empty */ }
+  if ('get' in Attributes || 'set' in Attributes) throw TypeError('Accessors not supported!');
+  if ('value' in Attributes) O[P] = Attributes.value;
+  return O;
+};
+
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var isObject = __webpack_require__(1);
+module.exports = function (it) {
+  if (!isObject(it)) throw TypeError(it + ' is not an object!');
+  return it;
+};
+
+
+/***/ }),
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = !__webpack_require__(2) && !__webpack_require__(3)(function () {
+  return Object.defineProperty(__webpack_require__(20)('div'), 'a', { get: function () { return 7; } }).a != 7;
+});
+
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var isObject = __webpack_require__(1);
+var document = __webpack_require__(0).document;
+// typeof document.createElement is 'object' in old IE
+var is = isObject(document) && isObject(document.createElement);
+module.exports = function (it) {
+  return is ? document.createElement(it) : {};
+};
+
+
+/***/ }),
+/* 21 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// 7.1.1 ToPrimitive(input [, PreferredType])
+var isObject = __webpack_require__(1);
+// instead of the ES6 spec version, we didn't implement @@toPrimitive case
+// and the second argument - flag - preferred type is a string
+module.exports = function (it, S) {
+  if (!isObject(it)) return it;
+  var fn, val;
+  if (S && typeof (fn = it.toString) == 'function' && !isObject(val = fn.call(it))) return val;
+  if (typeof (fn = it.valueOf) == 'function' && !isObject(val = fn.call(it))) return val;
+  if (!S && typeof (fn = it.toString) == 'function' && !isObject(val = fn.call(it))) return val;
+  throw TypeError("Can't convert object to primitive value");
+};
+
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports) {
+
+module.exports = function (bitmap, value) {
+  return {
+    enumerable: !(bitmap & 1),
+    configurable: !(bitmap & 2),
+    writable: !(bitmap & 4),
+    value: value
+  };
+};
+
+
+/***/ }),
+/* 23 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+// 19.1.2.1 Object.assign(target, source, ...)
+var getKeys = __webpack_require__(24);
+var gOPS = __webpack_require__(35);
+var pIE = __webpack_require__(36);
+var toObject = __webpack_require__(37);
+var IObject = __webpack_require__(6);
+var $assign = Object.assign;
+
+// should work with symbols and should have deterministic property order (V8 bug)
+module.exports = !$assign || __webpack_require__(3)(function () {
+  var A = {};
+  var B = {};
+  // eslint-disable-next-line no-undef
+  var S = Symbol();
+  var K = 'abcdefghijklmnopqrst';
+  A[S] = 7;
+  K.split('').forEach(function (k) { B[k] = k; });
+  return $assign({}, A)[S] != 7 || Object.keys($assign({}, B)).join('') != K;
+}) ? function assign(target, source) { // eslint-disable-line no-unused-vars
+  var T = toObject(target);
+  var aLen = arguments.length;
+  var index = 1;
+  var getSymbols = gOPS.f;
+  var isEnum = pIE.f;
+  while (aLen > index) {
+    var S = IObject(arguments[index++]);
+    var keys = getSymbols ? getKeys(S).concat(getSymbols(S)) : getKeys(S);
+    var length = keys.length;
+    var j = 0;
+    var key;
+    while (length > j) if (isEnum.call(S, key = keys[j++])) T[key] = S[key];
+  } return T;
+} : $assign;
+
+
+/***/ }),
+/* 24 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// 19.1.2.14 / 15.2.3.14 Object.keys(O)
+var $keys = __webpack_require__(25);
+var enumBugKeys = __webpack_require__(34);
+
+module.exports = Object.keys || function keys(O) {
+  return $keys(O, enumBugKeys);
+};
+
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var has = __webpack_require__(26);
+var toIObject = __webpack_require__(5);
+var arrayIndexOf = __webpack_require__(28)(false);
+var IE_PROTO = __webpack_require__(31)('IE_PROTO');
+
+module.exports = function (object, names) {
+  var O = toIObject(object);
+  var i = 0;
+  var result = [];
+  var key;
+  for (key in O) if (key != IE_PROTO) has(O, key) && result.push(key);
+  // Don't enum bug & hidden keys
+  while (names.length > i) if (has(O, key = names[i++])) {
+    ~arrayIndexOf(result, key) || result.push(key);
+  }
+  return result;
+};
+
+
+/***/ }),
+/* 26 */
+/***/ (function(module, exports) {
+
+var hasOwnProperty = {}.hasOwnProperty;
+module.exports = function (it, key) {
+  return hasOwnProperty.call(it, key);
+};
+
+
+/***/ }),
+/* 27 */
+/***/ (function(module, exports) {
+
+var toString = {}.toString;
+
+module.exports = function (it) {
+  return toString.call(it).slice(8, -1);
+};
+
+
+/***/ }),
+/* 28 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// false -> Array#indexOf
+// true  -> Array#includes
+var toIObject = __webpack_require__(5);
+var toLength = __webpack_require__(29);
+var toAbsoluteIndex = __webpack_require__(30);
+module.exports = function (IS_INCLUDES) {
+  return function ($this, el, fromIndex) {
+    var O = toIObject($this);
+    var length = toLength(O.length);
+    var index = toAbsoluteIndex(fromIndex, length);
+    var value;
+    // Array#includes uses SameValueZero equality algorithm
+    // eslint-disable-next-line no-self-compare
+    if (IS_INCLUDES && el != el) while (length > index) {
+      value = O[index++];
+      // eslint-disable-next-line no-self-compare
+      if (value != value) return true;
+    // Array#indexOf ignores holes, Array#includes - not
+    } else for (;length > index; index++) if (IS_INCLUDES || index in O) {
+      if (O[index] === el) return IS_INCLUDES || index || 0;
+    } return !IS_INCLUDES && -1;
+  };
+};
+
+
+/***/ }),
+/* 29 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// 7.1.15 ToLength
+var toInteger = __webpack_require__(8);
+var min = Math.min;
+module.exports = function (it) {
+  return it > 0 ? min(toInteger(it), 0x1fffffffffffff) : 0; // pow(2, 53) - 1 == 9007199254740991
+};
+
+
+/***/ }),
+/* 30 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var toInteger = __webpack_require__(8);
+var max = Math.max;
+var min = Math.min;
+module.exports = function (index, length) {
+  index = toInteger(index);
+  return index < 0 ? max(index + length, 0) : min(index, length);
+};
+
+
+/***/ }),
+/* 31 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var shared = __webpack_require__(32)('keys');
+var uid = __webpack_require__(33);
+module.exports = function (key) {
+  return shared[key] || (shared[key] = uid(key));
+};
+
+
+/***/ }),
+/* 32 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var global = __webpack_require__(0);
+var SHARED = '__core-js_shared__';
+var store = global[SHARED] || (global[SHARED] = {});
+module.exports = function (key) {
+  return store[key] || (store[key] = {});
+};
+
+
+/***/ }),
+/* 33 */
+/***/ (function(module, exports) {
+
+var id = 0;
+var px = Math.random();
+module.exports = function (key) {
+  return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++id + px).toString(36));
+};
+
+
+/***/ }),
+/* 34 */
+/***/ (function(module, exports) {
+
+// IE 8- don't enum bug keys
+module.exports = (
+  'constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf'
+).split(',');
+
+
+/***/ }),
+/* 35 */
+/***/ (function(module, exports) {
+
+exports.f = Object.getOwnPropertySymbols;
+
+
+/***/ }),
+/* 36 */
+/***/ (function(module, exports) {
+
+exports.f = {}.propertyIsEnumerable;
+
+
+/***/ }),
+/* 37 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// 7.1.13 ToObject(argument)
+var defined = __webpack_require__(7);
+module.exports = function (it) {
+  return Object(defined(it));
+};
+
+
+/***/ }),
+/* 38 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+
+exports.default = function (instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
 };
 
 /***/ }),
-/* 1 */
+/* 39 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 2 */
+/* 40 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+module.exports = {"bottomSpace":"src-style-main__bottomSpace","thumbsWrapper":"src-style-main__thumbsWrapper","active":"src-style-main__active"};
 
 /***/ }),
-/* 3 */
+/* 41 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_dom7_dist_dom7_modular__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_dom7_dist_dom7_modular__ = __webpack_require__(42);
 /**
- * Swiper 4.0.5
+ * Swiper 4.0.7
  * Most modern mobile touch slider and framework with hardware accelerated transitions
  * http://www.idangero.us/swiper/
  *
@@ -264,7 +886,7 @@ var _addStyles = function _addStyles(element, styles) {
  *
  * Released under the MIT License
  *
- * Released on: November 7, 2017
+ * Released on: November 28, 2017
  */
 
 
@@ -284,6 +906,7 @@ if (typeof window === 'undefined') {
     },
     Image() {},
     Date() {},
+    screen: {},
   };
 } else {
   w = window;
@@ -1802,9 +2425,17 @@ var onTouchStart = function (event) {
   const startY = touches.currentY;
 
   // Do NOT start if iOS edge swipe is detected. Otherwise iOS app (UIWebView) cannot swipe-to-go-back anymore
-  if (Device.ios && params.iOSEdgeSwipeDetection && startX <= params.iOSEdgeSwipeThreshold) {
+
+  if (
+    Device.ios &&
+    !Device.cordova &&
+    params.iOSEdgeSwipeDetection &&
+    (startX <= params.iOSEdgeSwipeThreshold) &&
+    (startX >= window.screen.width - params.iOSEdgeSwipeThreshold)
+  ) {
     return;
   }
+
   Utils.extend(data$$1, {
     isTouched: true,
     isMoved: false,
@@ -1826,7 +2457,7 @@ var onTouchStart = function (event) {
     if (doc.activeElement && Object(__WEBPACK_IMPORTED_MODULE_0_dom7_dist_dom7_modular__["a" /* $ */])(doc.activeElement).is(data$$1.formElements)) {
       doc.activeElement.blur();
     }
-    if (preventDefault) {
+    if (preventDefault && swiper.allowTouchMove) {
       e.preventDefault();
     }
   }
@@ -1865,14 +2496,16 @@ var onTouchMove = function (event) {
     if (swiper.isVertical()) {
       // Vertical
       if (
-        (touches.currentY < touches.startY && swiper.translate <= swiper.maxTranslate()) ||
-        (touches.currentY > touches.startY && swiper.translate >= swiper.minTranslate())
+        (pageY < touches.startY && swiper.translate <= swiper.maxTranslate()) ||
+        (pageY > touches.startY && swiper.translate >= swiper.minTranslate())
       ) {
+        data$$1.isTouched = false;
+        data$$1.isMoved = false;
         return;
       }
     } else if (
-      (touches.currentX < touches.startX && swiper.translate <= swiper.maxTranslate()) ||
-      (touches.currentX > touches.startX && swiper.translate >= swiper.minTranslate())
+      (pageX < touches.startX && swiper.translate <= swiper.maxTranslate()) ||
+      (pageX > touches.startX && swiper.translate >= swiper.minTranslate())
     ) {
       return;
     }
@@ -1889,16 +2522,22 @@ var onTouchMove = function (event) {
   }
   if (e.targetTouches && e.targetTouches.length > 1) return;
 
-  touches.currentX = e.type === 'touchmove' ? e.targetTouches[0].pageX : e.pageX;
-  touches.currentY = e.type === 'touchmove' ? e.targetTouches[0].pageY : e.pageY;
+  touches.currentX = pageX;
+  touches.currentY = pageY;
+
+  const diffX = touches.currentX - touches.startX;
+  const diffY = touches.currentY - touches.startY;
 
   if (typeof data$$1.isScrolling === 'undefined') {
     let touchAngle;
     if ((swiper.isHorizontal() && touches.currentY === touches.startY) || (swiper.isVertical() && touches.currentX === touches.startX)) {
       data$$1.isScrolling = false;
     } else {
-      touchAngle = (Math.atan2(Math.abs(touches.currentY - touches.startY), Math.abs(touches.currentX - touches.startX)) * 180) / Math.PI;
-      data$$1.isScrolling = swiper.isHorizontal() ? touchAngle > params.touchAngle : (90 - touchAngle > params.touchAngle);
+      // eslint-disable-next-line
+      if ((diffX * diffX) + (diffY * diffY) >= 25) {
+        touchAngle = (Math.atan2(Math.abs(diffY), Math.abs(diffX)) * 180) / Math.PI;
+        data$$1.isScrolling = swiper.isHorizontal() ? touchAngle > params.touchAngle : (90 - touchAngle > params.touchAngle);
+      }
     }
   }
   if (data$$1.isScrolling) {
@@ -1942,7 +2581,7 @@ var onTouchMove = function (event) {
   swiper.emit('sliderMove', e);
   data$$1.isMoved = true;
 
-  let diff = swiper.isHorizontal() ? touches.currentX - touches.startX : touches.currentY - touches.startY;
+  let diff = swiper.isHorizontal() ? diffX : diffY;
   touches.diff = diff;
 
   diff *= params.touchRatio;
@@ -2156,7 +2795,7 @@ var onTouchEnd = function (event) {
         } else {
           newPosition = snapGrid[nextSlide - 1];
         }
-        if (!rtl) newPosition = -newPosition;
+        newPosition = -newPosition;
       }
       // Fix duration
       if (swiper.velocity !== 0) {
@@ -2264,7 +2903,7 @@ var onTouchEnd = function (event) {
 var onResize = function () {
   const swiper = this;
 
-  const { params, el, allowSlideNext, allowSlidePrev } = swiper;
+  const { params, el } = swiper;
 
   if (el && el.offsetWidth === 0) return;
 
@@ -2272,6 +2911,9 @@ var onResize = function () {
   if (params.breakpoints) {
     swiper.setBreakpoint();
   }
+
+  // Save locks
+  const { allowSlideNext, allowSlidePrev } = swiper;
 
   // Disable locks on resize
   swiper.allowSlideNext = true;
@@ -2337,9 +2979,9 @@ function attachEvents() {
       (Support.touch ? target : doc).addEventListener(touchEvents.end, swiper.onTouchEnd, false);
     } else {
       if (Support.touch) {
-        const passiveListener = touchEvents.start === 'onTouchStart' && Support.passiveListener && params.passiveListeners ? { passive: true, capture: false } : false;
+        const passiveListener = touchEvents.start === 'touchstart' && Support.passiveListener && params.passiveListeners ? { passive: true, capture: false } : false;
         target.addEventListener(touchEvents.start, swiper.onTouchStart, passiveListener);
-        target.addEventListener(touchEvents.move, swiper.onTouchMove, capture);
+        target.addEventListener(touchEvents.move, swiper.onTouchMove, Support.passiveListener ? { passive: false, capture } : capture);
         target.addEventListener(touchEvents.end, swiper.onTouchEnd, passiveListener);
       }
       if ((params.simulateTouch && !Device.ios && !Device.android) || (params.simulateTouch && !Support.touch && Device.ios)) {
@@ -2422,12 +3064,12 @@ var setBreakpoint = function () {
     swiper.currentBreakpoint = breakpoint;
 
     if (needsReLoop) {
-      const oldIndex = activeIndex - loopedSlides;
       swiper.loopDestroy();
       swiper.loopCreate();
       swiper.updateSlides();
-      swiper.slideTo(oldIndex + loopedSlides, 0, false);
+      swiper.slideTo((activeIndex - loopedSlides) + swiper.loopedSlides, 0, false);
     }
+    swiper.emit('breakpoint', breakPointsParams);
   }
 };
 
@@ -2439,7 +3081,7 @@ var getBreakpoint = function (breakpoints) {
   Object.keys(breakpoints).forEach((point) => {
     points.push(point);
   });
-  points.sort((a, b) => parseInt(a, 10) > parseInt(b, 10));
+  points.sort((a, b) => parseInt(a, 10) - parseInt(b, 10));
   for (let i = 0; i < points.length; i += 1) {
     const point = points[i];
     if (point >= win.innerWidth && !breakpoint) {
@@ -2720,7 +3362,9 @@ class Swiper$1 extends SwiperClass {
 
     // Swiper Instance
     const swiper = this;
-
+    if (typeof swiper.modules === 'undefined') {
+      swiper.modules = {};
+    }
     Object.keys(swiper.modules).forEach((moduleName) => {
       const module = swiper.modules[moduleName];
       if (module.params) {
@@ -4259,7 +4903,7 @@ const Scrollbar = {
   setDragPosition(e) {
     const swiper = this;
     const { scrollbar } = swiper;
-    const { $el, dragSize, moveDivider } = scrollbar;
+    const { $el, dragSize, trackSize } = scrollbar;
 
     let pointerPosition;
     if (swiper.isHorizontal()) {
@@ -4267,18 +4911,15 @@ const Scrollbar = {
     } else {
       pointerPosition = ((e.type === 'touchstart' || e.type === 'touchmove') ? e.targetTouches[0].pageY : e.pageY || e.clientY);
     }
-    let position = (pointerPosition) - $el.offset()[swiper.isHorizontal() ? 'left' : 'top'] - (dragSize / 2);
-    const positionMin = -swiper.minTranslate() * moveDivider;
-    const positionMax = -swiper.maxTranslate() * moveDivider;
-    if (position < positionMin) {
-      position = positionMin;
-    } else if (position > positionMax) {
-      position = positionMax;
-    }
+    let positionRatio;
+    positionRatio = ((pointerPosition) - $el.offset()[swiper.isHorizontal() ? 'left' : 'top'] - (dragSize / 2)) / (trackSize - dragSize);
+    positionRatio = Math.max(Math.min(positionRatio, 1), 0);
     if (swiper.rtl) {
-      position = positionMax - position;
+      positionRatio = 1 - positionRatio;
     }
-    position = -position / moveDivider;
+
+    const position = swiper.minTranslate() + ((swiper.maxTranslate() - swiper.minTranslate()) * positionRatio);
+
     swiper.updateProgress(position);
     swiper.setTranslate(position);
     swiper.updateActiveIndex();
@@ -5265,7 +5906,9 @@ var Lazy$1 = {
   on: {
     beforeInit() {
       const swiper = this;
-      if (swiper.params.preloadImages) swiper.params.preloadImages = false;
+      if (swiper.params.lazy.enabled && swiper.params.preloadImages) {
+        swiper.params.preloadImages = false;
+      }
     },
     init() {
       const swiper = this;
@@ -5719,7 +6362,7 @@ const History = {
     swiper.history.scrollToSlide(swiper.params.speed, swiper.history.paths.value, false);
   },
   getPathValues() {
-    const pathArray = win.location.pathname.slice(1).split('/');
+    const pathArray = win.location.pathname.slice(1).split('/').filter(part => part !== '');
     const total = pathArray.length;
     const key = pathArray[total - 2];
     const value = pathArray[total - 1];
@@ -5785,6 +6428,7 @@ var History$1 = {
         setHistory: History.setHistory.bind(swiper),
         setHistoryPopState: History.setHistoryPopState.bind(swiper),
         scrollToSlide: History.scrollToSlide.bind(swiper),
+        destroy: History.destroy.bind(swiper),
       },
     });
   },
@@ -6507,6 +7151,7 @@ var EffectCoverflow = {
       swiper.classNames.push(`${swiper.params.containerModifierClass}3d`);
 
       swiper.params.watchSlidesProgress = true;
+      swiper.originalParams.watchSlidesProgress = true;
     },
     setTranslate() {
       const swiper = this;
@@ -6523,7 +7168,7 @@ var EffectCoverflow = {
 
 // Swiper Class
 // Core Modules
-Swiper$1.components = [
+Swiper$1.use([
   Device$2,
   Support$2,
   Browser$2,
@@ -6547,13 +7192,13 @@ Swiper$1.components = [
   EffectCube,
   EffectFlip,
   EffectCoverflow
-];
+]);
 
 /* harmony default export */ __webpack_exports__["a"] = (Swiper$1);
 
 
 /***/ }),
-/* 4 */
+/* 42 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7973,6 +8618,55 @@ function scroll(...args) {
 
 
 
+
+/***/ }),
+/* 43 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/**
+ * 判断是否字符串
+ * @param str
+ * @returns {boolean}
+ */
+/* harmony default export */ __webpack_exports__["a"] = (function (str) {
+  return typeof str === 'string' && str.constructor === String;
+});
+
+/***/ }),
+/* 44 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/**
+ * element add styles
+ * @param element
+ * @param styles(obj)
+ */
+/* harmony default export */ __webpack_exports__["a"] = (function (element, styles) {
+  for (var name in styles) {
+    element.style[name] = styles[name];
+  }
+});
+
+/***/ }),
+/* 45 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/**
+ * 兄弟节点过滤器（主要用来选取同组中的激活对象）
+ * @param el
+ * @param className
+ * @returns {*}
+ */
+/* harmony default export */ __webpack_exports__["a"] = (function (el) {
+  var className = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'active';
+
+  return Array.prototype.filter.call(el.parentNode.children, function (child) {
+    return child.classList.contains(className);
+  });
+});
 
 /***/ })
 /******/ ])["default"];

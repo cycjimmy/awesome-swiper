@@ -12,53 +12,76 @@ html(lang='en')
         link(href=_style, rel="stylesheet")
 
     style.
-      * {
-        margin: 0;
-        padding: 0;
-      }
-
-      html, body {
-        height: 100%;
-      }
-
-      body {
-        margin: 0 auto;
+      h1, h2 {
         text-align: center;
       }
 
       #demo1 {
-        width: 600px;
-        height: 300px;
-
-        background-color: aliceblue;
+        width: 800px;
+        height: 450px;
       }
 
-body
-  h1 Awesome Swiper Demo
-
-  #demo1
-    .swiper-wrapper
-      .swiper-slide
-        .swiper-explain Slide 1: test test test
-      .swiper-slide
-        .swiper-explain Slide 2: test test test test test test test test test test test test test test test test test test test test
-      .swiper-slide
-        .swiper-explain Slide 3: test test test test test test test test test test test test test test test test test test test test test test test test test test
-      .swiper-slide
-        .swiper-explain Slide 4: test test test test test test test test test test test test test test test test test test test test test test test test test test
-      .swiper-slide
-        .swiper-explain Slide 5: test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test
-
-  each _js in htmlWebpackPlugin.files.js
-    script(src=_js)
-
-  script.
-    let swiper = new AwesomeSwiper('#demo1', {
-      autoplay: null,
-      navigation: {
-        type: 'black'
+      #demo1Thumbs {
+        width: 800px;
+        height: 100px;
       }
-    });
 
-    console.log(swiper);
+  body
+    h1 Awesome Swiper Demo
+    hr
+
+    each _js in htmlWebpackPlugin.files.js
+      script(src=_js)
+    h2 Basic
+
+    #demo1.swiper-container
+      .swiper-wrapper
+        .swiper-slide
+          a.swiper-img(href="javascript:;")
+            img(src='p1.jpg')
+          .swiper-explain Slide 1: test test test
+        .swiper-slide
+          a.swiper-img(href="javascript:;")
+            img(src='p2.jpg')
+          .swiper-explain Slide 2: test test test test test test test test test test test test test test test test test test test test
+        .swiper-slide
+          a.swiper-img(href="javascript:;")
+            img(src='p3.jpg')
+          .swiper-explain Slide 3: test test test test test test test test test test test test test test test test test test test test test test test test test test
+        .swiper-slide
+          a.swiper-img(href="javascript:;")
+            img(src='p4.jpg')
+          .swiper-explain Slide 4: test test test test test test test test test test test test test test test test test test test test test test test test test test
+        .swiper-slide
+          a.swiper-img(href="javascript:;")
+            img(src='p5.jpg')
+          .swiper-explain Slide 5: test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test
+
+
+    #demo1Thumbs.swiper-container
+      .swiper-wrapper
+        .swiper-slide
+          a.swiper-img(href="javascript:;")
+            img(src='p1.jpg')
+        .swiper-slide
+          a.swiper-img(href="javascript:;")
+            img(src='p2.jpg')
+        .swiper-slide
+          a.swiper-img(href="javascript:;")
+            img(src='p3.jpg')
+        .swiper-slide
+          a.swiper-img(href="javascript:;")
+            img(src='p4.jpg')
+        .swiper-slide
+          a.swiper-img(href="javascript:;")
+            img(src='p5.jpg')
+
+    script.
+      new AwesomeSwiper()
+        .init('#demo1')
+        .addThumbs('#demo1Thumbs', {
+          slidesPerView: 5
+        });
+
+    hr
 

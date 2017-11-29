@@ -1,5 +1,5 @@
 /**
- * Swiper 4.0.5
+ * Swiper 4.0.7
  * Most modern mobile touch slider and framework with hardware accelerated transitions
  * http://www.idangero.us/swiper/
  *
@@ -7,7 +7,7 @@
  *
  * Released under the MIT License
  *
- * Released on: November 7, 2017
+ * Released on: November 28, 2017
  */
 .swiper-container {
   margin: 0 auto;
@@ -600,9 +600,16 @@ button.swiper-pagination-bullet {
   /* Windows 8 IE 10 fix */
   -ms-perspective: 1200px;
 }
-.swiper-explain {
+.swiper-img, .swiper-explain, .swiper-img > img {
   position: absolute;
   z-index: 1;
+}
+
+.swiper-img {
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .swiper-explain {
@@ -613,4 +620,47 @@ button.swiper-pagination-bullet {
   background-color: rgba(0, 0, 0, 0.4);
   color: white;
   text-align: left;
+}
+
+.swiper-explain.src-style-main__bottomSpace {
+  padding-bottom: 25px;
+}
+
+.swiper-img {
+  overflow: hidden;
+}
+
+.swiper-img > img {
+  display: block;
+  left: -100%;
+  top: -100%;
+  right: -100%;
+  bottom: -100%;
+  margin: auto;
+  width: 100%;
+}
+
+.src-style-main__thumbsWrapper .swiper-slide {
+  height: 100%;
+  opacity: 0.4;
+  cursor: pointer;
+}
+
+.src-style-main__thumbsWrapper .swiper-slide.src-style-main__active {
+  opacity: 1;
+}
+
+.src-style-main__thumbsWrapper.swiper-container-vertical .swiper-img > img {
+  width: auto;
+  height: 100%;
+}
+
+.swiper-pagination-bullet {
+  background-color: #fff;
+  opacity: .6;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #fff;
+  opacity: .8;
 }

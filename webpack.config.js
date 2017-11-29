@@ -8,6 +8,7 @@ var
   , ExtractTextPlugin = require('extract-text-webpack-plugin')
   , OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
   , CleanWebpackPlugin = require('clean-webpack-plugin')
+  , CopyWebpackPlugin = require('copy-webpack-plugin')
 ;
 
 var
@@ -157,6 +158,12 @@ if (IS_DEVELOPMENT) {
       verbose: true,
       dry: false
     }),
+
+    new CopyWebpackPlugin([{
+      from: path.resolve('static', 'images', '*'),
+      to: path.resolve('dist'),
+      flatten: true
+    }]),
 
     new BrowserSyncPlugin({
       server: {
