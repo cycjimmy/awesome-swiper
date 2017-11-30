@@ -1,4 +1,4 @@
-import AwesomeSwiper from '../dist/AwesomeSwiper';
+import AwesomeSwiper from '../build/AwesomeSwiper';
 
 describe('ui spec', () => {
   const
