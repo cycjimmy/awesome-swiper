@@ -2,21 +2,17 @@ import AwesomeSwiper from '../dist/AwesomeSwiper';
 
 describe('ui spec', () => {
   const
-    videoWrapper = document.createElement('div')
-    , source = 'https://raw.githubusercontent.com/cycjimmy/staticFiles/storage/media/Sony_test_video_vertical_720x1280.mp4'
+    wrapper = document.createElement('div')
   ;
 
-  videoWrapper.style.width = '360px';
-  videoWrapper.style.height = '640px';
+  wrapper.style.width = '360px';
+  wrapper.style.height = '640px';
 
   let
-    videoDefault = new H5VideoPlayer(source, {
-      context: videoWrapper,
-      control: true,
-    }).load()
+    basic = new AwesomeSwiper().init(wrapper)
   ;
 
-  test('videoDefault.mainContainer.parentNode should be videoWrapper', () => {
-    expect(videoDefault.mainContainer.parentNode).toBe(videoWrapper);
+  test('basic test', () => {
+    expect(basic.el.mainContainer).toBe(wrapper);
   });
 });

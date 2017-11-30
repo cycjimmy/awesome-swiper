@@ -1,11 +1,12 @@
 {
   "name": "awesome-swiper",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "awesome-swiper based on swiper",
   "main": "build/AwesomeSwiper.js",
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack --display-modules --display-reasons --display-error-details --watch --color",
-    "build": "cross-env NODE_ENV=production webpack --progress && webpack --progress --display-modules --display-reasons --display-error-details --color",
+    "build": "cross-env NODE_ENV=pack webpack --progress --display-modules --display-reasons --display-error-details --color && cross-env NODE_ENV=production webpack --progress",
+    "pack:standalone": "cross-env NODE_ENV=standalone webpack --display-modules --display-reasons --display-error-details --color",
     "deploy": "gulp deploy",
     "prepublish": "npm run build"
   },
@@ -24,6 +25,7 @@
   "homepage": "https://github.com/cycdpo/awesome-swiper#readme",
   "dependencies": {
     "awesome-js-funcs": "^0.1.0",
+    "babel-polyfill": "^6.26.0",
     "swiper": "^4.0.6"
   },
   "devDependencies": {

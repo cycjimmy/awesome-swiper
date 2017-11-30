@@ -22,12 +22,13 @@
 [download-url]: https://npmjs.org/package/awesome-swiper
 [license-image]: https://img.shields.io/npm/l/awesome-swiper.svg?style=flat-square
 
-awesome-swiper based on [swiper 4+](https://github.com/nolimits4web/Swiper). ([Releases](https://github.com/cycdpo/awesome-swiper/releases) | [Demo](https://cycdpo.github.io/awesome-swiper/))
+awesome-swiper 基于 [swiper 4+](https://github.com/nolimits4web/Swiper). ([Releases](https://github.com/cycdpo/awesome-swiper/releases) | [Demo](https://cycdpo.github.io/awesome-swiper/))
+
 
 [English](https://github.com/cycdpo/awesome-swiper/blob/master/README.md) | [中文](https://github.com/cycdpo/awesome-swiper/blob/master/README_zhCN.md)
 ***
 
-## Install
+## 安装
 ```shell
 # via npm
 $ npm install awesome-swiper --save
@@ -36,50 +37,50 @@ $ npm install awesome-swiper --save
 $ yarn add awesome-swiper
 ```
 
-## Usage
-**Awesome Swiper based on [Swiper 4+](https://github.com/nolimits4web/Swiper). Add Script of swiper in your project first**
+## 使用
+**Awesome Swiper 基于 [Swiper 4+](https://github.com/nolimits4web/Swiper). 首先将 swiper 加入你的工程**
 
 ```javascript
 import AwesomeSwiper from 'awesome-swiper';
 
-// OR
+// 或者
 const AwesomeSwiper = require('awesome-swiper');
 
 let awesomeSwiper = new AwesomeSwiper().init(context [, ...config , ...overlayConfig]);
 
-// if need thumbs
+// 如果需要缩略图
 let awesomeSwiper = new AwesomeSwiper()
                         .init(context [, ...config, ...overlayConfig])
                         .addThumbs(thumbsContext [, ...thumbsConfig]);
 ```
 
-### `AwesomeSwiper().init()` params:
-* `context`: [String | Element] the wrapper of swiper. Height and width of wrapper must be initialized.
+### `AwesomeSwiper().init()` 参数:
+* `context`: [String | Element] swiper的包裹层. 该包裹层的宽高大小必须提前设定.
 * config: [Object]
-  * `loop`: [Boolean] Set to `true` to enable loop. Default `false`.
-  * `autoplay`: [Number] Set autoplay delay. `0` means close. Default `0`.
-  * `mousewheel`: [Boolean] Set to `true` to enable navigation through slides using mouse wheel. Default `true`.
-  * `pagination`: [Object] Set pagination. If you do not want a pagination, set `null`.
-    * `color`: [String] `'default'` is blue. You also can set `'black'` or `'white'` and embed your own style
-  * `navigation`: [Object] Set navigation. If you do not want a navigation, set `null`.
-    * `color`: [String] `'default'` is blue. You also can set `'black'` or `'white'`
-    * `styles`: [Object] Custom style
-      * `prevEl` [Object] Custom style for prevEl.
-      * `nextEl` [Object] Custom style for nextEl.
-* overlayConfig: [Object] Use Custom swiper api to overlay config.
+  * `loop`: [Boolean] 设为 `true` 来允许循环播放. 默认值为 `false`.
+  * `autoplay`: [Number] 设置自动播放延迟的秒数. `0` 表示关闭自动播放. 默认值为 `0`.
+  * `mousewheel`: [Boolean] 设为 `true` 来允许通过鼠标滚轮控制. 默认值为 `true`.
+  * `pagination`: [Object] 设置分页器. 如果你不想要分页器, 将其设为 `null`.
+    * `color`: [String] `'default'` 默认颜色是蓝色. 你也可以设置`'black'` 或者 `'white'` 或者嵌入自定义样式
+  * `navigation`: [Object] 设置导航按钮. 如果你不想要导航按钮, 将其设为 `null`.
+    * `color`: [String] `'default'` 默认颜色是蓝色. 你也可以设置`'black'` 或者 `'white'`
+    * `styles`: [Object] 自定义样式
+      * `prevEl` [Object] 向前按钮的自定义样式.
+      * `nextEl` [Object] 向后按钮的自定义样式.
+* overlayConfig: [Object] 使用自定义的 swiper api 设置来覆盖.
 
-### `AwesomeSwiper().addThumbs()` params:
-* `thumbsContext`: [String | Element] the wrapper of thumbs. Height and width of wrapper must be initialized.
-* thumbsConfig: [Object] You can set it follow swiper api.
-  * `direction`: [String] Set direction. Could be 'horizontal' or 'vertical'.
-  * `spaceBetween`: [Number] Distance between slides in px. Default `10`.
-  * `slidesPerView`: [Number | 'auto'] Number of slides per view. Default `'auto'`.
+### `AwesomeSwiper().addThumbs()` 参数:
+* `thumbsContext`: [String | Element] 缩略图的包裹层. 该包裹层的宽高大小必须提前设定.
+* thumbsConfig: [Object] 可参照 swiper api 进行设置
+  * `direction`: [String] 设置方向. 可选项: 'horizontal' 和 'vertical'.
+  * `spaceBetween`: [Number] 每个slide之前的距离, 单位为px. 默认值为 `10`.
+  * `slidesPerView`: [Number | 'auto'] 视框中能同时看到slide的数量. 默认值为 `'auto'`.
 
-### new css classes in AwesomeSwiper
-* `.swiper-full-img`: Full images container.
-* `.swiper-explain`: Explain text container.
+### AwesomeSwiper中新增的css类
+* `.swiper-full-img`: 满照片容器.
+* `.swiper-explain`: 解释说明文字容器.
 
-## Use in browser
+## 在浏览器中使用
 ```html
 <link href="swiper.min.css" rel="stylesheet">
 <link href="AwesomeSwiper.min.css" rel="stylesheet">
@@ -98,7 +99,7 @@ let awesomeSwiper = new AwesomeSwiper()
 </script>
 ```
 
-or use standalone:
+或者使用独立版本:
 ```html
 <link href="AwesomeSwiper.standalone.min.css" rel="stylesheet">
 

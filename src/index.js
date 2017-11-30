@@ -1,19 +1,25 @@
 // style
-import 'swiper/dist/css/swiper.css';
+if(DEVELOPMENT || STANDALONE) {
+  console.log('development');
+  require('../node_modules/swiper/dist/css/swiper.css');
+}
+
 import _style from './style/main.scss';
 
 // component
 import Swiper from 'swiper';
 
-// template
+
 import isString from 'awesome-js-funcs/judgeBasic/isString';
 import addStyles from 'awesome-js-funcs/dom/addStyles';
 import siblingFilter from 'awesome-js-funcs/dom/siblingFilter';
 
+// polyfill
+import '../node_modules/core-js/modules/es6.object.assign';
+
 
 export default class AwesomeSwiper {
   constructor() {
-    // init mainContainer
     this.el = {
       mainContainer: null,
       thumbsContainer: null,
@@ -24,7 +30,7 @@ export default class AwesomeSwiper {
     this.config = {};
   };
 
-  init(container, customMainConfig = {}) {
+  init(container, customMainConfig = {}, overlaySwiperConfig = {}) {
     this.el.mainContainer = isString(container)
       ? document.querySelector(container)
       : container;
@@ -34,13 +40,13 @@ export default class AwesomeSwiper {
       autoplay: 0,
       mousewheel: true,
       pagination: {
-        type: 'default'
+        color: 'default'
       },
       navigation: {
-        type: 'white',
+        color: 'default',
         styles: {
+          prevEl: null,
           nextEl: null,
-          prevEl: null
         }
       }
     };
@@ -61,8 +67,8 @@ export default class AwesomeSwiper {
     this._initPagination();
     this._initNavigation();
 
+    this.config.main = Object.assign(this.config.main, overlaySwiperConfig);
     this.swiper.main = new Swiper(this.el.mainContainer, this.config.main);
-
 
     return this;
   };
@@ -90,7 +96,6 @@ export default class AwesomeSwiper {
     this.swiper.thumbs.slides[0].classList.add(_style.active);
 
     this._thumbsCtrl();
-
 
     return this;
   };
@@ -132,17 +137,21 @@ export default class AwesomeSwiper {
       this.el.mainContainer.appendChild(this.el.pagination);
 
       // set swiperConfig
-      switch (this.config.mainOrigin.pagination.type) {
-        case 'case':
+      switch (this.config.mainOrigin.pagination.color) {
+        case 'white':
+          this.el.pagination.classList.add(_style.white);
           break;
 
-        default:
-          this.config.main.pagination = {
-            el: '.swiper-pagination',
-            clickable: true,
-            dynamicBullets: true,
-          };
+        case 'black':
+          this.el.pagination.classList.add(_style.black);
+          break;
       }
+
+      this.config.main.pagination = {
+        el: this.el.pagination,
+        clickable: true,
+        dynamicBullets: true,
+      };
 
       // Fix Explain Space
       this._fixExplainSpace();
@@ -170,7 +179,7 @@ export default class AwesomeSwiper {
       this.el.navigation.nextEl.classList.add('swiper-button-next');
       this.el.navigation.prevEl.classList.add('swiper-button-prev');
 
-      switch (_navigation.type) {
+      switch (_navigation.color) {
         case 'white':
           this.el.navigation.nextEl.classList.add('swiper-button-white');
           this.el.navigation.prevEl.classList.add('swiper-button-white');

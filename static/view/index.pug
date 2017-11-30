@@ -16,14 +16,24 @@ html(lang='en')
         text-align: center;
       }
 
-      #demo1 {
-        width: 800px;
-        height: 450px;
+      .code-button {
+        display: block;
+        width: 100px;
+        height: 30px;
+        margin: 20px auto;
+
+        line-height: 30px;
+        text-align: center;
+        text-decoration: none;
+        font-weight: 700;
+        color: #000;
+
+        border: 1px solid black;
+        border-radius: 4px;
       }
 
-      #demo1Thumbs {
-        width: 800px;
-        height: 100px;
+      hr{
+        margin-bottom: 30px;
       }
 
   body
@@ -32,56 +42,275 @@ html(lang='en')
 
     each _js in htmlWebpackPlugin.files.js
       script(src=_js)
+
     h2 Basic
 
-    #demo1.swiper-container
+    style.
+      #basic {
+        width: 800px;
+        height: 450px;
+      }
+
+    #basic.swiper-container
       .swiper-wrapper
         .swiper-slide
-          a.swiper-img(href="javascript:;")
-            img(src='p1.jpg')
-          .swiper-explain Slide 1: test test test
-        .swiper-slide
-          a.swiper-img(href="javascript:;")
-            img(src='p2.jpg')
-          .swiper-explain Slide 2: test test test test test test test test test test test test test test test test test test test test
-        .swiper-slide
-          a.swiper-img(href="javascript:;")
-            img(src='p3.jpg')
-          .swiper-explain Slide 3: test test test test test test test test test test test test test test test test test test test test test test test test test test
-        .swiper-slide
-          a.swiper-img(href="javascript:;")
-            img(src='p4.jpg')
-          .swiper-explain Slide 4: test test test test test test test test test test test test test test test test test test test test test test test test test test
-        .swiper-slide
-          a.swiper-img(href="javascript:;")
-            img(src='p5.jpg')
-          .swiper-explain Slide 5: test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test
-
-
-    #demo1Thumbs.swiper-container
-      .swiper-wrapper
-        .swiper-slide
-          a.swiper-img(href="javascript:;")
+          a.swiper-full-img(href="javascript:;")
             img(src='p1.jpg')
         .swiper-slide
-          a.swiper-img(href="javascript:;")
+          a.swiper-full-img(href="javascript:;")
             img(src='p2.jpg')
         .swiper-slide
-          a.swiper-img(href="javascript:;")
+          a.swiper-full-img(href="javascript:;")
             img(src='p3.jpg')
         .swiper-slide
-          a.swiper-img(href="javascript:;")
+          a.swiper-full-img(href="javascript:;")
             img(src='p4.jpg')
         .swiper-slide
-          a.swiper-img(href="javascript:;")
+          a.swiper-full-img(href="javascript:;")
             img(src='p5.jpg')
 
     script.
       new AwesomeSwiper()
-        .init('#demo1')
-        .addThumbs('#demo1Thumbs', {
+        .init('#basic');
+
+
+    a.code-button(href="https://gist.github.com/cycjimmy/a21bfbc0781e6084dd130f85fe3059e2#file-basic-html") CODE
+
+    hr
+
+    h2 Change Color
+
+    style.
+      #changeColor {
+        width: 800px;
+        height: 450px;
+      }
+
+    #changeColor.swiper-container
+      .swiper-wrapper
+        .swiper-slide
+          a.swiper-full-img(href="javascript:;")
+            img(src='p1.jpg')
+        .swiper-slide
+          a.swiper-full-img(href="javascript:;")
+            img(src='p2.jpg')
+        .swiper-slide
+          a.swiper-full-img(href="javascript:;")
+            img(src='p3.jpg')
+        .swiper-slide
+          a.swiper-full-img(href="javascript:;")
+            img(src='p4.jpg')
+        .swiper-slide
+          a.swiper-full-img(href="javascript:;")
+            img(src='p5.jpg')
+
+    script.
+      new AwesomeSwiper()
+        .init('#changeColor', {
+          pagination: {
+            color: 'white'
+          },
+          navigation: {
+            color: 'white'
+          }
+        });
+
+    a.code-button(href="https://gist.github.com/cycjimmy/a21bfbc0781e6084dd130f85fe3059e2#file-changecolor-html") CODE
+
+    hr
+
+    h2 Add Explain
+
+    style.
+      #AddExplain {
+        width: 800px;
+        height: 450px;
+      }
+
+    #AddExplain.swiper-container
+      .swiper-wrapper
+        .swiper-slide
+          a.swiper-full-img(href="javascript:;")
+            img(src='p1.jpg')
+          .swiper-explain Slide 1: This is slide 1. This is slide 1. This is slide 1. This is slide 1. This is slide 1. This is slide 1.
+        .swiper-slide
+          a.swiper-full-img(href="javascript:;")
+            img(src='p2.jpg')
+          .swiper-explain Slide 2: This is slide 2. This is slide 2. This is slide 2. This is slide 2. This is slide 2. This is slide 2. This is slide 2. This is slide 2. This is slide 2. This is slide 2.
+        .swiper-slide
+          a.swiper-full-img(href="javascript:;")
+            img(src='p3.jpg')
+          .swiper-explain Slide 3: This is slide 3. This is slide 3.
+        .swiper-slide
+          a.swiper-full-img(href="javascript:;")
+            img(src='p4.jpg')
+          .swiper-explain Slide 4: This is slide 4. This is slide 4. This is slide 4. This is slide 4. This is slide 4. This is slide 4. This is slide 4. This is slide 4. This is slide 4. This is slide 4.
+        .swiper-slide
+          a.swiper-full-img(href="javascript:;")
+            img(src='p5.jpg')
+          .swiper-explain Slide 5: This is slide 5. This is slide 5. This is slide 5. This is slide 5. This is slide 5. This is slide 5. This is slide 5. This is slide 5. This is slide 5. This is slide 5. This is slide 5. This is slide 5. This is slide 5. This is slide 5. This is slide 5. This is slide 5. This is slide 5. This is slide 5.
+
+    script.
+      new AwesomeSwiper()
+        .init('#AddExplain', {
+          pagination: {
+            color: 'white'
+          },
+          navigation: {
+            color: 'white'
+          }
+        })
+
+    a.code-button(href="https://gist.github.com/cycjimmy/a21bfbc0781e6084dd130f85fe3059e2#file-addexplain-html") CODE
+
+    hr
+
+    h2 Add Bottom Thumbs
+
+    style.
+      #bottomThumbsDemo {
+        width: 800px;
+        height: 450px;
+      }
+
+      #bottomThumbs {
+        width: 800px;
+        height: 100px;
+      }
+
+    #bottomThumbsDemo.swiper-container
+      .swiper-wrapper
+        .swiper-slide
+          a.swiper-full-img(href="javascript:;")
+            img(src='p1.jpg')
+        .swiper-slide
+          a.swiper-full-img(href="javascript:;")
+            img(src='p2.jpg')
+        .swiper-slide
+          a.swiper-full-img(href="javascript:;")
+            img(src='p3.jpg')
+        .swiper-slide
+          a.swiper-full-img(href="javascript:;")
+            img(src='p4.jpg')
+        .swiper-slide
+          a.swiper-full-img(href="javascript:;")
+            img(src='p5.jpg')
+
+    #bottomThumbs.swiper-container
+      .swiper-wrapper
+        .swiper-slide
+          a.swiper-full-img(href="javascript:;")
+            img(src='p1.jpg')
+        .swiper-slide
+          a.swiper-full-img(href="javascript:;")
+            img(src='p2.jpg')
+        .swiper-slide
+          a.swiper-full-img(href="javascript:;")
+            img(src='p3.jpg')
+        .swiper-slide
+          a.swiper-full-img(href="javascript:;")
+            img(src='p4.jpg')
+        .swiper-slide
+          a.swiper-full-img(href="javascript:;")
+            img(src='p5.jpg')
+
+    script.
+      new AwesomeSwiper()
+        .init('#bottomThumbsDemo', {
+          pagination: null,
+          navigation: {
+            color: 'white'
+          }
+        })
+        .addThumbs('#bottomThumbs', {
           slidesPerView: 5
         });
 
+    a.code-button(href="https://gist.github.com/cycjimmy/a21bfbc0781e6084dd130f85fe3059e2#file-addbottomthumbs-html") CODE
+
     hr
+
+    h2 Add Right Thumbs
+
+    style.
+      .AddRightThumbsDemo {
+        width: 800px;
+        height: 380px;
+        margin: 0 auto;
+      }
+
+      #RightThumbsDemo {
+        float: left;
+        width: 690px;
+        height: 380px;
+      }
+
+      #RightThumbs{
+        float: right;
+        width: 100px;
+        height: 380px;
+      }
+
+    .AddRightThumbsDemo
+
+      #RightThumbsDemo.swiper-container
+        .swiper-wrapper
+          .swiper-slide
+            a.swiper-full-img(href="javascript:;")
+              img(src='p1.jpg')
+            .swiper-explain Slide 1: This is slide 1. This is slide 1. This is slide 1. This is slide 1. This is slide 1. This is slide 1.
+          .swiper-slide
+            a.swiper-full-img(href="javascript:;")
+              img(src='p2.jpg')
+            .swiper-explain Slide 2: This is slide 2. This is slide 2. This is slide 2. This is slide 2. This is slide 2. This is slide 2. This is slide 2. This is slide 2. This is slide 2. This is slide 2.
+          .swiper-slide
+            a.swiper-full-img(href="javascript:;")
+              img(src='p3.jpg')
+            .swiper-explain Slide 3: This is slide 3. This is slide 3.
+          .swiper-slide
+            a.swiper-full-img(href="javascript:;")
+              img(src='p4.jpg')
+            .swiper-explain Slide 4: This is slide 4. This is slide 4. This is slide 4. This is slide 4. This is slide 4. This is slide 4. This is slide 4. This is slide 4. This is slide 4. This is slide 4.
+          .swiper-slide
+            a.swiper-full-img(href="javascript:;")
+              img(src='p5.jpg')
+            .swiper-explain Slide 5: This is slide 5. This is slide 5. This is slide 5. This is slide 5. This is slide 5. This is slide 5. This is slide 5. This is slide 5. This is slide 5. This is slide 5. This is slide 5. This is slide 5. This is slide 5. This is slide 5. This is slide 5. This is slide 5. This is slide 5. This is slide 5.
+
+      #RightThumbs.swiper-container
+        .swiper-wrapper
+          .swiper-slide
+            a.swiper-full-img(href="javascript:;")
+              img(src='p1.jpg')
+          .swiper-slide
+            a.swiper-full-img(href="javascript:;")
+              img(src='p2.jpg')
+          .swiper-slide
+            a.swiper-full-img(href="javascript:;")
+              img(src='p3.jpg')
+          .swiper-slide
+            a.swiper-full-img(href="javascript:;")
+              img(src='p4.jpg')
+          .swiper-slide
+            a.swiper-full-img(href="javascript:;")
+              img(src='p5.jpg')
+
+    script.
+      new AwesomeSwiper()
+        .init('#RightThumbsDemo', {
+          pagination: null,
+          navigation: {
+            color: 'white'
+          }
+        })
+        .addThumbs('#RightThumbs', {
+          direction: 'vertical',
+          slidesPerView: 5
+        });
+
+    a.code-button(href="https://gist.github.com/cycjimmy/a21bfbc0781e6084dd130f85fe3059e2#file-addrightthumbs-html") CODE
+
+    hr
+
+    a(style='display:block; margin: 20px; text-align: center;', href="https://github.com/cycdpo/awesome-swiper") Read More on Github.
+
 

@@ -9,11 +9,15 @@ var
   , OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
   , CleanWebpackPlugin = require('clean-webpack-plugin')
   , CopyWebpackPlugin = require('copy-webpack-plugin')
+  , DefinePlugin = require('webpack/lib/DefinePlugin')
 ;
 
 var
-  IS_DEVELOPMENT = process.env.NODE_ENV === 'development'
+  libName = 'AwesomeSwiper'
+  , IS_DEVELOPMENT = process.env.NODE_ENV === 'development'
+  , IS_PACK = process.env.NODE_ENV === 'pack'
   , IS_PRODUCTION = process.env.NODE_ENV === 'production'
+  , IS_STANDALONE = process.env.NODE_ENV === 'standalone'
   , cssIdentifier = IS_PRODUCTION ? '[hash:base64:10]' : '[path][name]__[local]'
 ;
 
@@ -40,7 +44,7 @@ var
       loader: 'postcss-loader',
       options: {
         config: {
-          path: path.resolve('postcss.customConfig.js'),
+          path: path.resolve('postcss.config.js'),
         },
       },
     },
@@ -54,16 +58,13 @@ var
 
 
 var config = {
-  entry: path.resolve('src', 'index.js'),
+  entry: [
+    'swiper',
+    path.resolve('src', 'index.js')
+  ],
 
   output: {
-    path: IS_DEVELOPMENT
-      ? path.resolve('dist')
-      : path.resolve('build'),
-    filename: IS_PRODUCTION
-      ? 'AwesomeSwiper.min.js'
-      : 'AwesomeSwiper.js',
-    library: 'AwesomeSwiper',
+    library: libName,
     libraryTarget: 'umd',
     libraryExport: 'default'
   },
@@ -71,8 +72,12 @@ var config = {
   resolve: {
     modules: [
       path.resolve('src'),
+      path.resolve('static'),
       path.resolve('node_modules')
     ],
+    'alias': {
+      'swiper': path.resolve('node_modules', 'swiper', 'dist', 'js', 'swiper.js')
+    },
     'extensions': ['.js']
   },
 
@@ -82,8 +87,7 @@ var config = {
       {
         test: /\.js$/,
         include: [
-          path.resolve('src'),
-          path.resolve('node_modules', 'swiper'),
+          path.resolve('src')
         ],
         loader: 'babel-loader'
       },
@@ -132,13 +136,12 @@ var config = {
   },
 
   plugins: [
-    new ExtractTextPlugin({
-      filename: IS_PRODUCTION
-        ? 'AwesomeSwiper.min.css'
-        : 'AwesomeSwiper.css',
-      ignoreOrder: true,
-      allChunks: true
-    }),
+    new DefinePlugin({
+      DEVELOPMENT: JSON.stringify(IS_DEVELOPMENT),
+      PACK: JSON.stringify(IS_PACK),
+      PRODUCTION: JSON.stringify(IS_PRODUCTION),
+      STANDALONE: JSON.stringify(IS_STANDALONE),
+    })
   ]
 };
 
@@ -147,7 +150,17 @@ if (IS_DEVELOPMENT) {
   // devtool
   config.devtool = 'source-map';
 
+  config.output.path = path.resolve('dist');
+  config.output.filename = libName + '.js';
+
+
   config.plugins.push(
+    new ExtractTextPlugin({
+      filename: libName + '.css',
+      ignoreOrder: true,
+      allChunks: true
+    }),
+
     new HtmlWebpackPlugin({
       inject: false,
       template: path.resolve('./static', 'view', 'index.pug'),
@@ -176,13 +189,94 @@ if (IS_DEVELOPMENT) {
 }
 
 // production mode
-if (IS_PRODUCTION) {
+if (IS_PACK || IS_PRODUCTION) {
+  config.output.path = path.resolve('build');
+
+  config.externals = {
+    swiper: 'Swiper'
+  };
+
+  if (IS_PACK) {
+    config.output.filename = libName + '.js';
+
+    config.plugins.push(
+      new ExtractTextPlugin({
+        filename: libName + '.css',
+        ignoreOrder: true,
+        allChunks: true
+      }),
+
+      new CleanWebpackPlugin(['build'], {
+        root: path.resolve('./'),
+        verbose: true,
+        dry: false
+      })
+    );
+  }
+
+  if (IS_PRODUCTION) {
+    config.output.filename = libName + '.min.js';
+
+    config.plugins.push(
+      new ExtractTextPlugin({
+        filename: libName + '.min.css',
+        ignoreOrder: true,
+        allChunks: true
+      }),
+
+      new OptimizeCssAssetsPlugin(),
+
+      new UglifyJsPlugin({
+        uglifyOptions: {
+          ie8: false,
+          ecma: 5,
+          output: {
+            comments: false,
+            beautify: false
+          },
+          compress: {
+            warnings: false,
+            drop_debugger: true,
+            drop_console: true,
+            collapse_vars: true,
+            reduce_vars: true
+          },
+          warnings: false,
+          sourceMap: true
+        }
+      })
+    );
+  }
+}
+
+// standalone mode
+if (IS_STANDALONE) {
+  config.output.path = path.resolve('standalone');
+  config.output.filename = libName + '.standalone.min.js';
+
   config.plugins.push(
-    new CleanWebpackPlugin(['build'], {
+    new ExtractTextPlugin({
+      filename: libName + '.standalone.min.css',
+      ignoreOrder: true,
+      allChunks: true
+    }),
+
+    new CleanWebpackPlugin(['standalone'], {
       root: path.resolve('./'),
       verbose: true,
       dry: false
     }),
+
+    new HtmlWebpackPlugin({
+      inject: false,
+      template: path.resolve('./static', 'view', 'index.pug'),
+    }),
+
+    new CopyWebpackPlugin([{
+      from: path.resolve('static', 'images', '*'),
+      to: path.resolve('standalone'),
+      flatten: true
+    }]),
 
     new OptimizeCssAssetsPlugin(),
 

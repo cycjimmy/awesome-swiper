@@ -20,8 +20,5 @@
   "plugins": [
     "transform-runtime",
     "syntax-dynamic-import"
-  ],
-  "ignore": [
-    "node_modules"
   ]
 }
