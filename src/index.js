@@ -19,14 +19,16 @@ import '../node_modules/core-js/modules/es6.object.assign';
 
 
 export default class AwesomeSwiper {
-  constructor() {
+  constructor(SwiperModule) {
     this.el = {
       mainContainer: null,
       thumbsContainer: null,
       pagination: null,
       navigation: {},
     };
-    this.swiper = {};
+    this.swiper = {
+      _constructor: SwiperModule || Swiper,
+    };
     this.config = {};
   };
 
@@ -68,7 +70,7 @@ export default class AwesomeSwiper {
     this._initNavigation();
 
     this.config.main = Object.assign(this.config.main, overlaySwiperConfig);
-    this.swiper.main = new Swiper(this.el.mainContainer, this.config.main);
+    this.swiper.main = new this.swiper._constructor(this.el.mainContainer, this.config.main);
 
     return this;
   };
@@ -91,7 +93,7 @@ export default class AwesomeSwiper {
     this.config.thumbs = Object.assign({}, thumbsDefault, customThumbsConfig);
 
 
-    this.swiper.thumbs = new Swiper(this.el.thumbsContainer, this.config.thumbs);
+    this.swiper.thumbs = new this.swiper._constructor(this.el.thumbsContainer, this.config.thumbs);
 
     this.swiper.thumbs.slides[0].classList.add(_style.active);
 

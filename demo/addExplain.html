@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Awesome Swiper Demo</title>
+  <link href="AwesomeSwiper.standalone.min.css" rel="stylesheet">
+  <style>
+    h2 {
+      text-align: center;
+    }
+
+    #addExplain {
+      width: 800px;
+      height: 450px;
+    }
+
+  </style>
+</head>
+<body>
+<h2>Add Explain</h2>
+<div class="swiper-container" id="addExplain">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide">
+      <a class="swiper-full-img" href="javascript:;"><img src="p1.jpg"></a>
+      <div class="swiper-explain">Slide 1</div>
+    </div>
+    <div class="swiper-slide">
+      <a class="swiper-full-img" href="javascript:;"><img src="p2.jpg"></a>
+      <div class="swiper-explain">Slide 2</div>
+    </div>
+    <div class="swiper-slide">
+      <a class="swiper-full-img" href="javascript:;"><img src="p3.jpg"></a>
+      <div class="swiper-explain">Slide 3</div>
+    </div>
+    <div class="swiper-slide">
+      <a class="swiper-full-img" href="javascript:;"><img src="p4.jpg"></a>
+      <div class="swiper-explain">Slide 4</div>
+    </div>
+    <div class="swiper-slide">
+      <a class="swiper-full-img" href="javascript:;"><img src="p5.jpg"></a>
+      <div class="swiper-explain">Slide 5</div>
+    </div>
+  </div>
+</div>
+
+<script src="AwesomeSwiper.standalone.min.js"></script>
+<script>
+  new AwesomeSwiper().init('#addExplain', {
+    pagination: {
+      color: 'white'
+    },
+    navigation: {
+      color: 'white'
+    }
+  });
+</script>
+</body>
+</html>

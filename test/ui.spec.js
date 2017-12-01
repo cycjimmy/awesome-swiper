@@ -1,4 +1,5 @@
-import AwesomeSwiper from '../standalone/AwesomeSwiper.standalone.min';
+import Swiper from 'swiper';
+import AwesomeSwiper from '../build/AwesomeSwiper.min';
 
 describe('ui spec', () => {
   const
@@ -9,10 +10,11 @@ describe('ui spec', () => {
   wrapper.style.height = '640px';
 
   let
-    basic = new AwesomeSwiper().init(wrapper)
+    basic = new AwesomeSwiper(Swiper).init(wrapper)
   ;
 
   test('basic test', () => {
+    expect(basic.swiper._constructor).toBe(Swiper);
     expect(basic.el.mainContainer).toBe(wrapper);
   });
 });

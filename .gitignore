@@ -58,4 +58,8 @@ yarn-error.log
 .publish
 dist
 standalone
-demo
+demo/*.jpg
+demo/*.css
+demo/*.js
+
+

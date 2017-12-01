@@ -360,7 +360,7 @@ if (false) {
 
 
 var AwesomeSwiper = function () {
-  function AwesomeSwiper() {
+  function AwesomeSwiper(SwiperModule) {
     __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck___default()(this, AwesomeSwiper);
 
     this.el = {
@@ -369,7 +369,9 @@ var AwesomeSwiper = function () {
       pagination: null,
       navigation: {}
     };
-    this.swiper = {};
+    this.swiper = {
+      _constructor: SwiperModule || __WEBPACK_IMPORTED_MODULE_3_swiper___default.a
+    };
     this.config = {};
   }
 
@@ -411,7 +413,7 @@ var AwesomeSwiper = function () {
     this._initNavigation();
 
     this.config.main = __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign___default()(this.config.main, overlaySwiperConfig);
-    this.swiper.main = new __WEBPACK_IMPORTED_MODULE_3_swiper___default.a(this.el.mainContainer, this.config.main);
+    this.swiper.main = new this.swiper._constructor(this.el.mainContainer, this.config.main);
 
     return this;
   };
@@ -433,7 +435,7 @@ var AwesomeSwiper = function () {
 
     this.config.thumbs = __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign___default()({}, thumbsDefault, customThumbsConfig);
 
-    this.swiper.thumbs = new __WEBPACK_IMPORTED_MODULE_3_swiper___default.a(this.el.thumbsContainer, this.config.thumbs);
+    this.swiper.thumbs = new this.swiper._constructor(this.el.thumbsContainer, this.config.thumbs);
 
     this.swiper.thumbs.slides[0].classList.add(__WEBPACK_IMPORTED_MODULE_2__style_main_scss___default.a.active);
 
@@ -1023,7 +1025,7 @@ exports.default = function (instance, Constructor) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-module.exports = {"bottomSpace":"src-style-main__bottomSpace","white":"src-style-main__white","black":"src-style-main__black","thumbsWrapper":"src-style-main__thumbsWrapper","active":"src-style-main__active"};
+module.exports = {"bottomSpace":"_9qtK_Vt8QO","white":"_39B-D2csfE","black":"_2D7iEML7vm","thumbsWrapper":"_3CbNQoKvjw","active":"mMGOYWIJ9C"};
 
 /***/ }),
 /* 54 */

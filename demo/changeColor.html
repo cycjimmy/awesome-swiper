@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Awesome Swiper Demo</title>
+  <link href="AwesomeSwiper.standalone.min.css" rel="stylesheet">
+  <style>
+    h2 {
+      text-align: center;
+    }
+
+    #changeColor {
+      width: 800px;
+      height: 450px;
+    }
+  </style>
+</head>
+<body>
+<h2>Change Color</h2>
+<div class="swiper-container" id="changeColor">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide">
+      <a class="swiper-full-img" href="javascript:;"><img src="p1.jpg"></a>
+    </div>
+    <div class="swiper-slide">
+      <a class="swiper-full-img" href="javascript:;"><img src="p2.jpg"></a>
+    </div>
+    <div class="swiper-slide">
+      <a class="swiper-full-img" href="javascript:;"><img src="p3.jpg"></a>
+    </div>
+    <div class="swiper-slide">
+      <a class="swiper-full-img" href="javascript:;"><img src="p4.jpg"></a>
+    </div>
+    <div class="swiper-slide">
+      <a class="swiper-full-img" href="javascript:;"><img src="p5.jpg"></a>
+    </div>
+  </div>
+</div>
+
+<script src="AwesomeSwiper.standalone.min.js"></script>
+<script>
+  new AwesomeSwiper().init('#changeColor', {
+    pagination: {
+      color: 'white'
+    },
+    navigation: {
+      color: 'white'
+    }
+  });
+</script>
+</body>
+</html>

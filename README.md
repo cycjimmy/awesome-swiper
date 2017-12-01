@@ -40,18 +40,25 @@ $ yarn add awesome-swiper
 **Awesome Swiper based on [Swiper 4+](https://github.com/nolimits4web/Swiper). Add Script of swiper in your project first**
 
 ```javascript
+import Swiper from 'swiper';
 import AwesomeSwiper from 'awesome-swiper';
 
 // OR
+const Swiper = require('swiper');
 const AwesomeSwiper = require('awesome-swiper');
+```
 
-let awesomeSwiper = new AwesomeSwiper().init(context [, ...config , ...overlayConfig]);
+```javascript
+let awesomeSwiper = new AwesomeSwiper([SwiperModule]).init(context [, ...config , ...overlayConfig]);
 
 // if need thumbs
-let awesomeSwiper = new AwesomeSwiper()
+let awesomeSwiper = new AwesomeSwiper([SwiperModule])
                         .init(context [, ...config, ...overlayConfig])
                         .addThumbs(thumbsContext [, ...thumbsConfig]);
 ```
+
+### `AwesomeSwiper()` params:
+* `SwiperModule`: [Object] Set custom swiper constructor. Make sure the swiper version is 4+.
 
 ### `AwesomeSwiper().init()` params:
 * `context`: [String | Element] the wrapper of swiper. Height and width of wrapper must be initialized.

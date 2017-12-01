@@ -18,7 +18,7 @@ var
   , IS_PACK = process.env.NODE_ENV === 'pack'
   , IS_PRODUCTION = process.env.NODE_ENV === 'production'
   , IS_STANDALONE = process.env.NODE_ENV === 'standalone'
-  , cssIdentifier = IS_PRODUCTION ? '[hash:base64:10]' : '[path][name]__[local]'
+  , cssIdentifier = IS_DEVELOPMENT ? '[path][name]__[local]' : '[hash:base64:10]'
 ;
 
 var

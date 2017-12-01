@@ -41,18 +41,25 @@ $ yarn add awesome-swiper
 **Awesome Swiper 基于 [Swiper 4+](https://github.com/nolimits4web/Swiper). 首先将 swiper 加入你的工程**
 
 ```javascript
+import Swiper from 'swiper';
 import AwesomeSwiper from 'awesome-swiper';
 
 // 或者
+const Swiper = require('swiper');
 const AwesomeSwiper = require('awesome-swiper');
+```
 
-let awesomeSwiper = new AwesomeSwiper().init(context [, ...config , ...overlayConfig]);
+```javascript
+let awesomeSwiper = new AwesomeSwiper([SwiperModule]).init(context [, ...config , ...overlayConfig]);
 
 // 如果需要缩略图
-let awesomeSwiper = new AwesomeSwiper()
+let awesomeSwiper = new AwesomeSwiper([SwiperModule])
                         .init(context [, ...config, ...overlayConfig])
                         .addThumbs(thumbsContext [, ...thumbsConfig]);
 ```
+
+### `AwesomeSwiper()` 参数:
+* `SwiperModule`: [Object] 可设置自定义的 swiper 构造函数. 注意确保swiper版本为4以上
 
 ### `AwesomeSwiper().init()` 参数:
 * `context`: [String | Element] swiper的包裹层. 该包裹层的宽高大小必须提前设定.
