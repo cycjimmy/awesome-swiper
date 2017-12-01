@@ -49,12 +49,12 @@ const AwesomeSwiper = require('awesome-swiper');
 ```
 
 ```javascript
-let awesomeSwiper = new AwesomeSwiper([SwiperModule]).init(context [, ...config , ...overlayConfig]);
+let awesomeSwiper = new AwesomeSwiper([SwiperModule]).init(context [, ...config] [, ...overlayConfig]);
 
 // if need thumbs
 let awesomeSwiper = new AwesomeSwiper([SwiperModule])
-                        .init(context [, ...config, ...overlayConfig])
-                        .addThumbs(thumbsContext [, ...thumbsConfig]);
+                        .init(context [, ...config] [, ...overlayConfig])
+                        .addThumbs(thumbsContext [, ...thumbsConfig] [, ...thumbsExtraConfig]);
 ```
 
 ### `AwesomeSwiper()` params:
@@ -65,7 +65,8 @@ let awesomeSwiper = new AwesomeSwiper([SwiperModule])
 * config: [Object]
   * `loop`: [Boolean] Set to `true` to enable loop. Default `false`.
   * `autoplay`: [Number] Set autoplay delay. `0` means close. Default `0`.
-  * `mousewheel`: [Boolean] Set to `true` to enable navigation through slides using mouse wheel. Default `true`.
+  * `mousewheel`: [Boolean] Set to `true` to enable navigation through slides using mouse wheel. Default `false`.
+  * `autoFixFullImg`: [Boolean] Set `true` to auto fix full images. Default `false`. Tip: Due to the impact of performance, not necessary not to set it.
   * `pagination`: [Object] Set pagination. If you do not want a pagination, set `null`.
     * `color`: [String] `'default'` is blue. You also can set `'black'` or `'white'` and embed your own style
   * `navigation`: [Object] Set navigation. If you do not want a navigation, set `null`.
@@ -81,6 +82,8 @@ let awesomeSwiper = new AwesomeSwiper([SwiperModule])
   * `direction`: [String] Set direction. Could be 'horizontal' or 'vertical'.
   * `spaceBetween`: [Number] Distance between slides in px. Default `10`.
   * `slidesPerView`: [Number | 'auto'] Number of slides per view. Default `'auto'`.
+* thumbsExtraConfig: [Object] Extra config for thumbs.
+  * `mouseOverMode`: [Boolean] set `true` to use mouse over mode. Default `false`.
 
 ### new css classes in AwesomeSwiper
 * `.swiper-full-img`: Full images container.

@@ -50,12 +50,12 @@ const AwesomeSwiper = require('awesome-swiper');
 ```
 
 ```javascript
-let awesomeSwiper = new AwesomeSwiper([SwiperModule]).init(context [, ...config , ...overlayConfig]);
+let awesomeSwiper = new AwesomeSwiper([SwiperModule]).init(context [, ...config] [, ...overlayConfig]);
 
 // 如果需要缩略图
 let awesomeSwiper = new AwesomeSwiper([SwiperModule])
-                        .init(context [, ...config, ...overlayConfig])
-                        .addThumbs(thumbsContext [, ...thumbsConfig]);
+                        .init(context [, ...config] [, ...overlayConfig])
+                        .addThumbs(thumbsContext [, ...thumbsConfig] [, ...thumbsExtraConfig]);
 ```
 
 ### `AwesomeSwiper()` 参数:
@@ -66,7 +66,8 @@ let awesomeSwiper = new AwesomeSwiper([SwiperModule])
 * config: [Object]
   * `loop`: [Boolean] 设为 `true` 来允许循环播放. 默认值为 `false`.
   * `autoplay`: [Number] 设置自动播放延迟的秒数. `0` 表示关闭自动播放. 默认值为 `0`.
-  * `mousewheel`: [Boolean] 设为 `true` 来允许通过鼠标滚轮控制. 默认值为 `true`.
+  * `mousewheel`: [Boolean] 设为 `true` 来允许通过鼠标滚轮控制. 默认值为 `false`.
+  * `autoFixFullImg`: [Boolean] 设置 `true` 来自动适应满图片. 默认值为 `false`. 提示: 由于对性能有影响, 非必要情况请勿设置.
   * `pagination`: [Object] 设置分页器. 如果你不想要分页器, 将其设为 `null`.
     * `color`: [String] `'default'` 默认颜色是蓝色. 你也可以设置`'black'` 或者 `'white'` 或者嵌入自定义样式
   * `navigation`: [Object] 设置导航按钮. 如果你不想要导航按钮, 将其设为 `null`.
@@ -82,6 +83,8 @@ let awesomeSwiper = new AwesomeSwiper([SwiperModule])
   * `direction`: [String] 设置方向. 可选项: 'horizontal' 和 'vertical'.
   * `spaceBetween`: [Number] 每个slide之前的距离, 单位为px. 默认值为 `10`.
   * `slidesPerView`: [Number | 'auto'] 视框中能同时看到slide的数量. 默认值为 `'auto'`.
+* thumbsExtraConfig: [Object] 缩略图的额外配置项.
+  * `mouseOverMode`: [Boolean] 设置 `true` 来使用mouseover模式. 默认值为 `false`.
 
 ### AwesomeSwiper中新增的css类
 * `.swiper-full-img`: 满照片容器.

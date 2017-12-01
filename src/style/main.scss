@@ -47,6 +47,11 @@ $space: 10px;
     bottom: -100%;
     margin: auto;
     width: 100%;
+
+    &.basedOnHeight {
+      width: auto;
+      height: 100%;
+    }
   }
 }
 
@@ -74,8 +79,6 @@ $space: 10px;
       opacity: .8;
     }
   }
-
-
 }
 
 
