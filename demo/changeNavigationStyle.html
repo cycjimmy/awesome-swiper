@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Awesome Swiper Demo</title>
+  <link href="AwesomeSwiper.standalone.min.css" rel="stylesheet">
+  <style>
+    h2 {
+      text-align: center;
+    }
+
+    #changeNavigationStyle{
+      width: 800px;
+      height: 450px;
+    }
+  </style>
+</head>
+<body>
+<h2>Change Navigation Style</h2>
+<div class="swiper-container" id="changeNavigationStyle">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide">
+      <a class="swiper-full-img" href="javascript:;"><img src="p1.jpg"></a>
+    </div>
+    <div class="swiper-slide">
+      <a class="swiper-full-img" href="javascript:;"><img src="p2.jpg"></a>
+    </div>
+    <div class="swiper-slide">
+      <a class="swiper-full-img" href="javascript:;"><img src="p3.jpg"></a>
+    </div>
+    <div class="swiper-slide">
+      <a class="swiper-full-img" href="javascript:;"><img src="p4.jpg"></a>
+    </div>
+    <div class="swiper-slide">
+      <a class="swiper-full-img" href="javascript:;"><img src="p5.jpg"></a>
+    </div>
+  </div>
+</div>
+
+<script src="AwesomeSwiper.standalone.min.js"></script>
+<script>
+  new AwesomeSwiper().init('#changeNavigationStyle', {
+    pagination: {
+      color: 'white'
+    },
+    navigation: {
+      styles: {
+        prevEl: {
+          background: 'url(left.svg) no-repeat',
+          width: '40px',
+          height: '40px',
+          marginTop: '-20px'
+        },
+
+        nextEl: {
+          background: 'url(right.svg) no-repeat',
+          width: '40px',
+          height: '40px',
+          marginTop: '-20px'
+        }
+      }
+    }
+  });
+</script>
+</body>
+</html>

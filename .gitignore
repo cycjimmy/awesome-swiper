@@ -61,5 +61,6 @@ standalone
 demo/*.jpg
 demo/*.css
 demo/*.js
+demo/*.svg
 
 

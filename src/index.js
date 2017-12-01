@@ -1,5 +1,5 @@
 // style
-if(DEVELOPMENT || STANDALONE) {
+if (DEVELOPMENT || STANDALONE) {
   console.log('development');
   require('../node_modules/swiper/dist/css/swiper.css');
 }
@@ -13,6 +13,7 @@ import Swiper from 'swiper';
 import isString from 'awesome-js-funcs/judgeBasic/isString';
 import addStyles from 'awesome-js-funcs/dom/addStyles';
 import siblingFilter from 'awesome-js-funcs/dom/siblingFilter';
+import nodeListToArray from 'awesome-js-funcs/typeConversion/nodeListToArray';
 
 // polyfill
 import '../node_modules/core-js/modules/es6.object.assign';
@@ -24,7 +25,7 @@ export default class AwesomeSwiper {
       mainContainer: null,
       thumbsContainer: null,
       pagination: null,
-      navigation: {},
+      navigation: null,
     };
     this.swiper = {
       _constructor: SwiperModule || Swiper,
@@ -40,7 +41,8 @@ export default class AwesomeSwiper {
     let mainDefault = {
       loop: false,
       autoplay: 0,
-      mousewheel: true,
+      mousewheel: false,
+      autoFixFullImg: false,
       pagination: {
         color: 'default'
       },
@@ -55,6 +57,8 @@ export default class AwesomeSwiper {
 
     this.config.mainOrigin = Object.assign({}, mainDefault, customMainConfig);
 
+    // fix full img
+    this._fixFullImg(this.config.mainOrigin.autoFixFullImg);
 
     this.config.main = {
       loop: this.config.mainOrigin.loop,
@@ -75,7 +79,7 @@ export default class AwesomeSwiper {
     return this;
   };
 
-  addThumbs(thumbsContainer, customThumbsConfig = {}) {
+  addThumbs(thumbsContainer, customThumbsConfig = {}, extraConfig = {}) {
     console.log('addThumbs');
 
     this.el.thumbsContainer = isString(thumbsContainer)
@@ -90,23 +94,26 @@ export default class AwesomeSwiper {
       slidesPerView: 'auto',
     };
 
-    this.config.thumbs = Object.assign({}, thumbsDefault, customThumbsConfig);
+    let thumbsExtraDefault = {
+      mouseOverMode: false,
+    };
 
+    this.config.thumbs = Object.assign({}, thumbsDefault, customThumbsConfig);
+    this.config.thumbsExtra = Object.assign({}, thumbsExtraDefault, extraConfig);
 
     this.swiper.thumbs = new this.swiper._constructor(this.el.thumbsContainer, this.config.thumbs);
 
     this.swiper.thumbs.slides[0].classList.add(_style.active);
 
-    this._thumbsCtrl();
+    this._thumbsCtrl(this.config.thumbsExtra);
 
     return this;
   };
 
-  _thumbsCtrl() {
+  _thumbsCtrl(thumbsExtraConfig) {
     // mainSwiper ctrl
     this.swiper.main.on('slideChange', () => {
       console.log('mainSwiper slideChange');
-
 
       let
         swiperIndex = this.swiper.main.realIndex
@@ -121,13 +128,22 @@ export default class AwesomeSwiper {
 
 
     Array.prototype.slice.call(this.swiper.thumbs.slides).forEach((el, index) => {
-      el.addEventListener('click', () => {
-        // ui change
-        siblingFilter(el, _style.active)[0].classList.remove(_style.active);
-        this.swiper.thumbs.slides[index].classList.add(_style.active);
-        this.swiper.thumbs.slideTo(index);
-        this.swiper.main.slideTo(index);
-      });
+      let
+        _uiChange = () => {
+          siblingFilter(el, _style.active)[0].classList.remove(_style.active);
+          this.swiper.thumbs.slides[index].classList.add(_style.active);
+          this.swiper.thumbs.slideTo(index);
+          this.swiper.main.slideTo(index);
+        };
+
+      if (thumbsExtraConfig.mouseOverMode) {
+        el.addEventListener('mouseover', () => _uiChange());
+
+        //
+        el.addEventListener('touchstart', () => _uiChange());
+      } else {
+        el.addEventListener('click', () => _uiChange());
+      }
     });
   };
 
@@ -160,14 +176,6 @@ export default class AwesomeSwiper {
     }
   };
 
-  _fixExplainSpace() {
-    Array.prototype.slice
-      .apply(this.el.mainContainer.querySelectorAll('.swiper-explain'))
-      .forEach(el => {
-        el.classList.add(_style.bottomSpace);
-      });
-  }
-
   _initNavigation() {
     let
       _navigation = this.config.mainOrigin.navigation;
@@ -191,15 +199,16 @@ export default class AwesomeSwiper {
           this.el.navigation.nextEl.classList.add('swiper-button-black');
           this.el.navigation.prevEl.classList.add('swiper-button-black');
           break;
+      }
 
-        case 'custom':
-          if (_navigation.styles.nextEl) {
-            addStyles(this.el.navigation.nextEl, _navigation.styles.nextEl);
-          }
-          if (_navigation.styles.prevEl) {
-            addStyles(this.el.navigation.prevEl, _navigation.styles.prevEl);
-          }
-          break;
+      // set custom styles
+      if (_navigation.styles) {
+        if (_navigation.styles.nextEl) {
+          addStyles(this.el.navigation.nextEl, _navigation.styles.nextEl);
+        }
+        if (_navigation.styles.prevEl) {
+          addStyles(this.el.navigation.prevEl, _navigation.styles.prevEl);
+        }
       }
 
       this.el.mainContainer.appendChild(this.el.navigation.nextEl);
@@ -211,6 +220,50 @@ export default class AwesomeSwiper {
         prevEl: '.swiper-button-prev',
       };
     }
+  };
+
+  _fixExplainSpace() {
+    Array.prototype.slice
+      .apply(this.el.mainContainer.querySelectorAll('.swiper-explain'))
+      .forEach(el => {
+        el.classList.add(_style.bottomSpace);
+      });
+  };
+
+  _fixFullImg(needFix) {
+    if (!needFix) {
+      return;
+    }
+
+    let
+      mainContainerClientRect = this.el.mainContainer.getBoundingClientRect()
+      , aImgs = nodeListToArray(this.el.mainContainer.querySelectorAll('.swiper-full-img>img'))
+    ;
+
+    aImgs.forEach(img => {
+      let imgNaturalDimensions = _getImgNaturalDimensions(img);
+      if (mainContainerClientRect.width / mainContainerClientRect.height < imgNaturalDimensions.width / imgNaturalDimensions.height) {
+        img.classList.add(_style.basedOnHeight);
+      }
+    });
+  };
+};
+
+let _getImgNaturalDimensions = (img) => {
+  let
+    width
+    , height
+  ;
+  if (img.naturalWidth) {
+    width = img.naturalWidth;
+    height = img.naturalHeight;
+  } else {
+    width = img.offsetWidth;
+    height = img.offsetHeight;
+  }
+  return {
+    width,
+    height
   };
 };
 
