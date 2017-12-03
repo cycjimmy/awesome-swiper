@@ -3,8 +3,21 @@
     [
       "env",
       {
+        "targets": {
+          "browsers": [
+            "ie >= 11",
+            "ie_mob >= 11",
+            "ff >= 40",
+            "chrome >= 46",
+            "safari >= 8",
+            "ios >= 8",
+            "android >= 4.4"
+          ]
+        },
         "loose": true,
-        "modules": false
+        "modules": false,
+        "useBuiltIns": true,
+        "debug": false
       }
     ]
   ],

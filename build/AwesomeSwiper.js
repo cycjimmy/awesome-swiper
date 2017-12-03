@@ -1084,7 +1084,7 @@ exports.default = function (instance, Constructor) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-module.exports = {"bottomSpace":"_9qtK_Vt8QO","basedOnHeight":"_1U2wYwdDW_","white":"_39B-D2csfE","black":"_2D7iEML7vm","thumbsWrapper":"_3CbNQoKvjw","active":"mMGOYWIJ9C"};
+module.exports = {"bottomSpace":"_2FBEb3ta4X","basedOnHeight":"lvfZjzY3h7","white":"_3Z7apKuTtk","black":"oqrzY7j2Dt","thumbsWrapper":"b_2JxjC5Cn","active":"_3e7_y9st3v"};
 
 /***/ }),
 /* 54 */

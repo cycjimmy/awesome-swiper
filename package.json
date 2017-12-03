@@ -1,9 +1,10 @@
 {
   "name": "awesome-swiper",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "awesome-swiper based on swiper",
   "main": "build/AwesomeSwiper.js",
   "scripts": {
+    "test": "jest",
     "start": "cross-env NODE_ENV=development webpack --display-modules --display-reasons --display-error-details --watch --color",
     "build": "cross-env NODE_ENV=pack webpack --progress --display-modules --display-reasons --display-error-details --color && cross-env NODE_ENV=production webpack --progress",
     "pack:standalone": "cross-env NODE_ENV=standalone webpack --display-modules --display-reasons --display-error-details --color",

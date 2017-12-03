@@ -122,4 +122,11 @@ or use standalone:
 </script>
 ```
 
+## Compatibility
+* chrome >= 46
+* safari >= 8
+* firefox >= 40
+* ie >= 11
+* ios >= 8
+* android >= 4.4
 
