@@ -1,5 +1,5 @@
 import Swiper from 'swiper';
-import AwesomeSwiper from '../build/AwesomeSwiper.min';
+import AwesomeSwiper from '../demo/AwesomeSwiper.standalone.min';
 
 describe('ui spec', () => {
   const
