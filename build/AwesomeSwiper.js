@@ -7,7 +7,7 @@
 		exports["AwesomeSwiper"] = factory(require("Swiper"));
 	else
 		root["AwesomeSwiper"] = factory(root["Swiper"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_8__) {
+})(typeof self !== 'undefined' ? self : this, function(__WEBPACK_EXTERNAL_MODULE_8__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -386,10 +386,14 @@ var AwesomeSwiper = function () {
     var mainDefault = {
       loop: false,
       autoplay: 0,
+      direction: 'horizontal',
+      spaceBetween: 0,
+      slidesPerView: 1,
       mousewheel: false,
       autoFixFullImg: false,
       pagination: {
-        color: 'default'
+        color: 'default',
+        style: null
       },
       navigation: {
         color: 'default',
@@ -402,11 +406,11 @@ var AwesomeSwiper = function () {
 
     this.config.mainOrigin = __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign___default()({}, mainDefault, customMainConfig);
 
-    // fix full img
-    this._fixFullImg(this.config.mainOrigin.autoFixFullImg);
-
     this.config.main = {
       loop: this.config.mainOrigin.loop,
+      direction: this.config.mainOrigin.direction,
+      spaceBetween: this.config.mainOrigin.spaceBetween,
+      slidesPerView: this.config.mainOrigin.slidesPerView,
       mousewheel: this.config.mainOrigin.mousewheel
     };
 
@@ -420,6 +424,9 @@ var AwesomeSwiper = function () {
 
     this.config.main = __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign___default()(this.config.main, overlaySwiperConfig);
     this.swiper.main = new this.swiper._constructor(this.el.mainContainer, this.config.main);
+
+    // fix full img
+    this._fixFullImg(this.config.mainOrigin.autoFixFullImg);
 
     return this;
   };
@@ -498,14 +505,16 @@ var AwesomeSwiper = function () {
   };
 
   AwesomeSwiper.prototype._initPagination = function _initPagination() {
-    if (this.config.mainOrigin.pagination) {
+    var _pagination = this.config.mainOrigin.pagination;
+
+    if (_pagination) {
       // add to Dom
       this.el.pagination = document.createElement('div');
       this.el.pagination.classList.add('swiper-pagination');
       this.el.mainContainer.appendChild(this.el.pagination);
 
       // set swiperConfig
-      switch (this.config.mainOrigin.pagination.color) {
+      switch (_pagination.color) {
         case 'white':
           this.el.pagination.classList.add(__WEBPACK_IMPORTED_MODULE_2__style_main_scss___default.a.white);
           break;
@@ -520,6 +529,11 @@ var AwesomeSwiper = function () {
         clickable: true,
         dynamicBullets: true
       };
+
+      // set custom styles
+      if (_pagination.style) {
+        Object(__WEBPACK_IMPORTED_MODULE_5_awesome_js_funcs_dom_addStyles__["a" /* default */])(this.el.pagination, _pagination.style);
+      }
 
       // Fix Explain Space
       this._fixExplainSpace();
@@ -582,12 +596,12 @@ var AwesomeSwiper = function () {
       return;
     }
 
-    var mainContainerClientRect = this.el.mainContainer.getBoundingClientRect(),
+    var slideClientRect = this.el.mainContainer.querySelector('.swiper-slide').getBoundingClientRect(),
         aImgs = Object(__WEBPACK_IMPORTED_MODULE_7_awesome_js_funcs_typeConversion_nodeListToArray__["a" /* default */])(this.el.mainContainer.querySelectorAll('.swiper-full-img>img'));
 
     aImgs.forEach(function (img) {
       var imgNaturalDimensions = _getImgNaturalDimensions(img);
-      if (mainContainerClientRect.width / mainContainerClientRect.height < imgNaturalDimensions.width / imgNaturalDimensions.height) {
+      if (slideClientRect.width / slideClientRect.height < imgNaturalDimensions.width / imgNaturalDimensions.height) {
         img.classList.add(__WEBPACK_IMPORTED_MODULE_2__style_main_scss___default.a.basedOnHeight);
       }
     });
@@ -1084,7 +1098,7 @@ exports.default = function (instance, Constructor) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-module.exports = {"bottomSpace":"_2FBEb3ta4X","basedOnHeight":"lvfZjzY3h7","white":"_3Z7apKuTtk","black":"oqrzY7j2Dt","thumbsWrapper":"b_2JxjC5Cn","active":"_3e7_y9st3v"};
+module.exports = {"bottomSpace":"_9qtK_Vt8QO","basedOnHeight":"_1U2wYwdDW_","white":"_39B-D2csfE","black":"_2D7iEML7vm","thumbsWrapper":"_3CbNQoKvjw","active":"mMGOYWIJ9C"};
 
 /***/ }),
 /* 54 */

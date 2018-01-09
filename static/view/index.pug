@@ -124,7 +124,6 @@ html(lang='en')
       hr
 
 
-
     //- Change Navigation Style
     section
       h2 Change Navigation Style
@@ -182,6 +181,52 @@ html(lang='en')
 
       hr
 
+
+    //- Multiple Slides Per View
+    section
+      h2 Multiple Slides Per View
+
+      style.
+        #multipleSlidesPerView {
+          width: 800px;
+          height: 450px;
+        }
+
+      #multipleSlidesPerView.swiper-container
+        .swiper-wrapper
+          .swiper-slide
+            a.swiper-full-img(href="javascript:;")
+              img(src='p1.jpg')
+          .swiper-slide
+            a.swiper-full-img(href="javascript:;")
+              img(src='p2.jpg')
+          .swiper-slide
+            a.swiper-full-img(href="javascript:;")
+              img(src='p3.jpg')
+          .swiper-slide
+            a.swiper-full-img(href="javascript:;")
+              img(src='p4.jpg')
+          .swiper-slide
+            a.swiper-full-img(href="javascript:;")
+              img(src='p5.jpg')
+
+      script.
+        new AwesomeSwiper()
+          .init('#multipleSlidesPerView', {
+            spaceBetween: 10,
+            slidesPerView: 3,
+            autoFixFullImg: true,
+            pagination: {
+              color: 'white'
+            },
+            navigation: {
+              color: 'white'
+            }
+          });
+
+      a.code-button(href="https://github.com/cycdpo/awesome-swiper/blob/master/demo/multipleSlidesPerView.html", target="_blank") CODE
+
+      hr
 
     //- Add Explain
     section

@@ -41,10 +41,14 @@ export default class AwesomeSwiper {
     let mainDefault = {
       loop: false,
       autoplay: 0,
+      direction: 'horizontal',
+      spaceBetween: 0,
+      slidesPerView: 1,
       mousewheel: false,
       autoFixFullImg: false,
       pagination: {
-        color: 'default'
+        color: 'default',
+        style: null,
       },
       navigation: {
         color: 'default',
@@ -57,11 +61,11 @@ export default class AwesomeSwiper {
 
     this.config.mainOrigin = Object.assign({}, mainDefault, customMainConfig);
 
-    // fix full img
-    this._fixFullImg(this.config.mainOrigin.autoFixFullImg);
-
     this.config.main = {
       loop: this.config.mainOrigin.loop,
+      direction: this.config.mainOrigin.direction,
+      spaceBetween: this.config.mainOrigin.spaceBetween,
+      slidesPerView: this.config.mainOrigin.slidesPerView,
       mousewheel: this.config.mainOrigin.mousewheel,
     };
 
@@ -75,6 +79,9 @@ export default class AwesomeSwiper {
 
     this.config.main = Object.assign(this.config.main, overlaySwiperConfig);
     this.swiper.main = new this.swiper._constructor(this.el.mainContainer, this.config.main);
+
+    // fix full img
+    this._fixFullImg(this.config.mainOrigin.autoFixFullImg);
 
     return this;
   };
@@ -148,14 +155,18 @@ export default class AwesomeSwiper {
   };
 
   _initPagination() {
-    if (this.config.mainOrigin.pagination) {
+    let
+      _pagination = this.config.mainOrigin.pagination
+    ;
+
+    if (_pagination) {
       // add to Dom
       this.el.pagination = document.createElement('div');
       this.el.pagination.classList.add('swiper-pagination');
       this.el.mainContainer.appendChild(this.el.pagination);
 
       // set swiperConfig
-      switch (this.config.mainOrigin.pagination.color) {
+      switch (_pagination.color) {
         case 'white':
           this.el.pagination.classList.add(_style.white);
           break;
@@ -171,6 +182,11 @@ export default class AwesomeSwiper {
         dynamicBullets: true,
       };
 
+      // set custom styles
+      if (_pagination.style) {
+        addStyles(this.el.pagination, _pagination.style);
+      }
+
       // Fix Explain Space
       this._fixExplainSpace();
     }
@@ -178,7 +194,8 @@ export default class AwesomeSwiper {
 
   _initNavigation() {
     let
-      _navigation = this.config.mainOrigin.navigation;
+      _navigation = this.config.mainOrigin.navigation
+    ;
 
     if (_navigation) {
       // add to Dom
@@ -236,13 +253,13 @@ export default class AwesomeSwiper {
     }
 
     let
-      mainContainerClientRect = this.el.mainContainer.getBoundingClientRect()
+      slideClientRect = this.el.mainContainer.querySelector('.swiper-slide').getBoundingClientRect()
       , aImgs = nodeListToArray(this.el.mainContainer.querySelectorAll('.swiper-full-img>img'))
     ;
 
     aImgs.forEach(img => {
       let imgNaturalDimensions = _getImgNaturalDimensions(img);
-      if (mainContainerClientRect.width / mainContainerClientRect.height < imgNaturalDimensions.width / imgNaturalDimensions.height) {
+      if (slideClientRect.width / slideClientRect.height < imgNaturalDimensions.width / imgNaturalDimensions.height) {
         img.classList.add(_style.basedOnHeight);
       }
     });

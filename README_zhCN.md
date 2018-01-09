@@ -65,11 +65,15 @@ let awesomeSwiper = new AwesomeSwiper([SwiperModule])
 * `context`: [String | Element] swiper的包裹层. 该包裹层的宽高大小必须提前设定.
 * config: [Object]
   * `loop`: [Boolean] 设为 `true` 来允许循环播放. 默认值为 `false`.
-  * `autoplay`: [Number] 设置自动播放延迟的秒数. `0` 表示关闭自动播放. 默认值为 `0`.
+  * `autoplay`: [Number] 设置自动播放延迟的毫秒数. `0` 表示关闭自动播放. 默认值为 `0`.
+  * `direction`: [String] 设置方向. 可选项: `'horizontal'` 和 `'vertical'`. 默认为`'horizontal'`
+  * `spaceBetween`: [Number] 每个slide之前的距离, 单位为px. 默认值为 `0`.
+  * `slidesPerView`: [Number | 'auto'] 视框中能同时看到slide的数量. 默认值为 `1`.
   * `mousewheel`: [Boolean] 设为 `true` 来允许通过鼠标滚轮控制. 默认值为 `false`.
   * `autoFixFullImg`: [Boolean] 设置 `true` 来自动适应满图片. 默认值为 `false`. 提示: 由于对性能有影响, 非必要情况请勿设置.
   * `pagination`: [Object] 设置分页器. 如果你不想要分页器, 将其设为 `null`.
     * `color`: [String] `'default'` 默认颜色是蓝色. 你也可以设置`'black'` 或者 `'white'` 或者嵌入自定义样式
+    * `style`: [Object] 自定义分页器样式. 建议再此只对位置样式进行调整.
   * `navigation`: [Object] 设置导航按钮. 如果你不想要导航按钮, 将其设为 `null`.
     * `color`: [String] `'default'` 默认颜色是蓝色. 你也可以设置`'black'` 或者 `'white'`
     * `styles`: [Object] 自定义样式
@@ -80,7 +84,7 @@ let awesomeSwiper = new AwesomeSwiper([SwiperModule])
 ### `AwesomeSwiper().addThumbs()` 参数:
 * `thumbsContext`: [String | Element] 缩略图的包裹层. 该包裹层的宽高大小必须提前设定.
 * thumbsConfig: [Object] 可参照 swiper api 进行设置
-  * `direction`: [String] 设置方向. 可选项: 'horizontal' 和 'vertical'.
+  * `direction`: [String] 设置方向. 可选项: `'horizontal'` 和 `'vertical'`.
   * `spaceBetween`: [Number] 每个slide之前的距离, 单位为px. 默认值为 `10`.
   * `slidesPerView`: [Number | 'auto'] 视框中能同时看到slide的数量. 默认值为 `'auto'`.
 * thumbsExtraConfig: [Object] 缩略图的额外配置项.
