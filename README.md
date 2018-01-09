@@ -65,10 +65,14 @@ let awesomeSwiper = new AwesomeSwiper([SwiperModule])
 * config: [Object]
   * `loop`: [Boolean] Set to `true` to enable loop. Default `false`.
   * `autoplay`: [Number] Set autoplay delay. `0` means close. Default `0`.
+  * `direction`: [String] Set direction. Could be `'horizontal'` or `'vertical'`. Default `'horizontal'`.
+  * `spaceBetween`: [Number] Distance between slides in px. Default `0`.
+  * `slidesPerView`: [Number | 'auto'] Number of slides per view. Default `1`.
   * `mousewheel`: [Boolean] Set to `true` to enable navigation through slides using mouse wheel. Default `false`.
   * `autoFixFullImg`: [Boolean] Set `true` to auto fix full images. Default `false`. Tip: Due to the impact of performance, not necessary not to set it.
   * `pagination`: [Object] Set pagination. If you do not want a pagination, set `null`.
     * `color`: [String] `'default'` is blue. You also can set `'black'` or `'white'` and embed your own style
+    * `style`: [Object] Custom pagination style. Recommended to only adjust the position here.
   * `navigation`: [Object] Set navigation. If you do not want a navigation, set `null`.
     * `color`: [String] `'default'` is blue. You also can set `'black'` or `'white'`
     * `styles`: [Object] Custom style
@@ -79,7 +83,7 @@ let awesomeSwiper = new AwesomeSwiper([SwiperModule])
 ### `AwesomeSwiper().addThumbs()` params:
 * `thumbsContext`: [String | Element] the wrapper of thumbs. Height and width of wrapper must be initialized.
 * thumbsConfig: [Object] You can set it follow swiper api.
-  * `direction`: [String] Set direction. Could be 'horizontal' or 'vertical'.
+  * `direction`: [String] Set direction. Could be `'horizontal'` or `'vertical'`.
   * `spaceBetween`: [Number] Distance between slides in px. Default `10`.
   * `slidesPerView`: [Number | 'auto'] Number of slides per view. Default `'auto'`.
 * thumbsExtraConfig: [Object] Extra config for thumbs.
