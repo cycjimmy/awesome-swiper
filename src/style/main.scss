@@ -18,6 +18,16 @@
 
 $space: 10px;
 
+.resetNavigationEl {
+  position: static;
+  margin: auto;
+  top: auto;
+  right: auto;
+  left: auto;
+  bottom: auto;
+  background: none;
+}
+
 :global(.swiper-explain) {
   @extend %abs;
   left: 0;
@@ -80,7 +90,6 @@ $space: 10px;
     }
   }
 }
-
 
 .thumbsWrapper {
   :global(.swiper-slide) {

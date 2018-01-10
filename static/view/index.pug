@@ -32,7 +32,7 @@ html(lang='en')
         border-radius: 4px;
       }
 
-      hr{
+      hr {
         margin-bottom: 30px;
       }
 
@@ -160,14 +160,14 @@ html(lang='en')
             },
             navigation: {
               styles: {
-                prevEl: {
+                prev: {
                   background: 'url(left.svg) no-repeat',
                   width: '40px',
                   height: '40px',
                   marginTop: '-20px'
                 },
 
-                nextEl: {
+                next: {
                   background: 'url(right.svg) no-repeat',
                   width: '40px',
                   height: '40px',
@@ -178,6 +178,84 @@ html(lang='en')
           });
 
       a.code-button(href="https://github.com/cycdpo/awesome-swiper/blob/master/demo/changeNavigationStyle.html", target="_blank") CODE
+
+      hr
+
+
+    //- Custom Navigation Elements
+    section
+      h2 Custom Navigation Elements
+
+      style.
+        .customNavigationDemo {
+          position: relative;
+          z-index: 1;
+          width: 800px;
+          height: 450px;
+          margin: 0 auto;
+        }
+
+        #customPrevEl {
+          float: left;
+          width: 50px;
+          height: 450px;
+          margin-right: 20px;
+          background: url(leftBlack.svg) no-repeat 50% 50%;
+        }
+
+        #customNavigationElements {
+          float: left;
+          width: 660px;
+          height: 450px;
+        }
+
+        #customNextEl {
+          float: left;
+          width: 50px;
+          height: 450px;
+          margin-left: 20px;
+          background: url(rightBlack.svg) no-repeat 50% 50%;
+        }
+
+      .customNavigationDemo
+        #customPrevEl
+
+        #customNavigationElements.swiper-container
+          .swiper-wrapper
+            .swiper-slide
+              a.swiper-full-img(href="javascript:;")
+                img(src='p1.jpg')
+            .swiper-slide
+              a.swiper-full-img(href="javascript:;")
+                img(src='p2.jpg')
+            .swiper-slide
+              a.swiper-full-img(href="javascript:;")
+                img(src='p3.jpg')
+            .swiper-slide
+              a.swiper-full-img(href="javascript:;")
+                img(src='p4.jpg')
+            .swiper-slide
+              a.swiper-full-img(href="javascript:;")
+                img(src='p5.jpg')
+
+        #customNextEl
+
+      script.
+        new AwesomeSwiper()
+          .init('#customNavigationElements', {
+            autoFixFullImg: true,
+            pagination: {
+              color: 'white'
+            },
+            navigation: {
+              custom: {
+                prevEl: '#customPrevEl',
+                nextEl: document.getElementById('customNextEl')
+              }
+            }
+          });
+
+      a.code-button(href="https://github.com/cycdpo/awesome-swiper/blob/master/demo/customNavigationElements.html", target="_blank") CODE
 
       hr
 
@@ -454,7 +532,7 @@ html(lang='en')
           height: 380px;
         }
 
-        #RightThumbs{
+        #RightThumbs {
           float: right;
           width: 100px;
           height: 380px;

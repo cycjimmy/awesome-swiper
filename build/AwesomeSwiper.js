@@ -365,11 +365,16 @@ var AwesomeSwiper = function () {
   function AwesomeSwiper(SwiperModule) {
     __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck___default()(this, AwesomeSwiper);
 
+    this.emptyDiv = document.createElement('div');
+
     this.el = {
       mainContainer: null,
       thumbsContainer: null,
       pagination: null,
-      navigation: null
+      navigation: {
+        nextEl: null,
+        prevEl: null
+      }
     };
     this.swiper = {
       _constructor: SwiperModule || __WEBPACK_IMPORTED_MODULE_3_swiper___default.a
@@ -398,9 +403,10 @@ var AwesomeSwiper = function () {
       navigation: {
         color: 'default',
         styles: {
-          prevEl: null,
-          nextEl: null
-        }
+          prev: null,
+          next: null
+        },
+        custom: null
       }
     };
 
@@ -509,7 +515,7 @@ var AwesomeSwiper = function () {
 
     if (_pagination) {
       // add to Dom
-      this.el.pagination = document.createElement('div');
+      this.el.pagination = this.emptyDiv.cloneNode();
       this.el.pagination.classList.add('swiper-pagination');
       this.el.mainContainer.appendChild(this.el.pagination);
 
@@ -544,43 +550,50 @@ var AwesomeSwiper = function () {
     var _navigation = this.config.mainOrigin.navigation;
 
     if (_navigation) {
-      // add to Dom
-      this.el.navigation = {
-        nextEl: document.createElement('div'),
-        prevEl: document.createElement('div')
-      };
-      this.el.navigation.nextEl.classList.add('swiper-button-next');
-      this.el.navigation.prevEl.classList.add('swiper-button-prev');
 
-      switch (_navigation.color) {
-        case 'white':
-          this.el.navigation.nextEl.classList.add('swiper-button-white');
-          this.el.navigation.prevEl.classList.add('swiper-button-white');
-          break;
+      if (_navigation.custom) {
+        // Set custom navigation
+        this.el.navigation.prevEl = Object(__WEBPACK_IMPORTED_MODULE_4_awesome_js_funcs_judgeBasic_isString__["a" /* default */])(_navigation.custom.prevEl) ? document.querySelector(_navigation.custom.prevEl) : _navigation.custom.prevEl;
+        this.el.navigation.nextEl = Object(__WEBPACK_IMPORTED_MODULE_4_awesome_js_funcs_judgeBasic_isString__["a" /* default */])(_navigation.custom.nextEl) ? document.querySelector(_navigation.custom.nextEl) : _navigation.custom.nextEl;
+        this.el.navigation.prevEl.classList.add('swiper-button-prev', __WEBPACK_IMPORTED_MODULE_2__style_main_scss___default.a.resetNavigationEl);
+        this.el.navigation.nextEl.classList.add('swiper-button-next', __WEBPACK_IMPORTED_MODULE_2__style_main_scss___default.a.resetNavigationEl);
+      } else {
+        // add to Dom
+        this.el.navigation.prevEl = this.emptyDiv.cloneNode();
+        this.el.navigation.nextEl = this.emptyDiv.cloneNode();
+        this.el.navigation.prevEl.classList.add('swiper-button-prev');
+        this.el.navigation.nextEl.classList.add('swiper-button-next');
 
-        case 'black':
-          this.el.navigation.nextEl.classList.add('swiper-button-black');
-          this.el.navigation.prevEl.classList.add('swiper-button-black');
-          break;
-      }
+        switch (_navigation.color) {
+          case 'white':
+            this.el.navigation.nextEl.classList.add('swiper-button-white');
+            this.el.navigation.prevEl.classList.add('swiper-button-white');
+            break;
 
-      // set custom styles
-      if (_navigation.styles) {
-        if (_navigation.styles.nextEl) {
-          Object(__WEBPACK_IMPORTED_MODULE_5_awesome_js_funcs_dom_addStyles__["a" /* default */])(this.el.navigation.nextEl, _navigation.styles.nextEl);
+          case 'black':
+            this.el.navigation.nextEl.classList.add('swiper-button-black');
+            this.el.navigation.prevEl.classList.add('swiper-button-black');
+            break;
         }
-        if (_navigation.styles.prevEl) {
-          Object(__WEBPACK_IMPORTED_MODULE_5_awesome_js_funcs_dom_addStyles__["a" /* default */])(this.el.navigation.prevEl, _navigation.styles.prevEl);
-        }
-      }
 
-      this.el.mainContainer.appendChild(this.el.navigation.nextEl);
-      this.el.mainContainer.appendChild(this.el.navigation.prevEl);
+        // set custom styles
+        if (_navigation.styles) {
+          if (_navigation.styles.next) {
+            Object(__WEBPACK_IMPORTED_MODULE_5_awesome_js_funcs_dom_addStyles__["a" /* default */])(this.el.navigation.nextEl, _navigation.styles.next);
+          }
+          if (_navigation.styles.prev) {
+            Object(__WEBPACK_IMPORTED_MODULE_5_awesome_js_funcs_dom_addStyles__["a" /* default */])(this.el.navigation.prevEl, _navigation.styles.prev);
+          }
+        }
+
+        this.el.mainContainer.appendChild(this.el.navigation.nextEl);
+        this.el.mainContainer.appendChild(this.el.navigation.prevEl);
+      }
 
       // set swiperConfig
       this.config.main.navigation = {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev'
+        nextEl: this.el.navigation.nextEl,
+        prevEl: this.el.navigation.prevEl
       };
     }
   };
@@ -1098,7 +1111,7 @@ exports.default = function (instance, Constructor) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-module.exports = {"bottomSpace":"_9qtK_Vt8QO","basedOnHeight":"_1U2wYwdDW_","white":"_39B-D2csfE","black":"_2D7iEML7vm","thumbsWrapper":"_3CbNQoKvjw","active":"mMGOYWIJ9C"};
+module.exports = {"resetNavigationEl":"_1pgY7jIiH7","bottomSpace":"_9qtK_Vt8QO","basedOnHeight":"_1U2wYwdDW_","white":"_39B-D2csfE","black":"_2D7iEML7vm","thumbsWrapper":"_3CbNQoKvjw","active":"mMGOYWIJ9C"};
 
 /***/ }),
 /* 54 */

@@ -21,11 +21,16 @@ import '../node_modules/core-js/modules/es6.object.assign';
 
 export default class AwesomeSwiper {
   constructor(SwiperModule) {
+    this.emptyDiv = document.createElement('div');
+
     this.el = {
       mainContainer: null,
       thumbsContainer: null,
       pagination: null,
-      navigation: null,
+      navigation: {
+        nextEl: null,
+        prevEl: null,
+      },
     };
     this.swiper = {
       _constructor: SwiperModule || Swiper,
@@ -53,9 +58,10 @@ export default class AwesomeSwiper {
       navigation: {
         color: 'default',
         styles: {
-          prevEl: null,
-          nextEl: null,
-        }
+          prev: null,
+          next: null,
+        },
+        custom: null
       }
     };
 
@@ -161,7 +167,7 @@ export default class AwesomeSwiper {
 
     if (_pagination) {
       // add to Dom
-      this.el.pagination = document.createElement('div');
+      this.el.pagination = this.emptyDiv.cloneNode();
       this.el.pagination.classList.add('swiper-pagination');
       this.el.mainContainer.appendChild(this.el.pagination);
 
@@ -198,43 +204,54 @@ export default class AwesomeSwiper {
     ;
 
     if (_navigation) {
-      // add to Dom
-      this.el.navigation = {
-        nextEl: document.createElement('div'),
-        prevEl: document.createElement('div'),
-      };
-      this.el.navigation.nextEl.classList.add('swiper-button-next');
-      this.el.navigation.prevEl.classList.add('swiper-button-prev');
 
-      switch (_navigation.color) {
-        case 'white':
-          this.el.navigation.nextEl.classList.add('swiper-button-white');
-          this.el.navigation.prevEl.classList.add('swiper-button-white');
-          break;
+      if (_navigation.custom) {
+        // Set custom navigation
+        this.el.navigation.prevEl = isString(_navigation.custom.prevEl)
+          ? document.querySelector(_navigation.custom.prevEl)
+          : _navigation.custom.prevEl;
+        this.el.navigation.nextEl = isString(_navigation.custom.nextEl)
+          ? document.querySelector(_navigation.custom.nextEl)
+          : _navigation.custom.nextEl;
+        this.el.navigation.prevEl.classList.add('swiper-button-prev', _style.resetNavigationEl);
+        this.el.navigation.nextEl.classList.add('swiper-button-next', _style.resetNavigationEl);
+      } else {
+        // add to Dom
+        this.el.navigation.prevEl = this.emptyDiv.cloneNode();
+        this.el.navigation.nextEl = this.emptyDiv.cloneNode();
+        this.el.navigation.prevEl.classList.add('swiper-button-prev');
+        this.el.navigation.nextEl.classList.add('swiper-button-next');
 
-        case 'black':
-          this.el.navigation.nextEl.classList.add('swiper-button-black');
-          this.el.navigation.prevEl.classList.add('swiper-button-black');
-          break;
-      }
+        switch (_navigation.color) {
+          case 'white':
+            this.el.navigation.nextEl.classList.add('swiper-button-white');
+            this.el.navigation.prevEl.classList.add('swiper-button-white');
+            break;
 
-      // set custom styles
-      if (_navigation.styles) {
-        if (_navigation.styles.nextEl) {
-          addStyles(this.el.navigation.nextEl, _navigation.styles.nextEl);
+          case 'black':
+            this.el.navigation.nextEl.classList.add('swiper-button-black');
+            this.el.navigation.prevEl.classList.add('swiper-button-black');
+            break;
         }
-        if (_navigation.styles.prevEl) {
-          addStyles(this.el.navigation.prevEl, _navigation.styles.prevEl);
-        }
-      }
 
-      this.el.mainContainer.appendChild(this.el.navigation.nextEl);
-      this.el.mainContainer.appendChild(this.el.navigation.prevEl);
+        // set custom styles
+        if (_navigation.styles) {
+          if (_navigation.styles.next) {
+            addStyles(this.el.navigation.nextEl, _navigation.styles.next);
+          }
+          if (_navigation.styles.prev) {
+            addStyles(this.el.navigation.prevEl, _navigation.styles.prev);
+          }
+        }
+
+        this.el.mainContainer.appendChild(this.el.navigation.nextEl);
+        this.el.mainContainer.appendChild(this.el.navigation.prevEl);
+      }
 
       // set swiperConfig
       this.config.main.navigation = {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
+        nextEl: this.el.navigation.nextEl,
+        prevEl: this.el.navigation.prevEl,
       };
     }
   };
