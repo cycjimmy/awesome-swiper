@@ -76,8 +76,11 @@ let awesomeSwiper = new AwesomeSwiper([SwiperModule])
   * `navigation`: [Object] Set navigation. If you do not want a navigation, set `null`.
     * `color`: [String] `'default'` is blue. You also can set `'black'` or `'white'`
     * `styles`: [Object] Custom style
-      * `prevEl` [Object] Custom style for prevEl.
-      * `nextEl` [Object] Custom style for nextEl.
+      * `prev`: [Object] Custom style for prevEl.
+      * `next`: [Object] Custom style for nextEl.
+    * `custom`: [Object] Set custom navigation elements. Default `null`.
+      * `prevEl`: [String | Element] Custom prev button element.
+      * `nextEl`: [String | Element] Custom next button element.
 * overlayConfig: [Object] Use Custom swiper api to overlay config.
 
 ### `AwesomeSwiper().addThumbs()` params:

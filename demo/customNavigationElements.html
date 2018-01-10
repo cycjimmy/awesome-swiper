@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Awesome Swiper Demo</title>
+  <link href="AwesomeSwiper.standalone.min.css" rel="stylesheet">
+  <style>
+    h2 {
+      text-align: center;
+    }
+
+    .customNavigationDemo {
+      position: relative;
+      z-index: 1;
+      width: 800px;
+      height: 450px;
+      margin: 0 auto;
+    }
+
+    #customPrevEl {
+      float: left;
+      width: 50px;
+      height: 450px;
+      margin-right: 20px;
+      background: url(leftBlack.svg) no-repeat 50% 50%;
+    }
+
+    #customNavigationElements {
+      float: left;
+      width: 660px;
+      height: 450px;
+    }
+
+    #customNextEl {
+      float: left;
+      width: 50px;
+      height: 450px;
+      margin-left: 20px;
+      background: url(rightBlack.svg) no-repeat 50% 50%;
+    }
+
+  </style>
+</head>
+<body>
+<h2>Custom Navigation Elements</h2>
+<div class="customNavigationDemo">
+  <div id="customPrevEl"></div>
+  <div class="swiper-container" id="customNavigationElements">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <a class="swiper-full-img" href="javascript:;"><img src="p1.jpg"></a>
+      </div>
+      <div class="swiper-slide">
+        <a class="swiper-full-img" href="javascript:;"><img src="p2.jpg"></a>
+      </div>
+      <div class="swiper-slide">
+        <a class="swiper-full-img" href="javascript:;"><img src="p3.jpg"></a>
+      </div>
+      <div class="swiper-slide">
+        <a class="swiper-full-img" href="javascript:;"><img src="p4.jpg"></a>
+      </div>
+      <div class="swiper-slide">
+        <a class="swiper-full-img" href="javascript:;"><img src="p5.jpg"></a>
+      </div>
+    </div>
+  </div>
+  <div id="customNextEl"></div>
+</div>
+
+
+<script src="AwesomeSwiper.standalone.min.js"></script>
+<script>
+  new AwesomeSwiper()
+    .init('#customNavigationElements', {
+      autoFixFullImg: true,
+      pagination: {
+        color: 'white'
+      },
+      navigation: {
+        custom: {
+          prevEl: '#customPrevEl',
+          nextEl: document.getElementById('customNextEl')
+        }
+      }
+    });
+</script>
+</body>
+</html>

@@ -77,8 +77,11 @@ let awesomeSwiper = new AwesomeSwiper([SwiperModule])
   * `navigation`: [Object] 设置导航按钮. 如果你不想要导航按钮, 将其设为 `null`.
     * `color`: [String] `'default'` 默认颜色是蓝色. 你也可以设置`'black'` 或者 `'white'`
     * `styles`: [Object] 自定义样式
-      * `prevEl` [Object] 向前按钮的自定义样式.
-      * `nextEl` [Object] 向后按钮的自定义样式.
+      * `prev` [Object] 向前按钮的自定义样式.
+      * `next` [Object] 向后按钮的自定义样式.
+    * `custom`: [Object] 设置自定义的导航按钮元素. 默认值为 `null`.
+      * `prevEl`: [String | Element] 自定义向前按钮元素.
+      * `nextEl`: [String | Element] 自定义向后按钮元素.
 * overlayConfig: [Object] 使用自定义的 swiper api 设置来覆盖.
 
 ### `AwesomeSwiper().addThumbs()` 参数:
