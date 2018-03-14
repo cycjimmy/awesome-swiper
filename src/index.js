@@ -77,6 +77,7 @@ export default class AwesomeSwiper {
 
     // set customConfig.autoplay
     if (this.config.mainOrigin.autoplay) {
+      this.config.main.autoplay = {};
       this.config.main.autoplay.delay = this.config.mainOrigin.autoplay;
     }
 
