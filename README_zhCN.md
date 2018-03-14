@@ -112,7 +112,7 @@ let awesomeSwiper = new AwesomeSwiper([SwiperModule])
 <script src="swiper.min.js"></script>
 <script src="AwesomeSwiper.min.js"></script>
 <script>
-  new AwesomeSwiper().init('basic');
+  new AwesomeSwiper().init('#basic');
 </script>
 ```
 
@@ -126,7 +126,7 @@ let awesomeSwiper = new AwesomeSwiper([SwiperModule])
 
 <script src="AwesomeSwiper.standalone.min.js"></script>
 <script>
-  new AwesomeSwiper().init('basic');
+  new AwesomeSwiper().init('#basic');
 </script>
 ```
 

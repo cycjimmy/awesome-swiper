@@ -447,6 +447,53 @@ html(lang='en')
       hr
 
 
+
+    //- AutoPlay
+    section
+      h2 AutoPlay
+
+      style.
+        #autoPlay {
+          width: 800px;
+          height: 450px;
+        }
+
+      #autoPlay.swiper-container
+        .swiper-wrapper
+          .swiper-slide
+            a.swiper-full-img(href="javascript:;")
+              img(src='p1.jpg')
+          .swiper-slide
+            a.swiper-full-img(href="javascript:;")
+              img(src='p2.jpg')
+          .swiper-slide
+            a.swiper-full-img(href="javascript:;")
+              img(src='p3.jpg')
+          .swiper-slide
+            a.swiper-full-img(href="javascript:;")
+              img(src='p4.jpg')
+          .swiper-slide
+            a.swiper-full-img(href="javascript:;")
+              img(src='p5.jpg')
+
+      script.
+        new AwesomeSwiper()
+          .init('#autoPlay', {
+            loop: true,
+            autoplay: 5000,
+            pagination: {
+              color: 'white'
+            },
+            navigation: {
+              color: 'white'
+            }
+          });
+
+      a.code-button(href="https://github.com/cycdpo/awesome-swiper/blob/master/demo/autoPlay.html", target="_blank") CODE
+
+      hr
+
+
     //- Add Bottom Thumbs
     section
       h2 Add Bottom Thumbs
