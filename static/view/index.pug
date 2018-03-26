@@ -124,6 +124,52 @@ html(lang='en')
       hr
 
 
+
+    //- Dynamic Bullets Pagination
+    section
+      h2 Dynamic Bullets Pagination
+
+      style.
+        #dynamicBulletsPagination {
+          width: 800px;
+          height: 450px;
+        }
+
+      #dynamicBulletsPagination.swiper-container
+        .swiper-wrapper
+          .swiper-slide
+            a.swiper-full-img(href="javascript:;")
+              img(src='p1.jpg')
+          .swiper-slide
+            a.swiper-full-img(href="javascript:;")
+              img(src='p2.jpg')
+          .swiper-slide
+            a.swiper-full-img(href="javascript:;")
+              img(src='p3.jpg')
+          .swiper-slide
+            a.swiper-full-img(href="javascript:;")
+              img(src='p4.jpg')
+          .swiper-slide
+            a.swiper-full-img(href="javascript:;")
+              img(src='p5.jpg')
+
+      script.
+        new AwesomeSwiper()
+          .init('#dynamicBulletsPagination', {
+            pagination: {
+              color: 'white',
+              dynamicBullets: true
+            },
+            navigation: {
+              color: 'white'
+            }
+          });
+
+      a.code-button(href="https://github.com/cycdpo/awesome-swiper/blob/master/demo/dynamicBulletsPagination.html", target="_blank") CODE
+
+      hr
+
+
     //- Change Navigation Style
     section
       h2 Change Navigation Style
@@ -201,6 +247,7 @@ html(lang='en')
           height: 450px;
           margin-right: 20px;
           background: url(leftBlack.svg) no-repeat 50% 50%;
+          outline: none;
         }
 
         #customNavigationElements {
@@ -215,6 +262,7 @@ html(lang='en')
           height: 450px;
           margin-left: 20px;
           background: url(rightBlack.svg) no-repeat 50% 50%;
+          outline: none;
         }
 
       .customNavigationDemo

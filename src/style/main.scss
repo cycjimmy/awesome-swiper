@@ -97,7 +97,7 @@ $space: 10px;
     opacity: 0.4;
     cursor: pointer;
 
-    &.active {
+    &:global(.active-thumb) {
       opacity: 1;
     }
   }
