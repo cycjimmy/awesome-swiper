@@ -1,6 +1,6 @@
 {
   "name": "awesome-swiper",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "awesome-swiper based on swiper",
   "main": "build/AwesomeSwiper.js",
   "scripts": {
@@ -10,7 +10,7 @@
     "pack:standalone": "cross-env NODE_ENV=standalone webpack --display-modules --display-reasons --display-error-details --color",
     "pack:all": "npm run build && npm run pack:standalone && gulp copy:demo && gulp copy:build",
     "deploy": "gulp deploy",
-    "prepublish": "npm run build"
+    "prepublish": "npm run pack:all"
   },
   "repository": {
     "type": "git",
