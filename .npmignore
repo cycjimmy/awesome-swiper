@@ -1,4 +1,7 @@
+.idea
+test
 static
 dist
 standalone
 demo
+yarn.lock

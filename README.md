@@ -6,6 +6,7 @@
 [![devDependencies Status][david-dev-image]][david-dev-url]
 [![node version][node-image]][node-url]
 [![npm download][download-image]][download-url]
+[![jsdelivr][jsdelivr-image]][jsdelivr-url]
 [![npm license][license-image]][download-url]
 
 [npm-image]: https://img.shields.io/npm/v/awesome-swiper.svg?style=flat-square
@@ -20,6 +21,8 @@
 [node-url]: http://nodejs.org/download/
 [download-image]: https://img.shields.io/npm/dm/awesome-swiper.svg?style=flat-square
 [download-url]: https://npmjs.org/package/awesome-swiper
+[jsdelivr-image]: https://data.jsdelivr.com/v1/package/npm/awesome-swiper/badge
+[jsdelivr-url]: https://www.jsdelivr.com/package/npm/awesome-swiper
 [license-image]: https://img.shields.io/npm/l/awesome-swiper.svg?style=flat-square
 
 awesome-swiper based on [swiper 4+](https://github.com/nolimits4web/Swiper). ([Releases](https://github.com/cycdpo/awesome-swiper/releases) | [Demo](https://cycdpo.github.io/awesome-swiper/))
@@ -63,6 +66,7 @@ let awesomeSwiper = new AwesomeSwiper([SwiperModule])
 ### `AwesomeSwiper().init()` params:
 * `context`: [String | Element] the wrapper of swiper. Height and width of wrapper must be initialized.
 * config: [Object]
+  * `speed`: [Number] Duration of transition between slides (in ms). Default `300`.
   * `loop`: [Boolean] Set to `true` to enable loop. Default `false`.
   * `autoplay`: [Number] Set autoplay delay. `0` means close. Default `0`.
   * `direction`: [String] Set direction. Could be `'horizontal'` or `'vertical'`. Default `'horizontal'`.
@@ -73,6 +77,7 @@ let awesomeSwiper = new AwesomeSwiper([SwiperModule])
   * `pagination`: [Object] Set pagination. If you do not want a pagination, set `null`.
     * `color`: [String] `'default'` is blue. You also can set `'black'` or `'white'` and embed your own style
     * `style`: [Object] Custom pagination style. Recommended to only adjust the position here.
+    * `dynamicBullets`: [Boolean] Good to enable if you use bullets pagination with a lot of slides. So it will keep only few bullets visible at the same time. Default `false`. See [Swiper Pagination](http://idangero.us/swiper/api/#pagination)
   * `navigation`: [Object] Set navigation. If you do not want a navigation, set `null`.
     * `color`: [String] `'default'` is blue. You also can set `'black'` or `'white'`
     * `styles`: [Object] Custom style
@@ -95,6 +100,7 @@ let awesomeSwiper = new AwesomeSwiper([SwiperModule])
 ### new css classes in AwesomeSwiper
 * `.swiper-full-img`: Full images container.
 * `.swiper-explain`: Explain text container.
+* `.active-thumb`: Active slide of thumbs.
 
 ## Use in browser
 ```html
@@ -127,6 +133,16 @@ or use standalone:
 <script>
   new AwesomeSwiper().init('#basic');
 </script>
+```
+
+## CDN
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/awesome-swiper@1.0.2/build/AwesomeSwiper.min.css">
+<script src="https://cdn.jsdelivr.net/npm/awesome-swiper@1.0.2/build/AwesomeSwiper.min.js"></script>
+
+// standalone
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/awesome-swiper@1.0.2/build/AwesomeSwiper.standalone.min.css">
+<script src="https://cdn.jsdelivr.net/npm/awesome-swiper@1.0.2/build/AwesomeSwiper.standalone.min.js"></script>
 ```
 
 ## Compatibility

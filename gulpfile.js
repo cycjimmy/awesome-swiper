@@ -12,6 +12,14 @@ gulp.task('copy:demo', () => {
     .pipe(gulp.dest('demo'));
 });
 
+gulp.task('copy:build', () => {
+  gulp.src([
+    'standalone/**/*.js',
+    'standalone/**/*.css'
+  ])
+    .pipe(gulp.dest('build'));
+});
+
 // Deploy to ghPages
 gulp.task('deploy', function () {
   return ghPages.publish('standalone', {

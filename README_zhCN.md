@@ -6,6 +6,7 @@
 [![devDependencies Status][david-dev-image]][david-dev-url]
 [![node version][node-image]][node-url]
 [![npm download][download-image]][download-url]
+[![jsdelivr][jsdelivr-image]][jsdelivr-url]
 [![npm license][license-image]][download-url]
 
 [npm-image]: https://img.shields.io/npm/v/awesome-swiper.svg?style=flat-square
@@ -20,6 +21,8 @@
 [node-url]: http://nodejs.org/download/
 [download-image]: https://img.shields.io/npm/dm/awesome-swiper.svg?style=flat-square
 [download-url]: https://npmjs.org/package/awesome-swiper
+[jsdelivr-image]: https://data.jsdelivr.com/v1/package/npm/awesome-swiper/badge
+[jsdelivr-url]: https://www.jsdelivr.com/package/npm/awesome-swiper
 [license-image]: https://img.shields.io/npm/l/awesome-swiper.svg?style=flat-square
 
 awesome-swiper 基于 [swiper 4+](https://github.com/nolimits4web/Swiper). ([Releases](https://github.com/cycdpo/awesome-swiper/releases) | [Demo](https://cycdpo.github.io/awesome-swiper/))
@@ -64,15 +67,17 @@ let awesomeSwiper = new AwesomeSwiper([SwiperModule])
 ### `AwesomeSwiper().init()` 参数:
 * `context`: [String | Element] swiper的包裹层. 该包裹层的宽高大小必须提前设定.
 * config: [Object]
+  * `speed`: [Number] 设置slide切换速度(单位:毫秒). 默认值为 `300`.
   * `loop`: [Boolean] 设为 `true` 来允许循环播放. 默认值为 `false`.
   * `autoplay`: [Number] 设置自动播放延迟的毫秒数. `0` 表示关闭自动播放. 默认值为 `0`.
-  * `direction`: [String] 设置方向. 可选项: `'horizontal'` 和 `'vertical'`. 默认为`'horizontal'`
+  * `direction`: [String] 设置方向. 可选项: `'horizontal'` 和 `'vertical'`. 默认为 `'horizontal'`
   * `spaceBetween`: [Number] 每个slide之前的距离, 单位为px. 默认值为 `0`.
   * `slidesPerView`: [Number | 'auto'] 视框中能同时看到slide的数量. 默认值为 `1`.
   * `mousewheel`: [Boolean] 设为 `true` 来允许通过鼠标滚轮控制. 默认值为 `false`.
   * `autoFixFullImg`: [Boolean] 设置 `true` 来自动适应满图片. 默认值为 `false`. 提示: 由于对性能有影响, 非必要情况请勿设置.
   * `pagination`: [Object] 设置分页器. 如果你不想要分页器, 将其设为 `null`.
     * `color`: [String] `'default'` 默认颜色是蓝色. 你也可以设置`'black'` 或者 `'white'` 或者嵌入自定义样式
+    * `dynamicBullets`: [Boolean] 动态分页器. 默认值为 `false`. 查看[Swiper Pagination](http://idangero.us/swiper/api/#pagination)
     * `style`: [Object] 自定义分页器样式. 建议再此只对位置样式进行调整.
   * `navigation`: [Object] 设置导航按钮. 如果你不想要导航按钮, 将其设为 `null`.
     * `color`: [String] `'default'` 默认颜色是蓝色. 你也可以设置`'black'` 或者 `'white'`
@@ -96,6 +101,7 @@ let awesomeSwiper = new AwesomeSwiper([SwiperModule])
 ### AwesomeSwiper中新增的css类
 * `.swiper-full-img`: 满照片容器.
 * `.swiper-explain`: 解释说明文字容器.
+* `.active-thumb`: 正处在激活状态的缩略图.
 
 ## 在浏览器中使用
 ```html
@@ -128,6 +134,16 @@ let awesomeSwiper = new AwesomeSwiper([SwiperModule])
 <script>
   new AwesomeSwiper().init('#basic');
 </script>
+```
+
+## CDN
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/awesome-swiper@1.0.2/build/AwesomeSwiper.min.css">
+<script src="https://cdn.jsdelivr.net/npm/awesome-swiper@1.0.2/build/AwesomeSwiper.min.js"></script>
+
+// 独立版本
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/awesome-swiper@1.0.2/build/AwesomeSwiper.standalone.min.css">
+<script src="https://cdn.jsdelivr.net/npm/awesome-swiper@1.0.2/build/AwesomeSwiper.standalone.min.js"></script>
 ```
 
 ## 兼容性

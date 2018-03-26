@@ -389,6 +389,7 @@ var AwesomeSwiper = function () {
     this.el.mainContainer = Object(__WEBPACK_IMPORTED_MODULE_4_awesome_js_funcs_judgeBasic_isString__["a" /* default */])(container) ? document.querySelector(container) : container;
 
     var mainDefault = {
+      speed: 300,
       loop: false,
       autoplay: 0,
       direction: 'horizontal',
@@ -398,7 +399,8 @@ var AwesomeSwiper = function () {
       autoFixFullImg: false,
       pagination: {
         color: 'default',
-        style: null
+        style: null,
+        dynamicBullets: false
       },
       navigation: {
         color: 'default',
@@ -413,6 +415,7 @@ var AwesomeSwiper = function () {
     this.config.mainOrigin = __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign___default()({}, mainDefault, customMainConfig);
 
     this.config.main = {
+      speed: this.config.mainOrigin.speed,
       loop: this.config.mainOrigin.loop,
       direction: this.config.mainOrigin.direction,
       spaceBetween: this.config.mainOrigin.spaceBetween,
@@ -463,7 +466,7 @@ var AwesomeSwiper = function () {
 
     this.swiper.thumbs = new this.swiper._constructor(this.el.thumbsContainer, this.config.thumbs);
 
-    this.swiper.thumbs.slides[0].classList.add(__WEBPACK_IMPORTED_MODULE_2__style_main_scss___default.a.active);
+    this.swiper.thumbs.slides[0].classList.add(ACTIVE_THUMB_CLASS);
 
     this._thumbsCtrl(this.config.thumbsExtra);
 
@@ -481,15 +484,15 @@ var AwesomeSwiper = function () {
           targetThumb = _this.swiper.thumbs.slides[swiperIndex];
 
       // ui change
-      Object(__WEBPACK_IMPORTED_MODULE_6_awesome_js_funcs_dom_siblingFilter__["a" /* default */])(targetThumb, __WEBPACK_IMPORTED_MODULE_2__style_main_scss___default.a.active)[0].classList.remove(__WEBPACK_IMPORTED_MODULE_2__style_main_scss___default.a.active);
-      _this.swiper.thumbs.slides[swiperIndex].classList.add(__WEBPACK_IMPORTED_MODULE_2__style_main_scss___default.a.active);
+      Object(__WEBPACK_IMPORTED_MODULE_6_awesome_js_funcs_dom_siblingFilter__["a" /* default */])(targetThumb, ACTIVE_THUMB_CLASS)[0].classList.remove(ACTIVE_THUMB_CLASS);
+      _this.swiper.thumbs.slides[swiperIndex].classList.add(ACTIVE_THUMB_CLASS);
       _this.swiper.thumbs.slideTo(swiperIndex);
     });
 
     Array.prototype.slice.call(this.swiper.thumbs.slides).forEach(function (el, index) {
       var _uiChange = function _uiChange() {
-        Object(__WEBPACK_IMPORTED_MODULE_6_awesome_js_funcs_dom_siblingFilter__["a" /* default */])(el, __WEBPACK_IMPORTED_MODULE_2__style_main_scss___default.a.active)[0].classList.remove(__WEBPACK_IMPORTED_MODULE_2__style_main_scss___default.a.active);
-        _this.swiper.thumbs.slides[index].classList.add(__WEBPACK_IMPORTED_MODULE_2__style_main_scss___default.a.active);
+        Object(__WEBPACK_IMPORTED_MODULE_6_awesome_js_funcs_dom_siblingFilter__["a" /* default */])(el, ACTIVE_THUMB_CLASS)[0].classList.remove(ACTIVE_THUMB_CLASS);
+        _this.swiper.thumbs.slides[index].classList.add(ACTIVE_THUMB_CLASS);
         _this.swiper.thumbs.slideTo(index);
         _this.swiper.main.slideTo(index);
       };
@@ -498,8 +501,6 @@ var AwesomeSwiper = function () {
         el.addEventListener('mouseover', function () {
           return _uiChange();
         });
-
-        //
         el.addEventListener('touchstart', function () {
           return _uiChange();
         });
@@ -534,7 +535,7 @@ var AwesomeSwiper = function () {
       this.config.main.pagination = {
         el: this.el.pagination,
         clickable: true,
-        dynamicBullets: true
+        dynamicBullets: this.config.mainOrigin.pagination.dynamicBullets
       };
 
       // set custom styles
@@ -642,6 +643,8 @@ var _getImgNaturalDimensions = function _getImgNaturalDimensions(img) {
     height: height
   };
 };
+
+var ACTIVE_THUMB_CLASS = 'active-thumb';
 
 /***/ }),
 /* 24 */
@@ -1112,7 +1115,7 @@ exports.default = function (instance, Constructor) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-module.exports = {"resetNavigationEl":"_1pgY7jIiH7","bottomSpace":"_9qtK_Vt8QO","basedOnHeight":"_1U2wYwdDW_","white":"_39B-D2csfE","black":"_2D7iEML7vm","thumbsWrapper":"_3CbNQoKvjw","active":"mMGOYWIJ9C"};
+module.exports = {"resetNavigationEl":"_1pgY7jIiH7","bottomSpace":"_9qtK_Vt8QO","basedOnHeight":"_1U2wYwdDW_","white":"_39B-D2csfE","black":"_2D7iEML7vm","thumbsWrapper":"_3CbNQoKvjw"};
 
 /***/ }),
 /* 54 */

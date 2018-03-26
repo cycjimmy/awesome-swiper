@@ -44,6 +44,7 @@ export default class AwesomeSwiper {
       : container;
 
     let mainDefault = {
+      speed: 300,
       loop: false,
       autoplay: 0,
       direction: 'horizontal',
@@ -54,6 +55,7 @@ export default class AwesomeSwiper {
       pagination: {
         color: 'default',
         style: null,
+        dynamicBullets: false
       },
       navigation: {
         color: 'default',
@@ -68,6 +70,7 @@ export default class AwesomeSwiper {
     this.config.mainOrigin = Object.assign({}, mainDefault, customMainConfig);
 
     this.config.main = {
+      speed: this.config.mainOrigin.speed,
       loop: this.config.mainOrigin.loop,
       direction: this.config.mainOrigin.direction,
       spaceBetween: this.config.mainOrigin.spaceBetween,
@@ -117,7 +120,7 @@ export default class AwesomeSwiper {
 
     this.swiper.thumbs = new this.swiper._constructor(this.el.thumbsContainer, this.config.thumbs);
 
-    this.swiper.thumbs.slides[0].classList.add(_style.active);
+    this.swiper.thumbs.slides[0].classList.add(ACTIVE_THUMB_CLASS);
 
     this._thumbsCtrl(this.config.thumbsExtra);
 
@@ -135,8 +138,8 @@ export default class AwesomeSwiper {
       ;
 
       // ui change
-      siblingFilter(targetThumb, _style.active)[0].classList.remove(_style.active);
-      this.swiper.thumbs.slides[swiperIndex].classList.add(_style.active);
+      siblingFilter(targetThumb, ACTIVE_THUMB_CLASS)[0].classList.remove(ACTIVE_THUMB_CLASS);
+      this.swiper.thumbs.slides[swiperIndex].classList.add(ACTIVE_THUMB_CLASS);
       this.swiper.thumbs.slideTo(swiperIndex);
     });
 
@@ -144,16 +147,14 @@ export default class AwesomeSwiper {
     Array.prototype.slice.call(this.swiper.thumbs.slides).forEach((el, index) => {
       let
         _uiChange = () => {
-          siblingFilter(el, _style.active)[0].classList.remove(_style.active);
-          this.swiper.thumbs.slides[index].classList.add(_style.active);
+          siblingFilter(el, ACTIVE_THUMB_CLASS)[0].classList.remove(ACTIVE_THUMB_CLASS);
+          this.swiper.thumbs.slides[index].classList.add(ACTIVE_THUMB_CLASS);
           this.swiper.thumbs.slideTo(index);
           this.swiper.main.slideTo(index);
         };
 
       if (thumbsExtraConfig.mouseOverMode) {
         el.addEventListener('mouseover', () => _uiChange());
-
-        //
         el.addEventListener('touchstart', () => _uiChange());
       } else {
         el.addEventListener('click', () => _uiChange());
@@ -186,7 +187,7 @@ export default class AwesomeSwiper {
       this.config.main.pagination = {
         el: this.el.pagination,
         clickable: true,
-        dynamicBullets: true,
+        dynamicBullets: this.config.mainOrigin.pagination.dynamicBullets,
       };
 
       // set custom styles
@@ -301,4 +302,6 @@ let _getImgNaturalDimensions = (img) => {
     height
   };
 };
+
+const ACTIVE_THUMB_CLASS = 'active-thumb';
 
