@@ -138,12 +138,12 @@ let awesomeSwiper = new AwesomeSwiper([SwiperModule])
 
 ## CDN
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/awesome-swiper@1.0.3/build/AwesomeSwiper.min.css">
-<script src="https://cdn.jsdelivr.net/npm/awesome-swiper@1.0.3/build/AwesomeSwiper.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/awesome-swiper@1/build/AwesomeSwiper.min.css">
+<script src="https://cdn.jsdelivr.net/npm/awesome-swiper@1/build/AwesomeSwiper.min.js"></script>
 
 // 独立版本
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/awesome-swiper@1.0.3/build/AwesomeSwiper.standalone.min.css">
-<script src="https://cdn.jsdelivr.net/npm/awesome-swiper@1.0.3/build/AwesomeSwiper.standalone.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/awesome-swiper@1/build/AwesomeSwiper.standalone.min.css">
+<script src="https://cdn.jsdelivr.net/npm/awesome-swiper@1/build/AwesomeSwiper.standalone.min.js"></script>
 ```
 
 ## 兼容性

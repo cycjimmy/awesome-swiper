@@ -58,6 +58,7 @@ var
 
 
 var config = {
+  mode: 'none',
   entry: [
     'swiper',
     path.resolve('src', 'index.js')
@@ -86,6 +87,7 @@ var config = {
       // Scripts
       {
         test: /\.js$/,
+        type: 'javascript/auto',
         include: [
           path.resolve('src')
         ],
@@ -147,6 +149,8 @@ var config = {
 
 // dev mode
 if (IS_DEVELOPMENT) {
+  config.mode = 'development';
+
   // devtool
   config.devtool = 'source-map';
 
@@ -215,6 +219,8 @@ if (IS_PACK || IS_PRODUCTION) {
   }
 
   if (IS_PRODUCTION) {
+    config.mode = 'production';
+
     config.output.filename = libName + '.min.js';
 
     config.plugins.push(
@@ -251,6 +257,8 @@ if (IS_PACK || IS_PRODUCTION) {
 
 // standalone mode
 if (IS_STANDALONE) {
+  config.mode = 'production';
+
   config.output.path = path.resolve('standalone');
   config.output.filename = libName + '.standalone.min.js';
 
