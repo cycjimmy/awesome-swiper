@@ -97,6 +97,7 @@ let awesomeSwiper = new AwesomeSwiper([SwiperModule])
   * `slidesPerView`: [Number | 'auto'] 视框中能同时看到slide的数量. 默认值为 `'auto'`.
 * thumbsExtraConfig: [Object] 缩略图的额外配置项.
   * `mouseOverMode`: [Boolean] 设置 `true` 来使用mouseover模式. 默认值为 `false`.
+  * `autoFixFullImg`: [Boolean] 设置 `true` 来自动适应满图片. 默认值为 `false`. 提示: 由于对性能有影响, 非必要情况请勿设置.
 
 ### AwesomeSwiper中新增的css类
 * `.swiper-full-img`: 满照片容器.
