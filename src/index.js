@@ -91,7 +91,9 @@ export default class AwesomeSwiper {
     this.swiper.main = new this.swiper._constructor(this.el.mainContainer, this.config.main);
 
     // fix full img
-    this._fixFullImg(this.config.mainOrigin.autoFixFullImg);
+    if(this.config.mainOrigin.autoFixFullImg){
+      this._fixFullImg(this.el.mainContainer);
+    }
 
     return this;
   };
@@ -123,6 +125,11 @@ export default class AwesomeSwiper {
     this.swiper.thumbs.slides[0].classList.add(ACTIVE_THUMB_CLASS);
 
     this._thumbsCtrl(this.config.thumbsExtra);
+
+    // fix full img
+    if(this.config.thumbsExtra.autoFixFullImg){
+      this._fixFullImg(this.el.thumbsContainer);
+    }
 
     return this;
   };
@@ -266,14 +273,10 @@ export default class AwesomeSwiper {
       });
   };
 
-  _fixFullImg(needFix) {
-    if (!needFix) {
-      return;
-    }
-
+  _fixFullImg(eContainer) {
     let
-      slideClientRect = this.el.mainContainer.querySelector('.swiper-slide').getBoundingClientRect()
-      , aImgs = nodeListToArray(this.el.mainContainer.querySelectorAll('.swiper-full-img>img'))
+      slideClientRect = eContainer.querySelector('.swiper-slide').getBoundingClientRect()
+      , aImgs = nodeListToArray(eContainer.querySelectorAll('.swiper-full-img>img'))
     ;
 
     aImgs.forEach(img => {

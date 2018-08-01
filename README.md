@@ -96,6 +96,7 @@ let awesomeSwiper = new AwesomeSwiper([SwiperModule])
   * `slidesPerView`: [Number | 'auto'] Number of slides per view. Default `'auto'`.
 * thumbsExtraConfig: [Object] Extra config for thumbs.
   * `mouseOverMode`: [Boolean] set `true` to use mouse over mode. Default `false`.
+  * `autoFixFullImg`: [Boolean] Set `true` to auto fix full images. Default `false`. Tip: Due to the impact of performance, not necessary not to set it.
 
 ### new css classes in AwesomeSwiper
 * `.swiper-full-img`: Full images container.

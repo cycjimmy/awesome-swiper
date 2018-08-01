@@ -221,7 +221,9 @@ var AwesomeSwiper = function () {
     this.swiper.main = new this.swiper._constructor(this.el.mainContainer, this.config.main);
 
     // fix full img
-    this._fixFullImg(this.config.mainOrigin.autoFixFullImg);
+    if (this.config.mainOrigin.autoFixFullImg) {
+      this._fixFullImg(this.el.mainContainer);
+    }
 
     return this;
   };
@@ -254,6 +256,11 @@ var AwesomeSwiper = function () {
     this.swiper.thumbs.slides[0].classList.add(ACTIVE_THUMB_CLASS);
 
     this._thumbsCtrl(this.config.thumbsExtra);
+
+    // fix full img
+    if (this.config.thumbsExtra.autoFixFullImg) {
+      this._fixFullImg(this.el.thumbsContainer);
+    }
 
     return this;
   };
@@ -391,13 +398,9 @@ var AwesomeSwiper = function () {
     });
   };
 
-  AwesomeSwiper.prototype._fixFullImg = function _fixFullImg(needFix) {
-    if (!needFix) {
-      return;
-    }
-
-    var slideClientRect = this.el.mainContainer.querySelector('.swiper-slide').getBoundingClientRect(),
-        aImgs = Object(awesome_js_funcs_typeConversion_nodeListToArray__WEBPACK_IMPORTED_MODULE_7__["default"])(this.el.mainContainer.querySelectorAll('.swiper-full-img>img'));
+  AwesomeSwiper.prototype._fixFullImg = function _fixFullImg(eContainer) {
+    var slideClientRect = eContainer.querySelector('.swiper-slide').getBoundingClientRect(),
+        aImgs = Object(awesome_js_funcs_typeConversion_nodeListToArray__WEBPACK_IMPORTED_MODULE_7__["default"])(eContainer.querySelectorAll('.swiper-full-img>img'));
 
     aImgs.forEach(function (img) {
       var imgNaturalDimensions = _getImgNaturalDimensions(img);
