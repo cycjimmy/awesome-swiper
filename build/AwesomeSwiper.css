@@ -1,3 +1,8 @@
+/*!
+ * awesome-swiper v1.2.1
+ * Homepage: https://github.com/cycdpo/awesome-swiper#readme
+ * Released under the MIT License.
+ */
 .swiper-full-img, .swiper-explain, .swiper-full-img > img {
   position: absolute;
   z-index: 1;

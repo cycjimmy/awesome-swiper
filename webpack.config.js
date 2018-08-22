@@ -1,5 +1,7 @@
 var
   path = require('path')
+  , webpack = require('webpack')
+  , packageJson = require('./package.json')
 
   // webpack plugin
   , BrowserSyncPlugin = require('browser-sync-webpack-plugin')
@@ -143,6 +145,12 @@ var config = {
       PACK: JSON.stringify(IS_PACK),
       PRODUCTION: JSON.stringify(IS_PRODUCTION),
       STANDALONE: JSON.stringify(IS_STANDALONE),
+    }),
+
+    new webpack.BannerPlugin({
+      banner: packageJson.name + ' v' + packageJson.version +
+      '\nHomepage: ' + packageJson.homepage +
+      '\nReleased under the ' + packageJson.license + ' License.'
     })
   ]
 };
@@ -224,34 +232,42 @@ if (IS_PACK || IS_PRODUCTION) {
     config.output.filename = libName + '.min.js';
 
     config.plugins.push(
+      new webpack.HashedModuleIdsPlugin(),
+
       new ExtractTextPlugin({
         filename: libName + '.min.css',
         ignoreOrder: true,
         allChunks: true
       }),
 
-      new OptimizeCssAssetsPlugin(),
-
-      new UglifyJsPlugin({
-        uglifyOptions: {
-          ie8: false,
-          ecma: 5,
-          output: {
-            comments: false,
-            beautify: false
-          },
-          compress: {
-            warnings: false,
-            drop_debugger: true,
-            drop_console: true,
-            collapse_vars: true,
-            reduce_vars: true
-          },
-          warnings: false,
-          sourceMap: true
-        }
-      })
+      new OptimizeCssAssetsPlugin()
     );
+
+    config.optimization = {
+      minimizer: [
+        // Uglify Js
+        new UglifyJsPlugin({
+          uglifyOptions: {
+            ie8: false,
+            safari10: true,
+            ecma: 5,
+            output: {
+              comments: /^!/,
+              beautify: false
+            },
+            compress: {
+              warnings: false,
+              drop_debugger: true,
+              drop_console: true,
+              collapse_vars: true,
+              reduce_vars: true
+            },
+            warnings: false,
+            sourceMap: true
+          }
+        }),
+      ]
+    };
   }
 }
 
@@ -263,6 +279,8 @@ if (IS_STANDALONE) {
   config.output.filename = libName + '.standalone.min.js';
 
   config.plugins.push(
+    new webpack.HashedModuleIdsPlugin(),
+
     new ExtractTextPlugin({
       filename: libName + '.standalone.min.css',
       ignoreOrder: true,
@@ -286,28 +304,34 @@ if (IS_STANDALONE) {
       flatten: true
     }]),
 
-    new OptimizeCssAssetsPlugin(),
-
-    new UglifyJsPlugin({
-      uglifyOptions: {
-        ie8: false,
-        ecma: 5,
-        output: {
-          comments: false,
-          beautify: false
-        },
-        compress: {
-          warnings: false,
-          drop_debugger: true,
-          drop_console: true,
-          collapse_vars: true,
-          reduce_vars: true
-        },
-        warnings: false,
-        sourceMap: true
-      }
-    })
+    new OptimizeCssAssetsPlugin()
   );
+
+  config.optimization = {
+    minimizer: [
+      // Uglify Js
+      new UglifyJsPlugin({
+        uglifyOptions: {
+          ie8: false,
+          safari10: true,
+          ecma: 5,
+          output: {
+            comments: /^!/,
+            beautify: false
+          },
+          compress: {
+            warnings: false,
+            drop_debugger: true,
+            drop_console: true,
+            collapse_vars: true,
+            reduce_vars: true
+          },
+          warnings: false,
+          sourceMap: true
+        }
+      }),
+    ]
+  };
 }
 
 module.exports = config;

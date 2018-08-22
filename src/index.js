@@ -91,7 +91,7 @@ export default class AwesomeSwiper {
     this.swiper.main = new this.swiper._constructor(this.el.mainContainer, this.config.main);
 
     // fix full img
-    if(this.config.mainOrigin.autoFixFullImg){
+    if (this.config.mainOrigin.autoFixFullImg) {
       this._fixFullImg(this.el.mainContainer);
     }
 
@@ -127,7 +127,7 @@ export default class AwesomeSwiper {
     this._thumbsCtrl(this.config.thumbsExtra);
 
     // fix full img
-    if(this.config.thumbsExtra.autoFixFullImg){
+    if (this.config.thumbsExtra.autoFixFullImg) {
       this._fixFullImg(this.el.thumbsContainer);
     }
 
