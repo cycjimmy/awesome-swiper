@@ -4,7 +4,6 @@
 [![build status][travis-image]][travis-url]
 [![David deps][david-image]][david-url]
 [![devDependencies Status][david-dev-image]][david-dev-url]
-[![node version][node-image]][node-url]
 [![npm download][download-image]][download-url]
 [![jsdelivr][jsdelivr-image]][jsdelivr-url]
 [![npm license][license-image]][download-url]
@@ -17,8 +16,6 @@
 [david-url]: https://david-dm.org/cycdpo/awesome-swiper
 [david-dev-image]: https://david-dm.org/cycdpo/awesome-swiper/dev-status.svg?style=flat-square
 [david-dev-url]: https://david-dm.org/cycdpo/awesome-swiper?type=dev
-[node-image]: https://img.shields.io/badge/node.js-%3E=_6.0-green.svg?style=flat-square
-[node-url]: http://nodejs.org/download/
 [download-image]: https://img.shields.io/npm/dm/awesome-swiper.svg?style=flat-square
 [download-url]: https://npmjs.org/package/awesome-swiper
 [jsdelivr-image]: https://data.jsdelivr.com/v1/package/npm/awesome-swiper/badge
