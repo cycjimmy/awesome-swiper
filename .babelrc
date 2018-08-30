@@ -1,22 +1,20 @@
 {
   "presets": [
     [
-      "env",
+      "@babel/preset-env",
       {
         "targets": {
-          "browsers": [
-            "ie >= 11",
-            "ie_mob >= 11",
-            "ff >= 40",
-            "chrome >= 46",
-            "safari >= 8",
-            "ios >= 8",
-            "android >= 4.4"
-          ]
+          "ie": "11",
+          "ie_mob": "11",
+          "ff": "40",
+          "chrome": "46",
+          "safari": "8",
+          "ios": "8",
+          "android": "4.4"
         },
         "loose": true,
         "modules": false,
-        "useBuiltIns": true,
+        "useBuiltIns": "entry",
         "debug": false
       }
     ]
@@ -25,13 +23,14 @@
     "test": {
       "presets": [
         [
-          "env"
+          "@babel/preset-env"
         ]
       ]
     }
   },
   "plugins": [
-    "transform-runtime",
-    "syntax-dynamic-import"
+    "@babel/plugin-transform-runtime",
+    "@babel/plugin-syntax-dynamic-import",
+    "@babel/plugin-transform-object-assign"
   ]
 }

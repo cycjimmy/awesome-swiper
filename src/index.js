@@ -9,14 +9,10 @@ import _style from './style/main.scss';
 // component
 import Swiper from 'swiper';
 
-
 import isString from 'awesome-js-funcs/judgeBasic/isString';
 import addStyles from 'awesome-js-funcs/dom/addStyles';
 import siblingFilter from 'awesome-js-funcs/dom/siblingFilter';
 import nodeListToArray from 'awesome-js-funcs/typeConversion/nodeListToArray';
-
-// polyfill
-import '../node_modules/core-js/modules/es6.object.assign';
 
 
 export default class AwesomeSwiper {
