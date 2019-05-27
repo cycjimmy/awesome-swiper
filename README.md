@@ -133,6 +133,8 @@ or use standalone:
 </script>
 ```
 
+**Be sure to use the same version of JS and CSS files**
+
 ## CDN
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/awesome-swiper@1/build/AwesomeSwiper.min.css">

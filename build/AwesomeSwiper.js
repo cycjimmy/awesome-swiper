@@ -1,5 +1,5 @@
 /*!
- * awesome-swiper v1.2.2
+ * awesome-swiper v1.3.0
  * Homepage: https://github.com/cycdpo/awesome-swiper#readme
  * Released under the MIT License.
  */
@@ -461,7 +461,7 @@ module.exports = _extends;
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-module.exports = {"resetNavigationEl":"_1pgY7jIiH7","bottomSpace":"_9qtK_Vt8QO","basedOnHeight":"_1U2wYwdDW_","white":"_39B-D2csfE","black":"_2D7iEML7vm","thumbsWrapper":"_3CbNQoKvjw"};
+module.exports = {"resetNavigationEl":"_2WzTfnJAbP","bottomSpace":"_2FBEb3ta4X","basedOnHeight":"lvfZjzY3h7","white":"_3Z7apKuTtk","black":"oqrzY7j2Dt","thumbsWrapper":"b_2JxjC5Cn"};
 
 /***/ }),
 /* 5 */
@@ -491,7 +491,9 @@ __webpack_require__.r(__webpack_exports__);
  */
 /* harmony default export */ __webpack_exports__["default"] = (function (element, styles) {
   for (var name in styles) {
-    element.style[name] = styles[name];
+    if (styles.hasOwnProperty(name)) {
+      element.style[name] = styles[name];
+    }
   }
 });
 

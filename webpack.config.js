@@ -23,40 +23,60 @@ var
   , cssIdentifier = IS_DEVELOPMENT ? '[path][name]__[local]' : '[hash:base64:10]'
 ;
 
-var
-  styleLoaderConfig = {
-    styleLoader: {
-      loader: 'style-loader'
+var styleLoaderConfig = {
+  styleLoader: {
+    loader: 'style-loader'
+  },
+  cssLoader: {
+    loader: 'css-loader',
+    options: {
+      importLoaders: 2,
+      modules: true,
+      localIdentName: cssIdentifier
     },
-    cssLoader: {
-      loader: 'css-loader',
-      options: {
-        importLoaders: 2,
-        modules: true,
-        localIdentName: cssIdentifier
+  },
+  cssLoaderNoModules: {
+    loader: 'css-loader',
+    options: {
+      importLoaders: 2
+    },
+  },
+  postLoader: {
+    loader: 'postcss-loader',
+    options: {
+      config: {
+        path: path.resolve('postcss.config.js'),
       },
     },
-    cssLoaderNoModules: {
-      loader: 'css-loader',
-      options: {
-        importLoaders: 2
-      },
+  },
+  sassLoader: {
+    loader: 'sass-loader',
+    options: {
+      outputStyle: 'expanded',
     },
-    postLoader: {
-      loader: 'postcss-loader',
-      options: {
-        config: {
-          path: path.resolve('postcss.config.js'),
-        },
-      },
+  },
+};
+
+
+var UGLIFY_OPTIONS = {
+  uglifyOptions: {
+    ie8: false,
+    safari10: true,
+    ecma: 5,
+    output: {
+      comments: /^!/,
+      beautify: false
     },
-    sassLoader: {
-      loader: 'sass-loader',
-      options: {
-        outputStyle: 'expanded',
-      },
+    compress: {
+      drop_debugger: true,
+      drop_console: true,
+      collapse_vars: true,
+      reduce_vars: true
     },
-  };
+    warnings: false,
+    sourceMap: true
+  }
+};
 
 
 var config = {
@@ -149,8 +169,8 @@ var config = {
 
     new webpack.BannerPlugin({
       banner: packageJson.name + ' v' + packageJson.version +
-      '\nHomepage: ' + packageJson.homepage +
-      '\nReleased under the ' + packageJson.license + ' License.'
+        '\nHomepage: ' + packageJson.homepage +
+        '\nReleased under the ' + packageJson.license + ' License.'
     })
   ]
 };
@@ -178,8 +198,7 @@ if (IS_DEVELOPMENT) {
       template: path.resolve('./static', 'view', 'index.pug'),
     }),
 
-    new CleanWebpackPlugin(['dist'], {
-      root: path.resolve('./'),
+    new CleanWebpackPlugin({
       verbose: true,
       dry: false
     }),
@@ -218,11 +237,10 @@ if (IS_PACK || IS_PRODUCTION) {
         allChunks: true
       }),
 
-      new CleanWebpackPlugin(['build'], {
-        root: path.resolve('./'),
+      new CleanWebpackPlugin({
         verbose: true,
         dry: false
-      })
+      }),
     );
   }
 
@@ -246,26 +264,7 @@ if (IS_PACK || IS_PRODUCTION) {
     config.optimization = {
       minimizer: [
         // Uglify Js
-        new UglifyJsPlugin({
-          uglifyOptions: {
-            ie8: false,
-            safari10: true,
-            ecma: 5,
-            output: {
-              comments: /^!/,
-              beautify: false
-            },
-            compress: {
-              warnings: false,
-              drop_debugger: true,
-              drop_console: true,
-              collapse_vars: true,
-              reduce_vars: true
-            },
-            warnings: false,
-            sourceMap: true
-          }
-        }),
+        new UglifyJsPlugin(UGLIFY_OPTIONS),
       ]
     };
   }
@@ -287,8 +286,7 @@ if (IS_STANDALONE) {
       allChunks: true
     }),
 
-    new CleanWebpackPlugin(['standalone'], {
-      root: path.resolve('./'),
+    new CleanWebpackPlugin({
       verbose: true,
       dry: false
     }),
@@ -310,26 +308,7 @@ if (IS_STANDALONE) {
   config.optimization = {
     minimizer: [
       // Uglify Js
-      new UglifyJsPlugin({
-        uglifyOptions: {
-          ie8: false,
-          safari10: true,
-          ecma: 5,
-          output: {
-            comments: /^!/,
-            beautify: false
-          },
-          compress: {
-            warnings: false,
-            drop_debugger: true,
-            drop_console: true,
-            collapse_vars: true,
-            reduce_vars: true
-          },
-          warnings: false,
-          sourceMap: true
-        }
-      }),
+      new UglifyJsPlugin(UGLIFY_OPTIONS),
     ]
   };
 }
