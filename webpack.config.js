@@ -6,7 +6,7 @@ const
   // webpack plugin
   , BrowserSyncPlugin = require('browser-sync-webpack-plugin')
   , HtmlWebpackPlugin = require('html-webpack-plugin')
-  , UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+  , TerserPlugin = require('terser-webpack-plugin')
   , ExtractTextPlugin = require('extract-text-webpack-plugin')
   , OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
   , {CleanWebpackPlugin} = require('clean-webpack-plugin')
@@ -60,25 +60,28 @@ const styleLoaderConfig = {
   },
 };
 
-
-const UGLIFY_OPTIONS = {
-  uglifyOptions: {
-    ie8: false,
-    safari10: true,
-    ecma: 5,
-    output: {
-      comments: /^!/,
-      beautify: false
+const OPTIMIZATION_OPTIONS = {
+  minimize: true,
+  minimizer: [new TerserPlugin({
+    extractComments: false,
+    terserOptions: {
+      ie8: false,
+      safari10: true,
+      ecma: 5,
+      output: {
+        comments: /^!/,
+        beautify: false
+      },
+      compress: {
+        drop_debugger: true,
+        drop_console: true,
+        collapse_vars: true,
+        reduce_vars: true
+      },
+      warnings: false,
+      sourceMap: true
     },
-    compress: {
-      drop_debugger: true,
-      drop_console: true,
-      collapse_vars: true,
-      reduce_vars: true
-    },
-    warnings: false,
-    sourceMap: true
-  }
+  })],
 };
 
 
@@ -101,9 +104,6 @@ const config = {
       path.resolve('static'),
       path.resolve('node_modules')
     ],
-    'alias': {
-      'swiper': path.resolve('node_modules', 'swiper', 'js', 'swiper.js')
-    },
     'extensions': ['.js']
   },
 
@@ -258,12 +258,7 @@ if (IS_PACK || IS_PRODUCTION) {
       new OptimizeCssAssetsPlugin()
     );
 
-    config.optimization = {
-      minimizer: [
-        // Uglify Js
-        new UglifyJsPlugin(UGLIFY_OPTIONS),
-      ]
-    };
+    config.optimization = OPTIMIZATION_OPTIONS;
   }
 }
 
@@ -302,12 +297,7 @@ if (IS_STANDALONE) {
     new OptimizeCssAssetsPlugin()
   );
 
-  config.optimization = {
-    minimizer: [
-      // Uglify Js
-      new UglifyJsPlugin(UGLIFY_OPTIONS),
-    ]
-  };
+  config.optimization = OPTIMIZATION_OPTIONS;
 }
 
 module.exports = config;
