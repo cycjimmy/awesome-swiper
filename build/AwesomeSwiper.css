@@ -1,9 +1,69 @@
 /*!
- * awesome-swiper v1.3.0
+ * awesome-swiper v1.4.0
  * Homepage: https://github.com/cycdpo/awesome-swiper#readme
  * Released under the MIT License.
  */
-.swiper-full-img, .swiper-explain, .swiper-full-img > img {
+/**
+ * strip units
+ */
+/**
+ * calc vw
+ * $designDrawingLength
+ * $designDrawingWidth
+ *
+ * Usage:
+ * @function calcVW($designDrawingLength:0) {
+ *   @return call(get_function("designPx2VW"), $designDrawingLength, $designDrawingWidth);
+ * }
+ */
+/**
+ * Fix Align Center
+ * $offset
+ * $overwrite
+ * $top
+ * $right
+ * $bottom
+ * $left
+ */
+/**
+ * flex container inner elements alignment
+ * $mainAxis
+ * $crossAxis
+ * options: false, center, flex-end, ...
+ */
+/**
+ * square container
+ */
+/**
+ * bg-image-full
+ */
+.swiper-full-img, .swiper-explain {
+  position: absolute;
+  z-index: 1;
+}
+
+/**
+ * Fix Align Center
+ * $offset
+ * $overwrite
+ * $top
+ * $right
+ * $bottom
+ * $left
+ */
+/**
+ * flex container inner elements alignment
+ * $mainAxis
+ * $crossAxis
+ * options: false, center, flex-end, ...
+ */
+/**
+ * square container
+ */
+/**
+ * bg-image-full
+ */
+.swiper-full-img, .swiper-explain {
   position: absolute;
   z-index: 1;
 }
@@ -30,6 +90,7 @@
   bottom: 0;
   width: calc(100% - 20px);
   padding: 10px;
+  box-sizing: content-box;
   background-color: rgba(0, 0, 0, 0.4);
   color: white;
   text-align: left;
@@ -44,12 +105,14 @@
 }
 
 .swiper-full-img > img {
-  display: block;
+  position: absolute;
+  margin: auto;
   left: -100%;
   top: -100%;
   right: -100%;
   bottom: -100%;
-  margin: auto;
+  z-index: 1;
+  display: block;
   width: 100%;
 }
 

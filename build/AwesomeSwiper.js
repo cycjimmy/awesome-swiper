@@ -1,5 +1,5 @@
 /*!
- * awesome-swiper v1.3.0
+ * awesome-swiper v1.4.0
  * Homepage: https://github.com/cycdpo/awesome-swiper#readme
  * Released under the MIT License.
  */
@@ -126,10 +126,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _style_main_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_style_main_scss__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var swiper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(1);
 /* harmony import */ var swiper__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(swiper__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var awesome_js_funcs_judgeBasic_isString__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(5);
-/* harmony import */ var awesome_js_funcs_dom_addStyles__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(6);
-/* harmony import */ var awesome_js_funcs_dom_siblingFilter__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(7);
-/* harmony import */ var awesome_js_funcs_typeConversion_nodeListToArray__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(8);
+/* harmony import */ var _cycjimmy_awesome_js_funcs_judgeBasic_isString__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(5);
+/* harmony import */ var _cycjimmy_awesome_js_funcs_dom_addStyles__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(6);
+/* harmony import */ var _cycjimmy_awesome_js_funcs_dom_siblingFilter__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(7);
+/* harmony import */ var _cycjimmy_awesome_js_funcs_typeConversion_nodeListToArray__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(8);
 
 
 // style
@@ -174,7 +174,7 @@ function () {
       overlaySwiperConfig = {};
     }
 
-    this.el.mainContainer = Object(awesome_js_funcs_judgeBasic_isString__WEBPACK_IMPORTED_MODULE_3__["default"])(container) ? document.querySelector(container) : container;
+    this.el.mainContainer = Object(_cycjimmy_awesome_js_funcs_judgeBasic_isString__WEBPACK_IMPORTED_MODULE_3__["default"])(container) ? document.querySelector(container) : container;
     var mainDefault = {
       speed: 300,
       loop: false,
@@ -237,7 +237,7 @@ function () {
     }
 
     console.log('addThumbs');
-    this.el.thumbsContainer = Object(awesome_js_funcs_judgeBasic_isString__WEBPACK_IMPORTED_MODULE_3__["default"])(thumbsContainer) ? document.querySelector(thumbsContainer) : thumbsContainer;
+    this.el.thumbsContainer = Object(_cycjimmy_awesome_js_funcs_judgeBasic_isString__WEBPACK_IMPORTED_MODULE_3__["default"])(thumbsContainer) ? document.querySelector(thumbsContainer) : thumbsContainer;
     this.el.thumbsContainer.classList.add(_style_main_scss__WEBPACK_IMPORTED_MODULE_1___default.a.thumbsWrapper); // config
 
     var thumbsDefault = {
@@ -271,7 +271,7 @@ function () {
       var swiperIndex = _this.swiper.main.realIndex,
           targetThumb = _this.swiper.thumbs.slides[swiperIndex]; // ui change
 
-      Object(awesome_js_funcs_dom_siblingFilter__WEBPACK_IMPORTED_MODULE_5__["default"])(targetThumb, ACTIVE_THUMB_CLASS)[0].classList.remove(ACTIVE_THUMB_CLASS);
+      Object(_cycjimmy_awesome_js_funcs_dom_siblingFilter__WEBPACK_IMPORTED_MODULE_5__["default"])(targetThumb, ACTIVE_THUMB_CLASS)[0].classList.remove(ACTIVE_THUMB_CLASS);
 
       _this.swiper.thumbs.slides[swiperIndex].classList.add(ACTIVE_THUMB_CLASS);
 
@@ -279,7 +279,7 @@ function () {
     });
     Array.prototype.slice.call(this.swiper.thumbs.slides).forEach(function (el, index) {
       var _uiChange = function _uiChange() {
-        Object(awesome_js_funcs_dom_siblingFilter__WEBPACK_IMPORTED_MODULE_5__["default"])(el, ACTIVE_THUMB_CLASS)[0].classList.remove(ACTIVE_THUMB_CLASS);
+        Object(_cycjimmy_awesome_js_funcs_dom_siblingFilter__WEBPACK_IMPORTED_MODULE_5__["default"])(el, ACTIVE_THUMB_CLASS)[0].classList.remove(ACTIVE_THUMB_CLASS);
 
         _this.swiper.thumbs.slides[index].classList.add(ACTIVE_THUMB_CLASS);
 
@@ -329,7 +329,7 @@ function () {
       }; // set custom styles
 
       if (_pagination.style) {
-        Object(awesome_js_funcs_dom_addStyles__WEBPACK_IMPORTED_MODULE_4__["default"])(this.el.pagination, _pagination.style);
+        Object(_cycjimmy_awesome_js_funcs_dom_addStyles__WEBPACK_IMPORTED_MODULE_4__["default"])(this.el.pagination, _pagination.style);
       } // Fix Explain Space
 
 
@@ -343,8 +343,8 @@ function () {
     if (_navigation) {
       if (_navigation.custom) {
         // Set custom navigation
-        this.el.navigation.prevEl = Object(awesome_js_funcs_judgeBasic_isString__WEBPACK_IMPORTED_MODULE_3__["default"])(_navigation.custom.prevEl) ? document.querySelector(_navigation.custom.prevEl) : _navigation.custom.prevEl;
-        this.el.navigation.nextEl = Object(awesome_js_funcs_judgeBasic_isString__WEBPACK_IMPORTED_MODULE_3__["default"])(_navigation.custom.nextEl) ? document.querySelector(_navigation.custom.nextEl) : _navigation.custom.nextEl;
+        this.el.navigation.prevEl = Object(_cycjimmy_awesome_js_funcs_judgeBasic_isString__WEBPACK_IMPORTED_MODULE_3__["default"])(_navigation.custom.prevEl) ? document.querySelector(_navigation.custom.prevEl) : _navigation.custom.prevEl;
+        this.el.navigation.nextEl = Object(_cycjimmy_awesome_js_funcs_judgeBasic_isString__WEBPACK_IMPORTED_MODULE_3__["default"])(_navigation.custom.nextEl) ? document.querySelector(_navigation.custom.nextEl) : _navigation.custom.nextEl;
         this.el.navigation.prevEl.classList.add('swiper-button-prev', _style_main_scss__WEBPACK_IMPORTED_MODULE_1___default.a.resetNavigationEl);
         this.el.navigation.nextEl.classList.add('swiper-button-next', _style_main_scss__WEBPACK_IMPORTED_MODULE_1___default.a.resetNavigationEl);
       } else {
@@ -369,11 +369,11 @@ function () {
 
         if (_navigation.styles) {
           if (_navigation.styles.next) {
-            Object(awesome_js_funcs_dom_addStyles__WEBPACK_IMPORTED_MODULE_4__["default"])(this.el.navigation.nextEl, _navigation.styles.next);
+            Object(_cycjimmy_awesome_js_funcs_dom_addStyles__WEBPACK_IMPORTED_MODULE_4__["default"])(this.el.navigation.nextEl, _navigation.styles.next);
           }
 
           if (_navigation.styles.prev) {
-            Object(awesome_js_funcs_dom_addStyles__WEBPACK_IMPORTED_MODULE_4__["default"])(this.el.navigation.prevEl, _navigation.styles.prev);
+            Object(_cycjimmy_awesome_js_funcs_dom_addStyles__WEBPACK_IMPORTED_MODULE_4__["default"])(this.el.navigation.prevEl, _navigation.styles.prev);
           }
         }
 
@@ -397,7 +397,7 @@ function () {
 
   _proto._fixFullImg = function _fixFullImg(eContainer) {
     var slideClientRect = eContainer.querySelector('.swiper-slide').getBoundingClientRect(),
-        aImgs = Object(awesome_js_funcs_typeConversion_nodeListToArray__WEBPACK_IMPORTED_MODULE_6__["default"])(eContainer.querySelectorAll('.swiper-full-img>img'));
+        aImgs = Object(_cycjimmy_awesome_js_funcs_typeConversion_nodeListToArray__WEBPACK_IMPORTED_MODULE_6__["default"])(eContainer.querySelectorAll('.swiper-full-img>img'));
     aImgs.forEach(function (img) {
       var imgNaturalDimensions = _getImgNaturalDimensions(img);
 

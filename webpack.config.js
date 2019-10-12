@@ -1,4 +1,4 @@
-var
+const
   path = require('path')
   , webpack = require('webpack')
   , packageJson = require('./package.json')
@@ -9,12 +9,12 @@ var
   , UglifyJsPlugin = require('uglifyjs-webpack-plugin')
   , ExtractTextPlugin = require('extract-text-webpack-plugin')
   , OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
-  , CleanWebpackPlugin = require('clean-webpack-plugin')
+  , {CleanWebpackPlugin} = require('clean-webpack-plugin')
   , CopyWebpackPlugin = require('copy-webpack-plugin')
   , DefinePlugin = require('webpack/lib/DefinePlugin')
 ;
 
-var
+const
   libName = 'AwesomeSwiper'
   , IS_DEVELOPMENT = process.env.NODE_ENV === 'development'
   , IS_PACK = process.env.NODE_ENV === 'pack'
@@ -23,7 +23,7 @@ var
   , cssIdentifier = IS_DEVELOPMENT ? '[path][name]__[local]' : '[hash:base64:10]'
 ;
 
-var styleLoaderConfig = {
+const styleLoaderConfig = {
   styleLoader: {
     loader: 'style-loader'
   },
@@ -31,8 +31,9 @@ var styleLoaderConfig = {
     loader: 'css-loader',
     options: {
       importLoaders: 2,
-      modules: true,
-      localIdentName: cssIdentifier
+      modules: {
+        localIdentName: cssIdentifier,
+      },
     },
   },
   cssLoaderNoModules: {
@@ -52,13 +53,15 @@ var styleLoaderConfig = {
   sassLoader: {
     loader: 'sass-loader',
     options: {
-      outputStyle: 'expanded',
+      sassOptions: {
+        outputStyle: 'expanded',
+      },
     },
   },
 };
 
 
-var UGLIFY_OPTIONS = {
+const UGLIFY_OPTIONS = {
   uglifyOptions: {
     ie8: false,
     safari10: true,
@@ -79,7 +82,7 @@ var UGLIFY_OPTIONS = {
 };
 
 
-var config = {
+const config = {
   mode: 'none',
   entry: [
     'swiper',
@@ -99,7 +102,7 @@ var config = {
       path.resolve('node_modules')
     ],
     'alias': {
-      'swiper': path.resolve('node_modules', 'swiper', 'dist', 'js', 'swiper.js')
+      'swiper': path.resolve('node_modules', 'swiper', 'js', 'swiper.js')
     },
     'extensions': ['.js']
   },
@@ -110,10 +113,7 @@ var config = {
       {
         test: /\.js$/,
         type: 'javascript/auto',
-        include: [
-          path.resolve('src')
-        ],
-        loader: 'babel-loader'
+        loader: 'babel-loader',
       },
 
       // style
@@ -133,9 +133,6 @@ var config = {
       },
       {
         test: /\.css$/,
-        include: [
-          path.resolve('node_modules', 'swiper'),
-        ],
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
           use: [

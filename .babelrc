@@ -3,13 +3,6 @@
     [
       "@babel/preset-env",
       {
-        "targets": {
-          "ie": "11",
-          "chrome": "46",
-          "safari": "8",
-          "ios": "8",
-          "android": "4.4"
-        },
         "loose": true,
         "modules": false
       }

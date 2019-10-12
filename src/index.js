@@ -1,7 +1,7 @@
 // style
 if (DEVELOPMENT || STANDALONE) {
   console.log('development');
-  require('../node_modules/swiper/dist/css/swiper.css');
+  require('../node_modules/swiper/css/swiper.css');
 }
 
 import _style from './style/main.scss';
@@ -9,11 +9,10 @@ import _style from './style/main.scss';
 // component
 import Swiper from 'swiper';
 
-import isString from 'awesome-js-funcs/judgeBasic/isString';
-import addStyles from 'awesome-js-funcs/dom/addStyles';
-import siblingFilter from 'awesome-js-funcs/dom/siblingFilter';
-import nodeListToArray from 'awesome-js-funcs/typeConversion/nodeListToArray';
-
+import isString from '@cycjimmy/awesome-js-funcs/judgeBasic/isString';
+import addStyles from '@cycjimmy/awesome-js-funcs/dom/addStyles';
+import siblingFilter from '@cycjimmy/awesome-js-funcs/dom/siblingFilter';
+import nodeListToArray from '@cycjimmy/awesome-js-funcs/typeConversion/nodeListToArray';
 
 export default class AwesomeSwiper {
   constructor(SwiperModule) {
