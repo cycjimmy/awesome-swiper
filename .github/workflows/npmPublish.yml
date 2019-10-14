@@ -31,7 +31,7 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - run: npm install -g yarn
       - run: yarn install
-      - run: npm run build
+      - run: npm run pack:all
       - run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_PACKAGE_TOKEN}}
@@ -48,7 +48,7 @@ jobs:
           scope: '@cycjimmy'
       - run: npm install -g yarn
       - run: yarn install
-      - run: npm run build
+      - run: npm run pack:all
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
