@@ -1,0 +1,12 @@
+
+:global(.swiper-pagination) {
+  :global(.swiper-pagination-bullet) {
+    opacity: .4;
+    background: var(--swiper-pagination-color, black);
+  }
+
+  :global(.swiper-pagination-bullet-active) {
+    opacity: .9;
+    background: var(--swiper-pagination-color, var(--swiper-theme-color));
+  }
+}

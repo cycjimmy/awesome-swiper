@@ -1,0 +1,15 @@
+.resetNavigationEl {
+  position: static;
+  margin: auto;
+  top: auto;
+  right: auto;
+  left: auto;
+  bottom: auto;
+  background: none;
+
+  &::after {
+    content: '';
+    font-family: inherit;
+    font-size: inherit;
+  }
+}

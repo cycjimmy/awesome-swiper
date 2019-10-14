@@ -1,17 +1,11 @@
 @import "~@cycjimmy/sass-lib";
 
+@import "navigation";
+@import "pagination";
+@import "thumb";
+
+// Extra
 $space: 10px;
-
-.resetNavigationEl {
-  position: static;
-  margin: auto;
-  top: auto;
-  right: auto;
-  left: auto;
-  bottom: auto;
-  background: none;
-}
-
 :global(.swiper-explain) {
   @extend %abs;
   left: 0;
@@ -45,53 +39,4 @@ $space: 10px;
     }
   }
 }
-
-:global(.swiper-pagination) {
-  &.white {
-    :global(.swiper-pagination-bullet) {
-      background-color: #fff;
-      opacity: .6;
-    }
-
-    :global(.swiper-pagination-bullet-active) {
-      background-color: #fff;
-      opacity: .8;
-    }
-  }
-
-  &.black {
-    :global(.swiper-pagination-bullet) {
-      background-color: #000;
-      opacity: .6;
-    }
-
-    :global(.swiper-pagination-bullet-active) {
-      background-color: #000;
-      opacity: .8;
-    }
-  }
-}
-
-.thumbsWrapper {
-  :global(.swiper-slide) {
-    height: 100%;
-    opacity: 0.4;
-    cursor: pointer;
-
-    &:global(.active-thumb) {
-      opacity: 1;
-    }
-  }
-
-  &:global(.swiper-container-vertical) {
-    :global(.swiper-full-img) {
-      > img {
-        width: auto;
-        height: 100%;
-      }
-    }
-  }
-}
-
-
 

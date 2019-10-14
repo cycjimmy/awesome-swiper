@@ -1,6 +1,5 @@
-var
+const
   gulp = require('gulp')
-  , ghPages = require('gh-pages')
 ;
 
 // copy
@@ -15,14 +14,4 @@ gulp.task('copy:build', () => gulp.src([
   'standalone/**/*.css'
 ])
   .pipe(gulp.dest('build')));
-
-// Deploy to ghPages
-gulp.task('deploy', () => ghPages.publish('standalone', {
-  src: [
-    '**/*',
-    '!**/*.map'
-  ]
-}, function (err) {
-  console.error(err);
-}));
 

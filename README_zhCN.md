@@ -8,58 +8,59 @@
 [![jsdelivr][jsdelivr-image]][jsdelivr-url]
 [![npm license][license-image]][download-url]
 
-[npm-image]: https://img.shields.io/npm/v/awesome-swiper.svg?style=flat-square
-[npm-url]: https://npmjs.org/package/awesome-swiper
-[travis-image]: https://img.shields.io/travis/cycdpo/awesome-swiper.svg?style=flat-square
-[travis-url]: https://travis-ci.org/cycdpo/awesome-swiper
-[david-image]: https://img.shields.io/david/cycdpo/awesome-swiper.svg?style=flat-square
-[david-url]: https://david-dm.org/cycdpo/awesome-swiper
-[david-dev-image]: https://david-dm.org/cycdpo/awesome-swiper/dev-status.svg?style=flat-square
-[david-dev-url]: https://david-dm.org/cycdpo/awesome-swiper?type=dev
-[download-image]: https://img.shields.io/npm/dm/awesome-swiper.svg?style=flat-square
-[download-url]: https://npmjs.org/package/awesome-swiper
-[jsdelivr-image]: https://data.jsdelivr.com/v1/package/npm/awesome-swiper/badge
-[jsdelivr-url]: https://www.jsdelivr.com/package/npm/awesome-swiper
-[license-image]: https://img.shields.io/npm/l/awesome-swiper.svg?style=flat-square
+[npm-image]: https://img.shields.io/npm/v/@cycjimmy/awesome-swiper.svg?style=flat-square
+[npm-url]: https://npmjs.org/package/@cycjimmy/awesome-swiper
+[travis-image]: https://img.shields.io/travis/cycjimmy/awesome-swiper.svg?style=flat-square
+[travis-url]: https://travis-ci.org/cycjimmy/awesome-swiper
+[david-image]: https://img.shields.io/david/cycjimmy/awesome-swiper.svg?style=flat-square
+[david-url]: https://david-dm.org/cycjimmy/awesome-swiper
+[david-dev-image]: https://david-dm.org/cycjimmy/awesome-swiper/dev-status.svg?style=flat-square
+[david-dev-url]: https://david-dm.org/cycjimmy/awesome-swiper?type=dev
+[download-image]: https://img.shields.io/npm/dm/@cycjimmy/awesome-swiper.svg?style=flat-square
+[download-url]: https://npmjs.org/package/@cycjimmy/awesome-swiper
+[jsdelivr-image]: https://data.jsdelivr.com/v1/package/npm/@cycjimmy/awesome-swiper/badge
+[jsdelivr-url]: https://www.jsdelivr.com/package/npm/@cycjimmy/awesome-swiper
+[license-image]: https://img.shields.io/npm/l/@cycjimmy/awesome-swiper.svg?style=flat-square
 
-awesome-swiper 基于 [swiper 4+](https://github.com/nolimits4web/Swiper). ([Releases](https://github.com/cycdpo/awesome-swiper/releases) | [Demo](https://cycdpo.github.io/awesome-swiper/))
+* **[awesome-swiper](https://github.com/cycdpo/awesome-swiper) 已经迁移到 @cycjimmy/awesome-swiper**
+* awesome-swiper 基于 [swiper 5+](https://github.com/nolimits4web/Swiper). ([Releases](https://github.com/cycjimmy/awesome-swiper/releases) | [Demo](https://cycjimmy.github.io/awesome-swiper/))
 
 
-[English](https://github.com/cycdpo/awesome-swiper/blob/master/README.md) | [中文](https://github.com/cycdpo/awesome-swiper/blob/master/README_zhCN.md)
+[English](https://github.com/cycjimmy/awesome-swiper/blob/master/README.md) | [中文](https://github.com/cycjimmy/awesome-swiper/blob/master/README_zhCN.md)
 ***
 
 ## 安装
 ```shell
 # via npm
-$ npm install awesome-swiper --save
+$ npm install @cycjimmy/awesome-swiper --save
 
 # or via yarn
-$ yarn add awesome-swiper
+$ yarn add @cycjimmy/awesome-swiper
 ```
 
 ## 使用
-**Awesome Swiper 基于 [Swiper 4+](https://github.com/nolimits4web/Swiper). 首先将 swiper 加入你的工程**
+**Awesome Swiper 基于 [Swiper 5+](https://github.com/nolimits4web/Swiper). 首先将 swiper 加入你的工程**
 
 ```javascript
 import Swiper from 'swiper';
-import AwesomeSwiper from 'awesome-swiper';
+import AwesomeSwiper from '@cycjimmy/awesome-swiper';
 
 // 或者
 const Swiper = require('swiper');
-const AwesomeSwiper = require('awesome-swiper');
+const AwesomeSwiper = require('@cycjimmy/awesome-swiper');
 ```
 
 ```javascript
-let awesomeSwiper = new AwesomeSwiper([SwiperModule]).init(context [, ...config] [, ...overlayConfig]);
+const awesomeSwiper = new AwesomeSwiper([SwiperModule]).init(context [, ...config] [, ...overlayConfig]);
 
 // 如果需要缩略图
-let awesomeSwiper = new AwesomeSwiper([SwiperModule])
+const awesomeSwiper = new AwesomeSwiper([SwiperModule])
                         .init(context [, ...config] [, ...overlayConfig])
                         .addThumbs(thumbsContext [, ...thumbsConfig] [, ...thumbsExtraConfig]);
 ```
 
 ### `AwesomeSwiper()` 参数:
-* `SwiperModule`: [Object] 可设置自定义的 swiper 构造函数. 注意确保swiper版本为4以上
+* `SwiperModule`: [Object] 可设置自定义的 swiper 构造函数. 注意确保swiper版本为5以上
 
 ### `AwesomeSwiper().init()` 参数:
 * `context`: [String | Element] swiper的包裹层. 该包裹层的宽高大小必须提前设定.
@@ -68,16 +69,18 @@ let awesomeSwiper = new AwesomeSwiper([SwiperModule])
   * `loop`: [Boolean] 设为 `true` 来允许循环播放. 默认值为 `false`.
   * `autoplay`: [Number] 设置自动播放延迟的毫秒数. `0` 表示关闭自动播放. 默认值为 `0`.
   * `direction`: [String] 设置方向. 可选项: `'horizontal'` 和 `'vertical'`. 默认为 `'horizontal'`
+  * `themeColor`: [String] 设置swiper实例的主题颜色（可使用颜色名称、十六进制值等）. 默认为蓝色.
   * `spaceBetween`: [Number] 每个slide之前的距离, 单位为px. 默认值为 `0`.
   * `slidesPerView`: [Number | 'auto'] 视框中能同时看到slide的数量. 默认值为 `1`.
   * `mousewheel`: [Boolean] 设为 `true` 来允许通过鼠标滚轮控制. 默认值为 `false`.
   * `autoFixFullImg`: [Boolean] 设置 `true` 来自动适应满图片. 默认值为 `false`. 提示: 由于对性能有影响, 非必要情况请勿设置.
   * `pagination`: [Object] 设置分页器. 如果你不想要分页器, 将其设为 `null`.
-    * `color`: [String] `'default'` 默认颜色是蓝色. 你也可以设置`'black'` 或者 `'white'` 或者嵌入自定义样式
+    * `color`: [String] 设置分页器的颜色（可使用颜色名称、十六进制值等）. 默认为蓝色.
     * `dynamicBullets`: [Boolean] 动态分页器. 默认值为 `false`. 查看[Swiper Pagination](http://idangero.us/swiper/api/#pagination)
     * `style`: [Object] 自定义分页器样式. 建议再此只对位置样式进行调整.
   * `navigation`: [Object] 设置导航按钮. 如果你不想要导航按钮, 将其设为 `null`.
-    * `color`: [String] `'default'` 默认颜色是蓝色. 你也可以设置`'black'` 或者 `'white'`
+    * `color`: [String] 设置导航按钮的颜色（可使用颜色名称、十六进制值等）. 默认为蓝色.
+    * `size`: [String | Number] 设置导航按钮的尺寸
     * `styles`: [Object] 自定义样式
       * `prev` [Object] 向前按钮的自定义样式.
       * `next` [Object] 向后按钮的自定义样式.
@@ -104,7 +107,6 @@ let awesomeSwiper = new AwesomeSwiper([SwiperModule])
 ## 在浏览器中使用
 ```html
 <link href="swiper.min.css" rel="stylesheet">
-<link href="AwesomeSwiper.min.css" rel="stylesheet">
 
 <div id="basic" class="swiper-container">
   <div class="swiper-wrapper">
@@ -114,7 +116,7 @@ let awesomeSwiper = new AwesomeSwiper([SwiperModule])
 </div>
 
 <script src="swiper.min.js"></script>
-<script src="AwesomeSwiper.min.js"></script>
+<script src="awesome-swiper.min.js"></script>
 <script>
   new AwesomeSwiper().init('#basic');
 </script>
@@ -122,35 +124,30 @@ let awesomeSwiper = new AwesomeSwiper([SwiperModule])
 
 或者使用独立版本:
 ```html
-<link href="AwesomeSwiper.standalone.min.css" rel="stylesheet">
-
 <div id="basic" class="swiper-container">
   ...
 </div>
 
-<script src="AwesomeSwiper.standalone.min.js"></script>
+<script src="awesome-swiper.standalone.min.js"></script>
 <script>
   new AwesomeSwiper().init('#basic');
 </script>
 ```
 
-**务必使用对应版本的JS和CSS文件**
-
 ## CDN
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/awesome-swiper@1/build/AwesomeSwiper.min.css">
-<script src="https://cdn.jsdelivr.net/npm/awesome-swiper@1/build/AwesomeSwiper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@cycjimmy/awesome-swiper@2/build/awesome-swiper.min.js"></script>
 
 // 独立版本
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/awesome-swiper@1/build/AwesomeSwiper.standalone.min.css">
-<script src="https://cdn.jsdelivr.net/npm/awesome-swiper@1/build/AwesomeSwiper.standalone.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@cycjimmy/awesome-swiper@2/build/awesome-swiper.standalone.min.js"></script>
 ```
 
 ## 兼容性
-* chrome >= 46
-* safari >= 8
-* firefox >= 40
-* ie >= 11
-* ios >= 8
-* android >= 4.4
+* chrome >= 49
+* safari >= 11
+* firefox >= 31
+* ios >= 11
+* android >= 7
+* Samsung >= 5
 
+**注意: 不支持IE，如需兼容IE，请退回到[awesome-swiper](https://github.com/cycdpo/awesome-swiper)**

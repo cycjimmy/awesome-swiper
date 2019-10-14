@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <title>Awesome Swiper Demo</title>
-  <link href="AwesomeSwiper.standalone.min.css" rel="stylesheet">
   <style>
     h2 {
       text-align: center;
@@ -37,26 +36,25 @@
   </div>
 </div>
 
-<script src="AwesomeSwiper.standalone.min.js"></script>
+<script src="awesome-swiper.standalone.min.js"></script>
 <script>
   new AwesomeSwiper().init('#changeNavigationStyle', {
     pagination: {
       color: 'white'
     },
     navigation: {
+      color: '#27340a',
       styles: {
         prev: {
-          background: 'url(left.svg) no-repeat',
-          width: '40px',
-          height: '40px',
-          marginTop: '-20px'
+          width: '60px',
+          height: '120px',
+          backgroundColor: 'rgba(255, 255, 255, .4)'
         },
 
         next: {
-          background: 'url(right.svg) no-repeat',
-          width: '40px',
-          height: '40px',
-          marginTop: '-20px'
+          width: '60px',
+          height: '120px',
+          backgroundColor: 'rgba(255, 255, 255, .4)'
         }
       }
     }

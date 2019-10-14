@@ -4,12 +4,13 @@ if (DEVELOPMENT || STANDALONE) {
   require('swiper/css/swiper.css');
 }
 
-import _style from './style/main.scss';
+const _style = require('./style/main.scss');
 
 // component
 import Swiper from 'swiper';
 
 import isString from '@cycjimmy/awesome-js-funcs/judgeBasic/isString';
+import isNumber from '@cycjimmy/awesome-js-funcs/judgeBasic/isNumber';
 import addStyles from '@cycjimmy/awesome-js-funcs/dom/addStyles';
 import siblingFilter from '@cycjimmy/awesome-js-funcs/dom/siblingFilter';
 import nodeListToArray from '@cycjimmy/awesome-js-funcs/typeConversion/nodeListToArray';
@@ -38,7 +39,7 @@ export default class AwesomeSwiper {
       ? document.querySelector(container)
       : container;
 
-    let mainDefault = {
+    const mainDefault = {
       speed: 300,
       loop: false,
       autoplay: 0,
@@ -47,13 +48,15 @@ export default class AwesomeSwiper {
       slidesPerView: 1,
       mousewheel: false,
       autoFixFullImg: false,
+      themeColor: '',
       pagination: {
-        color: 'default',
+        color: '',
         style: null,
         dynamicBullets: false
       },
       navigation: {
-        color: 'default',
+        color: '',
+        size: '',
         styles: {
           prev: null,
           next: null,
@@ -83,19 +86,30 @@ export default class AwesomeSwiper {
     this._initNavigation();
 
     this.config.main = Object.assign(this.config.main, overlaySwiperConfig);
+    this._initMainSwiper();
+
+    return this;
+  };
+
+  _initMainSwiper() {
+    const _themeColor = this.config.mainOrigin.themeColor;
+
+    if (_themeColor) {
+      this.el.mainContainer.style.setProperty(
+        STYLE_PROPERTY_NAME.themeColor,
+        _themeColor,
+      );
+    }
+
     this.swiper.main = new this.swiper._constructor(this.el.mainContainer, this.config.main);
 
     // fix full img
     if (this.config.mainOrigin.autoFixFullImg) {
       this._fixFullImg(this.el.mainContainer);
     }
-
-    return this;
   };
 
   addThumbs(thumbsContainer, customThumbsConfig = {}, extraConfig = {}) {
-    console.log('addThumbs');
-
     this.el.thumbsContainer = isString(thumbsContainer)
       ? document.querySelector(thumbsContainer)
       : thumbsContainer;
@@ -103,12 +117,12 @@ export default class AwesomeSwiper {
     this.el.thumbsContainer.classList.add(_style.thumbsWrapper);
 
     // config
-    let thumbsDefault = {
+    const thumbsDefault = {
       spaceBetween: 10,
       slidesPerView: 'auto',
     };
 
-    let thumbsExtraDefault = {
+    const thumbsExtraDefault = {
       mouseOverMode: false,
     };
 
@@ -134,7 +148,7 @@ export default class AwesomeSwiper {
     this.swiper.main.on('slideChange', () => {
       console.log('mainSwiper slideChange');
 
-      let
+      const
         swiperIndex = this.swiper.main.realIndex
         , targetThumb = this.swiper.thumbs.slides[swiperIndex]
       ;
@@ -147,13 +161,12 @@ export default class AwesomeSwiper {
 
 
     Array.prototype.slice.call(this.swiper.thumbs.slides).forEach((el, index) => {
-      let
-        _uiChange = () => {
-          siblingFilter(el, ACTIVE_THUMB_CLASS)[0].classList.remove(ACTIVE_THUMB_CLASS);
-          this.swiper.thumbs.slides[index].classList.add(ACTIVE_THUMB_CLASS);
-          this.swiper.thumbs.slideTo(index);
-          this.swiper.main.slideTo(index);
-        };
+      const _uiChange = () => {
+        siblingFilter(el, ACTIVE_THUMB_CLASS)[0].classList.remove(ACTIVE_THUMB_CLASS);
+        this.swiper.thumbs.slides[index].classList.add(ACTIVE_THUMB_CLASS);
+        this.swiper.thumbs.slideTo(index);
+        this.swiper.main.slideTo(index);
+      };
 
       if (thumbsExtraConfig.mouseOverMode) {
         el.addEventListener('mouseover', () => _uiChange());
@@ -165,9 +178,7 @@ export default class AwesomeSwiper {
   };
 
   _initPagination() {
-    let
-      _pagination = this.config.mainOrigin.pagination
-    ;
+    const _pagination = this.config.mainOrigin.pagination;
 
     if (_pagination) {
       // add to Dom
@@ -176,14 +187,11 @@ export default class AwesomeSwiper {
       this.el.mainContainer.appendChild(this.el.pagination);
 
       // set swiperConfig
-      switch (_pagination.color) {
-        case 'white':
-          this.el.pagination.classList.add(_style.white);
-          break;
-
-        case 'black':
-          this.el.pagination.classList.add(_style.black);
-          break;
+      if (_pagination.color) {
+        this.el.mainContainer.style.setProperty(
+          STYLE_PROPERTY_NAME.paginationColor,
+          _pagination.color,
+        );
       }
 
       this.config.main.pagination = {
@@ -203,61 +211,71 @@ export default class AwesomeSwiper {
   };
 
   _initNavigation() {
-    let
-      _navigation = this.config.mainOrigin.navigation
-    ;
+    const _navigation = this.config.mainOrigin.navigation;
 
-    if (_navigation) {
+    if (!_navigation) {
+      return;
+    }
 
-      if (_navigation.custom) {
-        // Set custom navigation
-        this.el.navigation.prevEl = isString(_navigation.custom.prevEl)
-          ? document.querySelector(_navigation.custom.prevEl)
-          : _navigation.custom.prevEl;
-        this.el.navigation.nextEl = isString(_navigation.custom.nextEl)
-          ? document.querySelector(_navigation.custom.nextEl)
-          : _navigation.custom.nextEl;
-        this.el.navigation.prevEl.classList.add('swiper-button-prev', _style.resetNavigationEl);
-        this.el.navigation.nextEl.classList.add('swiper-button-next', _style.resetNavigationEl);
-      } else {
-        // add to Dom
-        this.el.navigation.prevEl = this.emptyDiv.cloneNode();
-        this.el.navigation.nextEl = this.emptyDiv.cloneNode();
-        this.el.navigation.prevEl.classList.add('swiper-button-prev');
-        this.el.navigation.nextEl.classList.add('swiper-button-next');
-
-        switch (_navigation.color) {
-          case 'white':
-            this.el.navigation.nextEl.classList.add('swiper-button-white');
-            this.el.navigation.prevEl.classList.add('swiper-button-white');
-            break;
-
-          case 'black':
-            this.el.navigation.nextEl.classList.add('swiper-button-black');
-            this.el.navigation.prevEl.classList.add('swiper-button-black');
-            break;
-        }
-
-        // set custom styles
-        if (_navigation.styles) {
-          if (_navigation.styles.next) {
-            addStyles(this.el.navigation.nextEl, _navigation.styles.next);
-          }
-          if (_navigation.styles.prev) {
-            addStyles(this.el.navigation.prevEl, _navigation.styles.prev);
-          }
-        }
-
-        this.el.mainContainer.appendChild(this.el.navigation.nextEl);
-        this.el.mainContainer.appendChild(this.el.navigation.prevEl);
-      }
-
-      // set swiperConfig
+    const _setSwiperConfig = () => {
       this.config.main.navigation = {
         nextEl: this.el.navigation.nextEl,
         prevEl: this.el.navigation.prevEl,
       };
+    };
+
+    if (_navigation.custom) {
+      // Set custom navigation
+      this.el.navigation.prevEl = isString(_navigation.custom.prevEl)
+        ? document.querySelector(_navigation.custom.prevEl)
+        : _navigation.custom.prevEl;
+      this.el.navigation.nextEl = isString(_navigation.custom.nextEl)
+        ? document.querySelector(_navigation.custom.nextEl)
+        : _navigation.custom.nextEl;
+      this.el.navigation.prevEl.classList.add('swiper-button-prev', _style.resetNavigationEl);
+      this.el.navigation.nextEl.classList.add('swiper-button-next', _style.resetNavigationEl);
+
+      _setSwiperConfig();
+      return;
     }
+
+    // add to Dom
+    this.el.navigation.prevEl = this.emptyDiv.cloneNode();
+    this.el.navigation.nextEl = this.emptyDiv.cloneNode();
+    this.el.navigation.prevEl.classList.add('swiper-button-prev');
+    this.el.navigation.nextEl.classList.add('swiper-button-next');
+
+    if (_navigation.color) {
+      this.el.mainContainer.style.setProperty(
+        STYLE_PROPERTY_NAME.navigationColor,
+        _navigation.color,
+      );
+    }
+
+    if (_navigation.size) {
+      if (isNumber(_navigation.size)) {
+        _navigation.size += 'px';
+      }
+
+      this.el.mainContainer.style.setProperty(
+        STYLE_PROPERTY_NAME.navigationSize,
+        _navigation.size,
+      );
+    }
+
+    // set custom styles
+    if (_navigation.styles) {
+      if (_navigation.styles.next) {
+        addStyles(this.el.navigation.nextEl, _navigation.styles.next);
+      }
+      if (_navigation.styles.prev) {
+        addStyles(this.el.navigation.prevEl, _navigation.styles.prev);
+      }
+    }
+
+    this.el.mainContainer.appendChild(this.el.navigation.nextEl);
+    this.el.mainContainer.appendChild(this.el.navigation.prevEl);
+    _setSwiperConfig();
   };
 
   _fixExplainSpace() {
@@ -269,13 +287,13 @@ export default class AwesomeSwiper {
   };
 
   _fixFullImg(eContainer) {
-    let
+    const
       slideClientRect = eContainer.querySelector('.swiper-slide').getBoundingClientRect()
       , aImgs = nodeListToArray(eContainer.querySelectorAll('.swiper-full-img>img'))
     ;
 
     aImgs.forEach(img => {
-      let imgNaturalDimensions = _getImgNaturalDimensions(img);
+      const imgNaturalDimensions = _getImgNaturalDimensions(img);
       if (slideClientRect.width / slideClientRect.height < imgNaturalDimensions.width / imgNaturalDimensions.height) {
         img.classList.add(_style.basedOnHeight);
       }
@@ -283,7 +301,7 @@ export default class AwesomeSwiper {
   };
 };
 
-let _getImgNaturalDimensions = (img) => {
+const _getImgNaturalDimensions = (img) => {
   let
     width
     , height
@@ -302,4 +320,11 @@ let _getImgNaturalDimensions = (img) => {
 };
 
 const ACTIVE_THUMB_CLASS = 'active-thumb';
+
+const STYLE_PROPERTY_NAME = {
+  themeColor: '--swiper-theme-color',
+  navigationColor: '--swiper-navigation-color',
+  navigationSize: '--swiper-navigation-size',
+  paginationColor: '--swiper-pagination-color',
+};
 

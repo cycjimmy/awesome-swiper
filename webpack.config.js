@@ -7,15 +7,12 @@ const
   , BrowserSyncPlugin = require('browser-sync-webpack-plugin')
   , HtmlWebpackPlugin = require('html-webpack-plugin')
   , TerserPlugin = require('terser-webpack-plugin')
-  , ExtractTextPlugin = require('extract-text-webpack-plugin')
-  , OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
   , {CleanWebpackPlugin} = require('clean-webpack-plugin')
-  , CopyWebpackPlugin = require('copy-webpack-plugin')
   , DefinePlugin = require('webpack/lib/DefinePlugin')
 ;
 
 const
-  libName = 'AwesomeSwiper'
+  libName = packageJson.name.replace(/^.+\//g, '')
   , IS_DEVELOPMENT = process.env.NODE_ENV === 'development'
   , IS_PACK = process.env.NODE_ENV === 'pack'
   , IS_PRODUCTION = process.env.NODE_ENV === 'production'
@@ -93,7 +90,7 @@ const config = {
   ],
 
   output: {
-    library: libName,
+    library: 'AwesomeSwiper',
     libraryTarget: 'umd',
     libraryExport: 'default'
   },
@@ -118,45 +115,50 @@ const config = {
 
       // style
       {
-        test: /\.scss$/,
-        exclude: [
-          path.resolve('node_modules'),
+        test: /\.css$/,
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          styleLoaderConfig.cssLoaderNoModules
         ],
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            styleLoaderConfig.cssLoader,
-            styleLoaderConfig.postLoader,
-            styleLoaderConfig.sassLoader,
-          ],
-        })
       },
       {
-        test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            styleLoaderConfig.cssLoaderNoModules
-          ],
-        })
+        test: /\.scss$/,
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          styleLoaderConfig.cssLoader,
+          styleLoaderConfig.postLoader,
+          styleLoaderConfig.sassLoader,
+        ],
       },
 
       // Pug template
       {
         test: /\.pug$/,
-        include: [
-          path.resolve('src'),
-          path.resolve('static')
-        ],
-        exclude: [
-          path.resolve('node_modules')
-        ],
         loader: 'pug-loader'
-      }
+      },
+
+      // Pictures
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+            },
+          },
+        ],
+      },
     ]
   },
 
   plugins: [
+    new webpack.HashedModuleIdsPlugin(),
+
     new DefinePlugin({
       DEVELOPMENT: JSON.stringify(IS_DEVELOPMENT),
       PACK: JSON.stringify(IS_PACK),
@@ -168,8 +170,8 @@ const config = {
       banner: packageJson.name + ' v' + packageJson.version +
         '\nHomepage: ' + packageJson.homepage +
         '\nReleased under the ' + packageJson.license + ' License.'
-    })
-  ]
+    }),
+  ],
 };
 
 // dev mode
@@ -182,14 +184,7 @@ if (IS_DEVELOPMENT) {
   config.output.path = path.resolve('dist');
   config.output.filename = libName + '.js';
 
-
   config.plugins.push(
-    new ExtractTextPlugin({
-      filename: libName + '.css',
-      ignoreOrder: true,
-      allChunks: true
-    }),
-
     new HtmlWebpackPlugin({
       inject: false,
       template: path.resolve('./static', 'view', 'index.pug'),
@@ -199,12 +194,6 @@ if (IS_DEVELOPMENT) {
       verbose: true,
       dry: false
     }),
-
-    new CopyWebpackPlugin([{
-      from: path.resolve('static', 'images', '*'),
-      to: path.resolve('dist'),
-      flatten: true
-    }]),
 
     new BrowserSyncPlugin({
       server: {
@@ -228,12 +217,6 @@ if (IS_PACK || IS_PRODUCTION) {
     config.output.filename = libName + '.js';
 
     config.plugins.push(
-      new ExtractTextPlugin({
-        filename: libName + '.css',
-        ignoreOrder: true,
-        allChunks: true
-      }),
-
       new CleanWebpackPlugin({
         verbose: true,
         dry: false
@@ -245,18 +228,6 @@ if (IS_PACK || IS_PRODUCTION) {
     config.mode = 'production';
 
     config.output.filename = libName + '.min.js';
-
-    config.plugins.push(
-      new webpack.HashedModuleIdsPlugin(),
-
-      new ExtractTextPlugin({
-        filename: libName + '.min.css',
-        ignoreOrder: true,
-        allChunks: true
-      }),
-
-      new OptimizeCssAssetsPlugin()
-    );
 
     config.optimization = OPTIMIZATION_OPTIONS;
   }
@@ -270,14 +241,6 @@ if (IS_STANDALONE) {
   config.output.filename = libName + '.standalone.min.js';
 
   config.plugins.push(
-    new webpack.HashedModuleIdsPlugin(),
-
-    new ExtractTextPlugin({
-      filename: libName + '.standalone.min.css',
-      ignoreOrder: true,
-      allChunks: true
-    }),
-
     new CleanWebpackPlugin({
       verbose: true,
       dry: false
@@ -287,14 +250,6 @@ if (IS_STANDALONE) {
       inject: false,
       template: path.resolve('./static', 'view', 'index.pug'),
     }),
-
-    new CopyWebpackPlugin([{
-      from: path.resolve('static', 'images', '*'),
-      to: path.resolve('standalone'),
-      flatten: true
-    }]),
-
-    new OptimizeCssAssetsPlugin()
   );
 
   config.optimization = OPTIMIZATION_OPTIONS;

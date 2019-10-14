@@ -1,0 +1,20 @@
+.thumbsWrapper {
+  :global(.swiper-slide) {
+    height: 100%;
+    opacity: 0.4;
+    cursor: pointer;
+
+    &:global(.active-thumb) {
+      opacity: 1;
+    }
+  }
+
+  &:global(.swiper-container-vertical) {
+    :global(.swiper-full-img) {
+      > img {
+        width: auto;
+        height: 100%;
+      }
+    }
+  }
+}

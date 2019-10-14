@@ -6,11 +6,6 @@ html(lang='en')
     title Awesome Swiper Demo
     base(href="./")
 
-    //- webpack style
-    each _style,index in htmlWebpackPlugin.files.css
-      if index === 0
-        link(href=_style, rel="stylesheet")
-
     style.
       h1, h2 {
         text-align: center;
@@ -42,6 +37,15 @@ html(lang='en')
 
     each _js in htmlWebpackPlugin.files.js
       script(src=_js)
+
+    //- copy images into dist dir
+    - require('../images/p1.jpg');
+    - require('../images/p2.jpg');
+    - require('../images/p3.jpg');
+    - require('../images/p4.jpg');
+    - require('../images/p5.jpg');
+    - require('../images/leftBlack.svg');
+    - require('../images/rightBlack.svg');
 
     //- Basic
     section
@@ -76,7 +80,7 @@ html(lang='en')
           .init('#basic');
 
 
-      a.code-button(href="https://github.com/cycdpo/awesome-swiper/blob/master/demo/basic.html", target="_blank") CODE
+      a.code-button(href="https://github.com/cycjimmy/awesome-swiper/blob/master/demo/basic.html", target="_blank") CODE
 
       hr
 
@@ -112,17 +116,54 @@ html(lang='en')
         new AwesomeSwiper()
           .init('#changeColor', {
             pagination: {
-              color: 'white'
+              color: '#71b4c5'
             },
             navigation: {
-              color: 'white'
+              color: '#71b4c5'
             }
           });
 
-      a.code-button(href="https://github.com/cycdpo/awesome-swiper/blob/master/demo/changeColor.html", target="_blank") CODE
+      a.code-button(href="https://github.com/cycjimmy/awesome-swiper/blob/master/demo/changeColor.html", target="_blank") CODE
 
       hr
 
+    //- Change Theme Color
+    section
+      h2 Change Theme Color
+
+      style.
+        #changeThemeColor {
+          width: 800px;
+          height: 450px;
+        }
+
+      #changeThemeColor.swiper-container
+        .swiper-wrapper
+          .swiper-slide
+            a.swiper-full-img(href="javascript:;")
+              img(src='p1.jpg')
+          .swiper-slide
+            a.swiper-full-img(href="javascript:;")
+              img(src='p2.jpg')
+          .swiper-slide
+            a.swiper-full-img(href="javascript:;")
+              img(src='p3.jpg')
+          .swiper-slide
+            a.swiper-full-img(href="javascript:;")
+              img(src='p4.jpg')
+          .swiper-slide
+            a.swiper-full-img(href="javascript:;")
+              img(src='p5.jpg')
+
+      script.
+        new AwesomeSwiper()
+          .init('#changeThemeColor', {
+            themeColor: 'green'
+          });
+
+      a.code-button(href="https://github.com/cycjimmy/awesome-swiper/blob/master/demo/changeThemeColor.html", target="_blank") CODE
+
+      hr
 
 
     //- Dynamic Bullets Pagination
@@ -165,7 +206,7 @@ html(lang='en')
             }
           });
 
-      a.code-button(href="https://github.com/cycdpo/awesome-swiper/blob/master/demo/dynamicBulletsPagination.html", target="_blank") CODE
+      a.code-button(href="https://github.com/cycjimmy/awesome-swiper/blob/master/demo/dynamicBulletsPagination.html", target="_blank") CODE
 
       hr
 
@@ -205,25 +246,25 @@ html(lang='en')
               color: 'white'
             },
             navigation: {
+              color: '#27340a',
+              size: '60px',
               styles: {
                 prev: {
-                  background: 'url(left.svg) no-repeat',
-                  width: '40px',
-                  height: '40px',
-                  marginTop: '-20px'
+                  width: '60px',
+                  height: '120px',
+                  backgroundColor: 'rgba(255, 255, 255, .4)'
                 },
 
                 next: {
-                  background: 'url(right.svg) no-repeat',
-                  width: '40px',
-                  height: '40px',
-                  marginTop: '-20px'
+                  width: '60px',
+                  height: '120px',
+                  backgroundColor: 'rgba(255, 255, 255, .4)'
                 }
               }
             }
           });
 
-      a.code-button(href="https://github.com/cycdpo/awesome-swiper/blob/master/demo/changeNavigationStyle.html", target="_blank") CODE
+      a.code-button(href="https://github.com/cycjimmy/awesome-swiper/blob/master/demo/changeNavigationStyle.html", target="_blank") CODE
 
       hr
 
@@ -303,7 +344,7 @@ html(lang='en')
             }
           });
 
-      a.code-button(href="https://github.com/cycdpo/awesome-swiper/blob/master/demo/customNavigationElements.html", target="_blank") CODE
+      a.code-button(href="https://github.com/cycjimmy/awesome-swiper/blob/master/demo/customNavigationElements.html", target="_blank") CODE
 
       hr
 
@@ -350,7 +391,7 @@ html(lang='en')
             }
           });
 
-      a.code-button(href="https://github.com/cycdpo/awesome-swiper/blob/master/demo/multipleSlidesPerView.html", target="_blank") CODE
+      a.code-button(href="https://github.com/cycjimmy/awesome-swiper/blob/master/demo/multipleSlidesPerView.html", target="_blank") CODE
 
       hr
 
@@ -398,7 +439,7 @@ html(lang='en')
             }
           })
 
-      a.code-button(href="https://github.com/cycdpo/awesome-swiper/blob/master/demo/addExplain.html", target="_blank") CODE
+      a.code-button(href="https://github.com/cycjimmy/awesome-swiper/blob/master/demo/addExplain.html", target="_blank") CODE
 
       hr
 
@@ -444,7 +485,7 @@ html(lang='en')
             }
           });
 
-      a.code-button(href="https://github.com/cycdpo/awesome-swiper/blob/master/demo/autoFixFullImg.html", target="_blank") CODE
+      a.code-button(href="https://github.com/cycjimmy/awesome-swiper/blob/master/demo/autoFixFullImg.html", target="_blank") CODE
 
       hr
 
@@ -490,7 +531,7 @@ html(lang='en')
             }
           });
 
-      a.code-button(href="https://github.com/cycdpo/awesome-swiper/blob/master/demo/allowMouseWheel.html", target="_blank") CODE
+      a.code-button(href="https://github.com/cycjimmy/awesome-swiper/blob/master/demo/allowMouseWheel.html", target="_blank") CODE
 
       hr
 
@@ -537,7 +578,7 @@ html(lang='en')
             }
           });
 
-      a.code-button(href="https://github.com/cycdpo/awesome-swiper/blob/master/demo/autoPlay.html", target="_blank") CODE
+      a.code-button(href="https://github.com/cycjimmy/awesome-swiper/blob/master/demo/autoPlay.html", target="_blank") CODE
 
       hr
 
@@ -605,7 +646,7 @@ html(lang='en')
             slidesPerView: 5
           });
 
-      a.code-button(href="https://github.com/cycdpo/awesome-swiper/blob/master/demo/addBottomThumbs.html", target="_blank") CODE
+      a.code-button(href="https://github.com/cycjimmy/awesome-swiper/blob/master/demo/addBottomThumbs.html", target="_blank") CODE
 
       hr
 
@@ -688,7 +729,7 @@ html(lang='en')
             slidesPerView: 5
           });
 
-      a.code-button(href="https://github.com/cycdpo/awesome-swiper/blob/master/demo/addRightThumbs.html", target="_blank") CODE
+      a.code-button(href="https://github.com/cycjimmy/awesome-swiper/blob/master/demo/addRightThumbs.html", target="_blank") CODE
 
       hr
 
@@ -760,11 +801,11 @@ html(lang='en')
             mouseOverMode: true
           });
 
-      a.code-button(href="https://github.com/cycdpo/awesome-swiper/blob/master/demo/thumbsMouseOverMode.html", target="_blank") CODE
+      a.code-button(href="https://github.com/cycjimmy/awesome-swiper/blob/master/demo/thumbsMouseOverMode.html", target="_blank") CODE
 
       hr
 
 
-    a(style='display:block; margin: 20px; text-align: center;', href="https://github.com/cycdpo/awesome-swiper") Read More on Github.
+    a(style='display:block; margin: 20px; text-align: center;', href="https://github.com/cycjimmy/awesome-swiper") Read More on Github.
 
 
