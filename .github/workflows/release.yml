@@ -16,6 +16,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
 
+      - name: Install dependencies
+        run: npm ci
+
       - name: Setup Node.js with GitHub Package Registry
         uses: actions/setup-node@v1
         with:
