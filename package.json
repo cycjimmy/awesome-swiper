@@ -1,6 +1,6 @@
 {
   "name": "@cycjimmy/awesome-swiper",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "awesome-swiper based on swiper",
   "main": "build/awesome-swiper.min.js",
   "scripts": {
