@@ -159,13 +159,14 @@ export default class AwesomeSwiper {
       this.swiper.thumbs.slideTo(swiperIndex);
     });
 
-
     Array.prototype.slice.call(this.swiper.thumbs.slides).forEach((el, index) => {
       const _uiChange = () => {
         siblingFilter(el, ACTIVE_THUMB_CLASS)[0].classList.remove(ACTIVE_THUMB_CLASS);
         this.swiper.thumbs.slides[index].classList.add(ACTIVE_THUMB_CLASS);
         this.swiper.thumbs.slideTo(index);
-        this.swiper.main.slideTo(index);
+        this.swiper.main.params.loop
+          ? this.swiper.main.slideToLoop(index)
+          : this.swiper.main.slideTo(index);
       };
 
       if (thumbsExtraConfig.mouseOverMode) {
