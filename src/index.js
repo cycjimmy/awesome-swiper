@@ -288,10 +288,14 @@ export default class AwesomeSwiper {
   };
 
   _fixFullImg(eContainer) {
-    const
-      slideClientRect = eContainer.querySelector('.swiper-slide').getBoundingClientRect()
-      , aImgs = nodeListToArray(eContainer.querySelectorAll('.swiper-full-img>img'))
-    ;
+    const eSide = eContainer.querySelector('.swiper-slide');
+    // fix empty swiper
+    if (!eSide) {
+      return;
+    }
+
+    const slideClientRect = eSide.getBoundingClientRect();
+    const aImgs = nodeListToArray(eContainer.querySelectorAll('.swiper-full-img > img'));
 
     aImgs.forEach(img => {
       const imgNaturalDimensions = _getImgNaturalDimensions(img);
