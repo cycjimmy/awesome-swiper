@@ -1,6 +1,4 @@
-const
-  gulp = require('gulp')
-;
+const gulp = require('gulp');
 
 // copy
 gulp.task('copy:demo', () => gulp.src([

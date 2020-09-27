@@ -55,6 +55,7 @@ npm-debug.log
 yarn-error.log
 
 # project
+build
 dist
 standalone
 demo/*.jpg
