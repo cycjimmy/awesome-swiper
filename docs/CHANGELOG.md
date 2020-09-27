@@ -1,3 +1,10 @@
+## [2.0.5](https://github.com/cycjimmy/awesome-swiper/compare/v2.0.4...v2.0.5) (2020-09-27)
+
+
+### Bug Fixes
+
+* **navigation:** fix custom navigation elements style ([84bfcc4](https://github.com/cycjimmy/awesome-swiper/commit/84bfcc4d5ac6fb14fc7b917e4dc716851e1c5421))
+
 ## [2.0.4](https://github.com/cycjimmy/awesome-swiper/compare/v2.0.3...v2.0.4) (2020-09-27)
 
 
