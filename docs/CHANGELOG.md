@@ -1,3 +1,10 @@
+## [2.0.3](https://github.com/cycjimmy/awesome-swiper/compare/v2.0.2...v2.0.3) (2020-09-27)
+
+
+### Bug Fixes
+
+* fix loop mode swiper index when using thumbs ([de1ad5a](https://github.com/cycjimmy/awesome-swiper/commit/de1ad5ac8b210d7cf8a01a7d0600b5dd3777add4))
+
 ## [2.0.2](https://github.com/cycjimmy/awesome-swiper/compare/v2.0.1...v2.0.2) (2019-10-24)
 
 
