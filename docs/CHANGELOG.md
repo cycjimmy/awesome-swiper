@@ -1,3 +1,10 @@
+## [2.0.4](https://github.com/cycjimmy/awesome-swiper/compare/v2.0.3...v2.0.4) (2020-09-27)
+
+
+### Bug Fixes
+
+* fix empty swiper when using fixFullImg param ([9740a9b](https://github.com/cycjimmy/awesome-swiper/commit/9740a9b5b4af9430b8a5eb072931cdaf1c282d39))
+
 ## [2.0.3](https://github.com/cycjimmy/awesome-swiper/compare/v2.0.2...v2.0.3) (2020-09-27)
 
 
