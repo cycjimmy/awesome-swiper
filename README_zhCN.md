@@ -101,6 +101,7 @@ const awesomeSwiper = new AwesomeSwiper([SwiperModule])
 
 ### AwesomeSwiper中新增的css类
 * `.swiper-full-img`: 满照片容器.
+* `.swiper-full-bg`: 满背景容器.
 * `.swiper-explain`: 解释说明文字容器.
 * `.active-thumb`: 正处在激活状态的缩略图.
 

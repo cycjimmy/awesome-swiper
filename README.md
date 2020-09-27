@@ -100,6 +100,7 @@ const awesomeSwiper = new AwesomeSwiper([SwiperModule])
 
 ### new css classes in AwesomeSwiper
 * `.swiper-full-img`: Full images container.
+* `.swiper-full-bg`: Full background container.
 * `.swiper-explain`: Explain text container.
 * `.active-thumb`: Active slide of thumbs.
 

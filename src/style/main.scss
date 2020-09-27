@@ -40,3 +40,11 @@ $space: 10px;
   }
 }
 
+:global(.swiper-full-bg) {
+  @extend %fullContainer;
+  display: block;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
