@@ -16,5 +16,5 @@ cache:
 
 script:
   - npm --version
-  - npm run pack:all
+  - npm run build
   - npm run test

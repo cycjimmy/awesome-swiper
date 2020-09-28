@@ -1,13 +1,4 @@
-// style
-if (DEVELOPMENT || STANDALONE) {
-  console.log('development');
-  require('swiper/css/swiper.css');
-}
-
-const _style = require('./style/main.scss');
-
-// component
-import Swiper from 'swiper';
+import Swiper, { Navigation, Pagination, Autoplay, Mousewheel } from 'swiper';
 
 import isString from '@cycjimmy/awesome-js-funcs/judgeBasic/isString';
 import isNumber from '@cycjimmy/awesome-js-funcs/judgeBasic/isNumber';
@@ -15,9 +6,61 @@ import addStyles from '@cycjimmy/awesome-js-funcs/dom/addStyles';
 import siblingFilter from '@cycjimmy/awesome-js-funcs/dom/siblingFilter';
 import nodeListToArray from '@cycjimmy/awesome-js-funcs/typeConversion/nodeListToArray';
 
-export default class AwesomeSwiper {
-  constructor(SwiperModule) {
-    this.emptyDiv = document.createElement('div');
+import 'swiper/swiper-bundle.css';
+import style from './style/main.module.scss';
+
+// configure Swiper to use modules
+Swiper.use([Navigation, Pagination, Autoplay, Mousewheel]);
+
+const getImgNaturalDimensions = (img) => {
+  let width;
+  let height;
+  if (img.naturalWidth) {
+    width = img.naturalWidth;
+    height = img.naturalHeight;
+  } else {
+    width = img.offsetWidth;
+    height = img.offsetHeight;
+  }
+  return {
+    width,
+    height
+  };
+};
+
+const fixFullImg = (eContainer) => {
+  const eSide = eContainer.querySelector('.swiper-slide');
+  // fix empty swiper
+  if (!eSide) {
+    return;
+  }
+
+  const slideClientRect = eSide.getBoundingClientRect();
+  const aImgs = nodeListToArray(eContainer.querySelectorAll('.swiper-full-img > img'));
+
+  aImgs.forEach((img) => {
+    const imgNaturalDimensions = getImgNaturalDimensions(img);
+    if (
+      slideClientRect.width / slideClientRect.height <
+      imgNaturalDimensions.width / imgNaturalDimensions.height
+    ) {
+      img.classList.add(style.basedOnHeight);
+    }
+  });
+};
+
+const ACTIVE_THUMB_CLASS = 'active-thumb';
+
+const STYLE_PROPERTY_NAME = {
+  themeColor: '--swiper-theme-color',
+  navigationColor: '--swiper-navigation-color',
+  navigationSize: '--swiper-navigation-size',
+  paginationColor: '--swiper-pagination-color'
+};
+
+export default class {
+  constructor() {
+    this._emptyDiv = document.createElement('div');
 
     this.el = {
       mainContainer: null,
@@ -25,19 +68,17 @@ export default class AwesomeSwiper {
       pagination: null,
       navigation: {
         nextEl: null,
-        prevEl: null,
-      },
+        prevEl: null
+      }
     };
     this.swiper = {
-      _constructor: SwiperModule || Swiper,
+      constructor: Swiper
     };
     this.config = {};
-  };
+  }
 
   init(container, customMainConfig = {}, overlaySwiperConfig = {}) {
-    this.el.mainContainer = isString(container)
-      ? document.querySelector(container)
-      : container;
+    this.el.mainContainer = isString(container) ? document.querySelector(container) : container;
 
     const mainDefault = {
       speed: 300,
@@ -59,7 +100,7 @@ export default class AwesomeSwiper {
         size: '',
         styles: {
           prev: null,
-          next: null,
+          next: null
         },
         custom: null
       }
@@ -73,7 +114,7 @@ export default class AwesomeSwiper {
       direction: this.config.mainOrigin.direction,
       spaceBetween: this.config.mainOrigin.spaceBetween,
       slidesPerView: this.config.mainOrigin.slidesPerView,
-      mousewheel: this.config.mainOrigin.mousewheel,
+      mousewheel: this.config.mainOrigin.mousewheel
     };
 
     // set customConfig.autoplay
@@ -89,47 +130,29 @@ export default class AwesomeSwiper {
     this._initMainSwiper();
 
     return this;
-  };
-
-  _initMainSwiper() {
-    const _themeColor = this.config.mainOrigin.themeColor;
-
-    if (_themeColor) {
-      this.el.mainContainer.style.setProperty(
-        STYLE_PROPERTY_NAME.themeColor,
-        _themeColor,
-      );
-    }
-
-    this.swiper.main = new this.swiper._constructor(this.el.mainContainer, this.config.main);
-
-    // fix full img
-    if (this.config.mainOrigin.autoFixFullImg) {
-      this._fixFullImg(this.el.mainContainer);
-    }
-  };
+  }
 
   addThumbs(thumbsContainer, customThumbsConfig = {}, extraConfig = {}) {
     this.el.thumbsContainer = isString(thumbsContainer)
       ? document.querySelector(thumbsContainer)
       : thumbsContainer;
 
-    this.el.thumbsContainer.classList.add(_style.thumbsWrapper);
+    this.el.thumbsContainer.classList.add(style.thumbsWrapper);
 
     // config
     const thumbsDefault = {
       spaceBetween: 10,
-      slidesPerView: 'auto',
+      slidesPerView: 'auto'
     };
 
     const thumbsExtraDefault = {
-      mouseOverMode: false,
+      mouseOverMode: false
     };
 
     this.config.thumbs = Object.assign({}, thumbsDefault, customThumbsConfig);
     this.config.thumbsExtra = Object.assign({}, thumbsExtraDefault, extraConfig);
 
-    this.swiper.thumbs = new this.swiper._constructor(this.el.thumbsContainer, this.config.thumbs);
+    this.swiper.thumbs = new this.swiper.constructor(this.el.thumbsContainer, this.config.thumbs);
 
     this.swiper.thumbs.slides[0].classList.add(ACTIVE_THUMB_CLASS);
 
@@ -137,22 +160,32 @@ export default class AwesomeSwiper {
 
     // fix full img
     if (this.config.thumbsExtra.autoFixFullImg) {
-      this._fixFullImg(this.el.thumbsContainer);
+      fixFullImg(this.el.thumbsContainer);
     }
 
     return this;
-  };
+  }
+
+  _initMainSwiper() {
+    const { themeColor } = this.config.mainOrigin;
+
+    if (themeColor) {
+      this.el.mainContainer.style.setProperty(STYLE_PROPERTY_NAME.themeColor, themeColor);
+    }
+
+    this.swiper.main = new this.swiper.constructor(this.el.mainContainer, this.config.main);
+
+    // fix full img
+    if (this.config.mainOrigin.autoFixFullImg) {
+      fixFullImg(this.el.mainContainer);
+    }
+  }
 
   _thumbsCtrl(thumbsExtraConfig) {
     // mainSwiper ctrl
     this.swiper.main.on('slideChange', () => {
-      console.log('mainSwiper slideChange');
-
-      const
-        swiperIndex = this.swiper.main.realIndex
-        , targetThumb = this.swiper.thumbs.slides[swiperIndex]
-      ;
-
+      const swiperIndex = this.swiper.main.realIndex;
+      const targetThumb = this.swiper.thumbs.slides[swiperIndex];
       // ui change
       siblingFilter(targetThumb, ACTIVE_THUMB_CLASS)[0].classList.remove(ACTIVE_THUMB_CLASS);
       this.swiper.thumbs.slides[swiperIndex].classList.add(ACTIVE_THUMB_CLASS);
@@ -160,176 +193,130 @@ export default class AwesomeSwiper {
     });
 
     Array.prototype.slice.call(this.swiper.thumbs.slides).forEach((el, index) => {
-      const _uiChange = () => {
+      const uiChange = () => {
         siblingFilter(el, ACTIVE_THUMB_CLASS)[0].classList.remove(ACTIVE_THUMB_CLASS);
         this.swiper.thumbs.slides[index].classList.add(ACTIVE_THUMB_CLASS);
         this.swiper.thumbs.slideTo(index);
-        this.swiper.main.params.loop
-          ? this.swiper.main.slideToLoop(index)
-          : this.swiper.main.slideTo(index);
+
+        if (this.swiper.main.params.loop) {
+          this.swiper.main.slideToLoop(index);
+        } else {
+          this.swiper.main.slideTo(index);
+        }
       };
 
       if (thumbsExtraConfig.mouseOverMode) {
-        el.addEventListener('mouseover', () => _uiChange());
-        el.addEventListener('touchstart', () => _uiChange());
+        el.addEventListener('mouseover', () => uiChange());
+        el.addEventListener('touchstart', () => uiChange());
       } else {
-        el.addEventListener('click', () => _uiChange());
+        el.addEventListener('click', () => uiChange());
       }
     });
-  };
+  }
 
   _initPagination() {
-    const _pagination = this.config.mainOrigin.pagination;
+    const { pagination } = this.config.mainOrigin;
 
-    if (_pagination) {
+    if (pagination) {
       // add to Dom
-      this.el.pagination = this.emptyDiv.cloneNode();
+      this.el.pagination = this._emptyDiv.cloneNode();
       this.el.pagination.classList.add('swiper-pagination');
       this.el.mainContainer.appendChild(this.el.pagination);
 
       // set swiperConfig
-      if (_pagination.color) {
+      if (pagination.color) {
         this.el.mainContainer.style.setProperty(
           STYLE_PROPERTY_NAME.paginationColor,
-          _pagination.color,
+          pagination.color
         );
       }
 
       this.config.main.pagination = {
         el: this.el.pagination,
         clickable: true,
-        dynamicBullets: this.config.mainOrigin.pagination.dynamicBullets,
+        dynamicBullets: this.config.mainOrigin.pagination.dynamicBullets
       };
 
       // set custom styles
-      if (_pagination.style) {
-        addStyles(this.el.pagination, _pagination.style);
+      if (pagination.style) {
+        addStyles(this.el.pagination, pagination.style);
       }
 
       // Fix Explain Space
       this._fixExplainSpace();
     }
-  };
+  }
 
   _initNavigation() {
-    const _navigation = this.config.mainOrigin.navigation;
+    const { navigation } = this.config.mainOrigin;
 
-    if (!_navigation) {
+    if (!navigation) {
       return;
     }
 
-    const _setSwiperConfig = () => {
+    const setSwiperConfig = () => {
       this.config.main.navigation = {
         nextEl: this.el.navigation.nextEl,
-        prevEl: this.el.navigation.prevEl,
+        prevEl: this.el.navigation.prevEl
       };
     };
 
-    if (_navigation.custom) {
+    if (navigation.custom) {
       // Set custom navigation
-      this.el.navigation.prevEl = isString(_navigation.custom.prevEl)
-        ? document.querySelector(_navigation.custom.prevEl)
-        : _navigation.custom.prevEl;
-      this.el.navigation.nextEl = isString(_navigation.custom.nextEl)
-        ? document.querySelector(_navigation.custom.nextEl)
-        : _navigation.custom.nextEl;
-      this.el.navigation.prevEl.classList.add(_style.customNavigationEl);
-      this.el.navigation.nextEl.classList.add(_style.customNavigationEl);
+      this.el.navigation.prevEl = isString(navigation.custom.prevEl)
+        ? document.querySelector(navigation.custom.prevEl)
+        : navigation.custom.prevEl;
+      this.el.navigation.nextEl = isString(navigation.custom.nextEl)
+        ? document.querySelector(navigation.custom.nextEl)
+        : navigation.custom.nextEl;
+      this.el.navigation.prevEl.classList.add(style.customNavigationEl);
+      this.el.navigation.nextEl.classList.add(style.customNavigationEl);
 
-      _setSwiperConfig();
+      setSwiperConfig();
       return;
     }
 
     // add to Dom
-    this.el.navigation.prevEl = this.emptyDiv.cloneNode();
-    this.el.navigation.nextEl = this.emptyDiv.cloneNode();
+    this.el.navigation.prevEl = this._emptyDiv.cloneNode();
+    this.el.navigation.nextEl = this._emptyDiv.cloneNode();
     this.el.navigation.prevEl.classList.add('swiper-button-prev');
     this.el.navigation.nextEl.classList.add('swiper-button-next');
 
-    if (_navigation.color) {
+    if (navigation.color) {
       this.el.mainContainer.style.setProperty(
         STYLE_PROPERTY_NAME.navigationColor,
-        _navigation.color,
+        navigation.color
       );
     }
 
-    if (_navigation.size) {
-      if (isNumber(_navigation.size)) {
-        _navigation.size += 'px';
+    if (navigation.size) {
+      if (isNumber(navigation.size)) {
+        navigation.size += 'px';
       }
 
-      this.el.mainContainer.style.setProperty(
-        STYLE_PROPERTY_NAME.navigationSize,
-        _navigation.size,
-      );
+      this.el.mainContainer.style.setProperty(STYLE_PROPERTY_NAME.navigationSize, navigation.size);
     }
 
     // set custom styles
-    if (_navigation.styles) {
-      if (_navigation.styles.next) {
-        addStyles(this.el.navigation.nextEl, _navigation.styles.next);
+    if (navigation.styles) {
+      if (navigation.styles.next) {
+        addStyles(this.el.navigation.nextEl, navigation.styles.next);
       }
-      if (_navigation.styles.prev) {
-        addStyles(this.el.navigation.prevEl, _navigation.styles.prev);
+      if (navigation.styles.prev) {
+        addStyles(this.el.navigation.prevEl, navigation.styles.prev);
       }
     }
 
     this.el.mainContainer.appendChild(this.el.navigation.nextEl);
     this.el.mainContainer.appendChild(this.el.navigation.prevEl);
-    _setSwiperConfig();
-  };
+    setSwiperConfig();
+  }
 
   _fixExplainSpace() {
     Array.prototype.slice
       .apply(this.el.mainContainer.querySelectorAll('.swiper-explain'))
-      .forEach(el => {
-        el.classList.add(_style.bottomSpace);
+      .forEach((el) => {
+        el.classList.add(style.bottomSpace);
       });
-  };
-
-  _fixFullImg(eContainer) {
-    const eSide = eContainer.querySelector('.swiper-slide');
-    // fix empty swiper
-    if (!eSide) {
-      return;
-    }
-
-    const slideClientRect = eSide.getBoundingClientRect();
-    const aImgs = nodeListToArray(eContainer.querySelectorAll('.swiper-full-img > img'));
-
-    aImgs.forEach(img => {
-      const imgNaturalDimensions = _getImgNaturalDimensions(img);
-      if (slideClientRect.width / slideClientRect.height < imgNaturalDimensions.width / imgNaturalDimensions.height) {
-        img.classList.add(_style.basedOnHeight);
-      }
-    });
-  };
-};
-
-const _getImgNaturalDimensions = (img) => {
-  let
-    width
-    , height
-  ;
-  if (img.naturalWidth) {
-    width = img.naturalWidth;
-    height = img.naturalHeight;
-  } else {
-    width = img.offsetWidth;
-    height = img.offsetHeight;
   }
-  return {
-    width,
-    height
-  };
-};
-
-const ACTIVE_THUMB_CLASS = 'active-thumb';
-
-const STYLE_PROPERTY_NAME = {
-  themeColor: '--swiper-theme-color',
-  navigationColor: '--swiper-navigation-color',
-  navigationSize: '--swiper-navigation-size',
-  paginationColor: '--swiper-pagination-color',
-};
-
+}

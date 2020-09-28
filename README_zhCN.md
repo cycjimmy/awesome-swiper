@@ -1,68 +1,56 @@
 # Awesome Swiper
-
-[![NPM version][npm-image]][npm-url]
+![][workflows-badge-image]
 [![build status][travis-image]][travis-url]
-[![David deps][david-image]][david-url]
-[![devDependencies Status][david-dev-image]][david-dev-url]
-[![npm download][download-image]][download-url]
-[![jsdelivr][jsdelivr-image]][jsdelivr-url]
+[![libraries dependency status][libraries-status-image]][libraries-status-url]
+[![libraries sourcerank][libraries-sourcerank-image]][libraries-sourcerank-url]
+[![Coverage Status][coverage-image]][coverage-url]
+[![Release date][release-date-image]][release-url]
+[![rollup][rollup-image]][rollup-url]
+[![semantic-release][semantic-image]][semantic-url]
+[![jest][jest-image]][jest-url]
 [![npm license][license-image]][download-url]
 
-[npm-image]: https://img.shields.io/npm/v/@cycjimmy/awesome-swiper.svg?style=flat-square
-[npm-url]: https://npmjs.org/package/@cycjimmy/awesome-swiper
-[travis-image]: https://img.shields.io/travis/cycjimmy/awesome-swiper.svg?style=flat-square
-[travis-url]: https://travis-ci.org/cycjimmy/awesome-swiper
-[david-image]: https://img.shields.io/david/cycjimmy/awesome-swiper.svg?style=flat-square
-[david-url]: https://david-dm.org/cycjimmy/awesome-swiper
-[david-dev-image]: https://david-dm.org/cycjimmy/awesome-swiper/dev-status.svg?style=flat-square
-[david-dev-url]: https://david-dm.org/cycjimmy/awesome-swiper?type=dev
-[download-image]: https://img.shields.io/npm/dm/@cycjimmy/awesome-swiper.svg?style=flat-square
-[download-url]: https://npmjs.org/package/@cycjimmy/awesome-swiper
-[jsdelivr-image]: https://data.jsdelivr.com/v1/package/npm/@cycjimmy/awesome-swiper/badge
-[jsdelivr-url]: https://www.jsdelivr.com/package/npm/@cycjimmy/awesome-swiper
-[license-image]: https://img.shields.io/npm/l/@cycjimmy/awesome-swiper.svg?style=flat-square
-
-* **[awesome-swiper](https://github.com/cycdpo/awesome-swiper) 已经迁移到 @cycjimmy/awesome-swiper**
-* awesome-swiper 基于 [swiper 5+](https://github.com/nolimits4web/Swiper). ([Releases](https://github.com/cycjimmy/awesome-swiper/releases) | [Demo](https://cycjimmy.github.io/awesome-swiper/))
+* **[awesome-swiper][Old-repository-url] 已经迁移到 @cycjimmy/awesome-swiper**
+* awesome-swiper 基于 [swiper6][Swiper-repository-url]. ([Demo][github-pages-url])
 
 
-[English](https://github.com/cycjimmy/awesome-swiper/blob/master/README.md) | [中文](https://github.com/cycjimmy/awesome-swiper/blob/master/README_zhCN.md)
+语言: [En][Readme-url-En] | [中文][Readme-url-ZhCN]
 ***
 
 ## 安装
+[![NPM version][npm-image]][npm-url]
+[![NPM bundle size][npm-bundle-size-image]][npm-url]
+[![npm download][download-image]][download-url]
+
 ```shell
-# via npm
+# 通过npm安装
 $ npm install @cycjimmy/awesome-swiper --save
 
-# or via yarn
+# 或通过yarn安装
 $ yarn add @cycjimmy/awesome-swiper
 ```
 
 ## 使用
-**Awesome Swiper 基于 [Swiper 5+](https://github.com/nolimits4web/Swiper). 首先将 swiper 加入你的工程**
-
 ```javascript
-import Swiper from 'swiper';
 import AwesomeSwiper from '@cycjimmy/awesome-swiper';
-
 // 或者
-const Swiper = require('swiper');
 const AwesomeSwiper = require('@cycjimmy/awesome-swiper');
 ```
 
 ```javascript
-const awesomeSwiper = new AwesomeSwiper([SwiperModule]).init(context [, ...config] [, ...overlayConfig]);
+const awesomeSwiper = new AwesomeSwiper().init(context [, ...config] [, ...overlayConfig]);
+
 
 // 如果需要缩略图
-const awesomeSwiper = new AwesomeSwiper([SwiperModule])
+const awesomeSwiper = new AwesomeSwiper()
                         .init(context [, ...config] [, ...overlayConfig])
                         .addThumbs(thumbsContext [, ...thumbsConfig] [, ...thumbsExtraConfig]);
 ```
 
-### `AwesomeSwiper()` 参数:
-* `SwiperModule`: [Object] 可设置自定义的 swiper 构造函数. 注意确保swiper版本为5以上
+### 函数 
+#### `new AwesomeSwiper()`: 创建一个AwesomeSwiper实例.
 
-### `AwesomeSwiper().init()` 参数:
+#### `init(context [, ...config] [, ...overlayConfig])`: 初始化主swiper实例
 * `context`: [String | Element] swiper的包裹层. 该包裹层的宽高大小必须提前设定.
 * config: [Object]
   * `speed`: [Number] 设置slide切换速度(单位:毫秒). 默认值为 `300`.
@@ -89,7 +77,7 @@ const awesomeSwiper = new AwesomeSwiper([SwiperModule])
       * `nextEl`: [String | Element] 自定义向后按钮元素.
 * overlayConfig: [Object] 使用自定义的 swiper api 设置来覆盖.
 
-### `AwesomeSwiper().addThumbs()` 参数:
+#### `addThumbs(thumbsContext [, ...thumbsConfig] [, ...thumbsExtraConfig])`: 初始化缩略图swiper实例
 * `thumbsContext`: [String | Element] 缩略图的包裹层. 该包裹层的宽高大小必须提前设定.
 * thumbsConfig: [Object] 可参照 swiper api 进行设置
   * `direction`: [String] 设置方向. 可选项: `'horizontal'` 和 `'vertical'`.
@@ -107,7 +95,7 @@ const awesomeSwiper = new AwesomeSwiper([SwiperModule])
 
 ## 在浏览器中使用
 ```html
-<link href="swiper.min.css" rel="stylesheet">
+<link href="swiper-bundle.min.css" rel="stylesheet">
 
 <div id="basic" class="swiper-container">
   <div class="swiper-wrapper">
@@ -116,8 +104,8 @@ const awesomeSwiper = new AwesomeSwiper([SwiperModule])
   </div>
 </div>
 
-<script src="swiper.min.js"></script>
-<script src="awesome-swiper.min.js"></script>
+<script src="swiper-bundle.min.js"></script>
+<script src="awesome-swiper.umd.min.js"></script>
 <script>
   new AwesomeSwiper().init('#basic');
 </script>
@@ -129,18 +117,20 @@ const awesomeSwiper = new AwesomeSwiper([SwiperModule])
   ...
 </div>
 
-<script src="awesome-swiper.standalone.min.js"></script>
+<script src="awesome-swiper.standalone.umd.min.js"></script>
 <script>
   new AwesomeSwiper().init('#basic');
 </script>
 ```
 
 ## CDN
+[![jsdelivr][jsdelivr-image]][jsdelivr-url]
+
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@cycjimmy/awesome-swiper@2/build/awesome-swiper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@cycjimmy/awesome-swiper@3/dist/awesome-swiper.umd.min.js"></script>
 
 // 独立版本
-<script src="https://cdn.jsdelivr.net/npm/@cycjimmy/awesome-swiper@2/build/awesome-swiper.standalone.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@cycjimmy/awesome-swiper@3/dist/awesome-swiper.standalone.umd.min.js"></script>
 ```
 
 ## 兼容性
@@ -151,4 +141,49 @@ const awesomeSwiper = new AwesomeSwiper([SwiperModule])
 * android >= 7
 * Samsung >= 5
 
-**注意: 不支持IE，如需兼容IE，请退回到[awesome-swiper](https://github.com/cycdpo/awesome-swiper)**
+**注意: 不支持IE，如需兼容IE，请退回到[awesome-swiper][Old-repository-url]**
+
+<!-- Links: -->
+[npm-image]: https://img.shields.io/npm/v/@cycjimmy/awesome-swiper
+[npm-url]: https://npmjs.org/package/@cycjimmy/awesome-swiper
+[npm-bundle-size-image]: https://img.shields.io/bundlephobia/min/@cycjimmy/awesome-swiper
+
+[download-image]: https://img.shields.io/npm/dt/@cycjimmy/awesome-swiper
+[download-url]: https://npmjs.org/package/@cycjimmy/awesome-swiper
+
+[jsdelivr-image]: https://img.shields.io/jsdelivr/npm/hy/@cycjimmy/awesome-swiper
+[jsdelivr-url]: https://www.jsdelivr.com/package/npm/@cycjimmy/awesome-swiper
+
+[workflows-badge-image]: https://github.com/cycjimmy/awesome-swiper/workflows/Test%20CI/badge.svg
+[travis-image]: https://img.shields.io/travis/cycjimmy/awesome-swiper
+[travis-url]: https://travis-ci.org/cycjimmy/awesome-swiper
+
+[libraries-status-image]: https://img.shields.io/librariesio/release/npm/@cycjimmy/awesome-swiper
+[libraries-sourcerank-image]: https://img.shields.io/librariesio/sourcerank/npm/@cycjimmy/awesome-swiper
+[libraries-status-url]: https://libraries.io/github/cycjimmy/awesome-swiper
+[libraries-sourcerank-url]: https://libraries.io/npm/@cycjimmy%2Fawesome-swiper
+
+[coverage-image]: https://img.shields.io/coveralls/github/cycjimmy/awesome-swiper
+[coverage-url]: https://coveralls.io/github/cycjimmy/awesome-swiper
+
+[release-date-image]: https://img.shields.io/github/release-date/cycjimmy/awesome-swiper
+[release-url]: https://github.com/cycjimmy/awesome-swiper/releases
+
+[rollup-image]: https://img.shields.io/github/package-json/dependency-version/cycjimmy/awesome-swiper/dev/rollup
+[rollup-url]: https://github.com/rollup/rollup
+
+[semantic-image]: https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
+[semantic-url]: https://github.com/semantic-release/semantic-release
+
+[jest-image]: https://img.shields.io/badge/tested_with-jest-99424f.svg
+[jest-url]: https://github.com/facebook/jest
+
+[license-image]: https://img.shields.io/npm/l/@cycjimmy/awesome-swiper
+
+[github-pages-url]: https://cycjimmy.github.io/awesome-swiper/
+
+[Readme-url-En]: https://github.com/cycjimmy/awesome-swiper/blob/master/README.md
+[Readme-url-ZhCN]: https://github.com/cycjimmy/awesome-swiper/blob/master/README_zhCN.md
+
+[Old-repository-url]: https://github.com/cycdpo/awesome-swiper
+[Swiper-repository-url]: https://github.com/nolimits4web/Swiper

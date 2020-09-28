@@ -1,0 +1,9 @@
+{
+  "extends": "rollup",
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "rules": {
+  }
+}
