@@ -27,22 +27,6 @@ export const plugins = [
   postcss({
     modules: {
       generateScopedName: IS_PRODUCTION ? '[hash:base64:10]' : '[name]__[local]',
-      // generateScopedName:  (name, filename, css) => {
-      //   console.log(name, filename);
-      //
-      //   if (IS_PRODUCTION) {
-      //     return '[hash:base64:10]';
-      //   }
-      //
-      //   return '[name]__[local]';
-      //
-      //   // var path = require("path");
-      //   // var i = css.indexOf("." + name);
-      //   // var line = css.substr(0, i).split(/[\r\n]/).length;
-      //   // var file = path.basename(filename, ".css");
-      //   //
-      //   // return "_" + file + "_" + line + "_" + name;
-      // },
     },
     autoModules: true,
     minimize: true,

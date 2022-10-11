@@ -1,1 +1,1 @@
-import 'swiper/css/swiper.css';
+import 'swiper/swiper-bundle.css';

@@ -34,7 +34,7 @@ export default [
     input: inputForStandalone,
     output: {
       name,
-      file: pkg.standalone,
+      file: pkg['browser:standalone'],
       format: 'umd',
       banner,
       exports: 'default',
