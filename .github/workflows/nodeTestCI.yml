@@ -27,9 +27,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
-      - run: npm ci
-        env:
-          OPEN_SOURCE_CONTRIBUTOR: true
+      - run: npm ci --ignore-scripts # fix windows install swiper
       - run: npm test
       - run: npm run package
 
