@@ -20,14 +20,14 @@ jobs:
     strategy:
       matrix:
         node: [ '16' ]
-        os: [ubuntu-latest, windows-latest, macOS-latest]
+        os: [ubuntu-latest, macOS-latest]
 
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
-      - run: npm ci --ignore-scripts # fix windows install swiper
+      - run: npm ci
       - run: npm test
       - run: npm run package
 
