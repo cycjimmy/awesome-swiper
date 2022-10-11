@@ -27,7 +27,9 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
-      - run: npm ci --silent
+      - run: npm ci
+        env:
+          OPEN_SOURCE_CONTRIBUTOR: true
       - run: npm test
       - run: npm run package
 
