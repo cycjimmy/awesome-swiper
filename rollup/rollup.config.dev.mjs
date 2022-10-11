@@ -6,7 +6,7 @@ import copy from 'rollup-plugin-copy';
 import pkg from '../package.cjs';
 
 import {
-  input, IS_DEVELOPMENT, IS_DEPLOYMENT, name, plugins, external,
+  input, IS_DEVELOPMENT, IS_DEPLOYMENT, name, plugins, globalsForOutput,
 } from './rollup.common.mjs';
 
 export default [
@@ -17,9 +17,7 @@ export default [
       file: pkg.browser.replace('.min.js', '.js'),
       format: 'umd',
       exports: 'default',
-      globals: {
-        swiper: 'Swiper',
-      },
+      globals: globalsForOutput,
     },
     plugins: [
       ...plugins,
@@ -40,6 +38,5 @@ export default [
         watch: true,
       }),
     ],
-    external,
   },
 ];

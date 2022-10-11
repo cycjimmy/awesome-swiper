@@ -2,7 +2,13 @@
 import pkg from '../package.cjs';
 
 import {
-  banner, input, inputForStandalone, name, plugins, terserPlugins, external,
+  banner,
+  input,
+  inputForStandalone,
+  name,
+  pluginsWithoutExternals, plugins,
+  terserPlugins,
+  globalsForOutput,
 } from './rollup.common.mjs';
 
 export default [
@@ -13,7 +19,6 @@ export default [
       { file: pkg.module, format: 'es', exports: 'default' },
     ],
     plugins,
-    external,
   },
   {
     input,
@@ -23,12 +28,9 @@ export default [
       format: 'umd',
       banner,
       exports: 'default',
-      globals: {
-        swiper: 'Swiper',
-      },
+      globals: globalsForOutput,
     },
     plugins: [...plugins, terserPlugins],
-    external,
   },
   {
     input: inputForStandalone,
@@ -40,7 +42,7 @@ export default [
       exports: 'default',
     },
     plugins: [
-      ...plugins,
+      ...pluginsWithoutExternals,
       terserPlugins,
     ],
   },

@@ -7,6 +7,7 @@ import { babel } from '@rollup/plugin-babel';
 import postcss from 'rollup-plugin-postcss';
 import autoprefixer from 'autoprefixer';
 import { terser } from 'rollup-plugin-terser';
+import externals from 'rollup-plugin-node-externals';
 
 import myBanner from '@cycjimmy/config-lib/esm/chore/myBanner.js';
 import terserOption from '@cycjimmy/config-lib/esm/terser/4.x/production.js';
@@ -22,7 +23,7 @@ export const inputForStandalone = './src/standalone.js';
 export const name = 'AwesomeSwiper';
 export const banner = myBanner(pkg);
 
-export const plugins = [
+export const pluginsWithoutExternals = [
   json(),
   postcss({
     modules: {
@@ -43,6 +44,16 @@ export const plugins = [
   babel({ babelHelpers: 'bundled' }),
 ];
 
-export const external = ['swiper'];
+export const plugins = [
+  externals({
+    deps: false,
+    include: /^swiper/,
+  }),
+  ...pluginsWithoutExternals,
+];
+
+export const globalsForOutput = {
+  swiper: 'Swiper',
+};
 
 export const terserPlugins = IS_PRODUCTION && terser(terserOption);
