@@ -21,7 +21,7 @@
       width: 50px;
       height: 450px;
       margin-right: 20px;
-      background: url("leftBlack.svg") no-repeat 50% 50%;
+      background: url(https://cycjimmy.github.io/staticFiles/images/icons/icon-prevBlack1.svg) no-repeat 50% 50%;
       outline: none;
     }
 
@@ -36,54 +36,62 @@
       width: 50px;
       height: 450px;
       margin-left: 20px;
-      background: url("rightBlack.svg") no-repeat 50% 50%;
+      background: url(https://cycjimmy.github.io/staticFiles/images/icons/icon-nextBlack1.svg) no-repeat 50% 50%;
       outline: none;
     }
-
   </style>
 </head>
 <body>
 <h2>Custom Navigation Elements</h2>
+
 <div class="customNavigationDemo">
   <div id="customPrevEl"></div>
-  <div class="swiper-container" id="customNavigationElements">
+  <div id="customNavigationElements" class="swiper swiper-container">
     <div class="swiper-wrapper">
       <div class="swiper-slide">
-        <a class="swiper-full-bg" href="javascript:;" style="background-image: url(p1.jpg);"></a>
+        <a class="swiper-full-bg"
+           style="background-image: url(https://cycjimmy.github.io/staticFiles/images/demo/p0001.jpg)"
+           href="javascript:"></a>
       </div>
       <div class="swiper-slide">
-        <a class="swiper-full-bg" href="javascript:;" style="background-image: url(p2.jpg);"></a>
+        <a class="swiper-full-bg"
+           style="background-image: url(https://cycjimmy.github.io/staticFiles/images/demo/p0002.jpg)"
+           href="javascript:"></a>
       </div>
       <div class="swiper-slide">
-        <a class="swiper-full-bg" href="javascript:;" style="background-image: url(p3.jpg);"></a>
+        <a class="swiper-full-bg"
+           style="background-image: url(https://cycjimmy.github.io/staticFiles/images/demo/p0003.jpg)"
+           href="javascript:"></a>
       </div>
       <div class="swiper-slide">
-        <a class="swiper-full-bg" href="javascript:;" style="background-image: url(p4.jpg);"></a>
+        <a class="swiper-full-bg"
+           style="background-image: url(https://cycjimmy.github.io/staticFiles/images/demo/p0004.jpg)"
+           href="javascript:"></a>
       </div>
       <div class="swiper-slide">
-        <a class="swiper-full-bg" href="javascript:;" style="background-image: url(p5.jpg);"></a>
+        <a class="swiper-full-bg"
+           style="background-image: url(https://cycjimmy.github.io/staticFiles/images/demo/p0005.jpg)"
+           href="javascript:"></a>
       </div>
     </div>
   </div>
   <div id="customNextEl"></div>
 </div>
 
-
-<script src="awesome-swiper.standalone.min.js"></script>
+<script src="./awesome-swiper.standalone.umd.min.js"></script>
 <script>
-  new AwesomeSwiper()
-    .init('#customNavigationElements', {
-      autoFixFullImg: true,
-      pagination: {
-        color: 'white'
+  new AwesomeSwiper().init('#customNavigationElements', {
+    autoFixFullImg: true,
+    pagination: {
+      color: 'white',
+    },
+    navigation: {
+      custom: {
+        prevEl: '#customPrevEl',
+        nextEl: document.getElementById('customNextEl'),
       },
-      navigation: {
-        custom: {
-          prevEl: '#customPrevEl',
-          nextEl: document.getElementById('customNextEl')
-        }
-      }
-    });
+    },
+  });
 </script>
 </body>
 </html>

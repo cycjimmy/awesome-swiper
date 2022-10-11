@@ -8,7 +8,7 @@
       text-align: center;
     }
 
-    .AddRightThumbsDemo {
+    .addRightThumbsDemo {
       width: 800px;
       height: 380px;
       margin: 0 auto;
@@ -30,61 +30,95 @@
 <body>
 <h2>Add Right Thumbs</h2>
 
-<div class="AddRightThumbsDemo">
-  <div class="swiper-container" id="rightThumbsDemo">
+<div class="addRightThumbsDemo">
+  <div id="rightThumbsDemo" class="swiper swiper-container">
     <div class="swiper-wrapper">
       <div class="swiper-slide">
-        <a class="swiper-full-bg" href="javascript:;" style="background-image: url(p1.jpg);"></a>
+        <a class="swiper-full-bg"
+           style="background-image: url(https://cycjimmy.github.io/staticFiles/images/demo/p0001.jpg)"
+           href="javascript:"></a>
+        <div class="swiper-explain">Slide 1: This is slide 1. This is slide 1. This is slide 1. This is slide 1. This is
+          slide 1. This is slide 1.
+        </div>
       </div>
       <div class="swiper-slide">
-        <a class="swiper-full-bg" href="javascript:;" style="background-image: url(p2.jpg);"></a>
+        <a class="swiper-full-bg"
+           style="background-image: url(https://cycjimmy.github.io/staticFiles/images/demo/p0002.jpg)"
+           href="javascript:"></a>
+        <div class="swiper-explain">Slide 2: This is slide 2. This is slide 2. This is slide 2. This is slide 2. This is
+          slide 2. This is slide 2. This is slide 2. This is slide 2. This is slide 2. This is slide 2.
+        </div>
       </div>
       <div class="swiper-slide">
-        <a class="swiper-full-bg" href="javascript:;" style="background-image: url(p3.jpg);"></a>
+        <a class="swiper-full-bg"
+           style="background-image: url(https://cycjimmy.github.io/staticFiles/images/demo/p0003.jpg)"
+           href="javascript:"></a>
+        <div class="swiper-explain">Slide 3: This is slide 3. This is slide 3.</div>
       </div>
       <div class="swiper-slide">
-        <a class="swiper-full-bg" href="javascript:;" style="background-image: url(p4.jpg);"></a>
+        <a class="swiper-full-bg"
+           style="background-image: url(https://cycjimmy.github.io/staticFiles/images/demo/p0004.jpg)"
+           href="javascript:"></a>
+        <div class="swiper-explain">Slide 4: This is slide 4. This is slide 4. This is slide 4. This is slide 4. This is
+          slide 4. This is slide 4. This is slide 4. This is slide 4. This is slide 4. This is slide 4.
+        </div>
       </div>
       <div class="swiper-slide">
-        <a class="swiper-full-bg" href="javascript:;" style="background-image: url(p5.jpg);"></a>
+        <a class="swiper-full-bg"
+           style="background-image: url(https://cycjimmy.github.io/staticFiles/images/demo/p0005.jpg)"
+           href="javascript:"></a>
+        <div class="swiper-explain">Slide 5: This is slide 5. This is slide 5. This is slide 5. This is slide 5. This is
+          slide 5. This is slide 5. This is slide 5. This is slide 5. This is slide 5. This is slide 5. This is slide 5.
+          This is slide 5. This is slide 5. This is slide 5. This is slide 5. This is slide 5. This is slide 5. This is
+          slide 5.
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="swiper-container" id="rightThumbs">
+  <div id="rightThumbs" class="swiper swiper-container">
     <div class="swiper-wrapper">
       <div class="swiper-slide">
-        <a class="swiper-full-bg" href="javascript:;" style="background-image: url(p1.jpg);"></a>
+        <a class="swiper-full-bg"
+           style="background-image: url(https://cycjimmy.github.io/staticFiles/images/demo/p0001.jpg)"
+           href="javascript:"></a>
       </div>
       <div class="swiper-slide">
-        <a class="swiper-full-bg" href="javascript:;" style="background-image: url(p2.jpg);"></a>
+        <a class="swiper-full-bg"
+           style="background-image: url(https://cycjimmy.github.io/staticFiles/images/demo/p0002.jpg)"
+           href="javascript:"></a>
       </div>
       <div class="swiper-slide">
-        <a class="swiper-full-bg" href="javascript:;" style="background-image: url(p3.jpg);"></a>
+        <a class="swiper-full-bg"
+           style="background-image: url(https://cycjimmy.github.io/staticFiles/images/demo/p0003.jpg)"
+           href="javascript:"></a>
       </div>
       <div class="swiper-slide">
-        <a class="swiper-full-bg" href="javascript:;" style="background-image: url(p4.jpg);"></a>
+        <a class="swiper-full-bg"
+           style="background-image: url(https://cycjimmy.github.io/staticFiles/images/demo/p0004.jpg)"
+           href="javascript:"></a>
       </div>
       <div class="swiper-slide">
-        <a class="swiper-full-bg" href="javascript:;" style="background-image: url(p5.jpg);"></a>
+        <a class="swiper-full-bg"
+           style="background-image: url(https://cycjimmy.github.io/staticFiles/images/demo/p0005.jpg)"
+           href="javascript:"></a>
       </div>
     </div>
   </div>
 </div>
 
-
-<script src="awesome-swiper.standalone.min.js"></script>
+<script src="./awesome-swiper.standalone.umd.min.js"></script>
 <script>
   new AwesomeSwiper()
     .init('#rightThumbsDemo', {
       pagination: null,
       navigation: {
-        color: 'white'
-      }
+        color: 'white',
+      },
     })
     .addThumbs('#rightThumbs', {
       direction: 'vertical',
-      slidesPerView: 5
+      slidesPerView: 5,
     });
 </script>
 </body>

@@ -16,36 +16,47 @@
 </head>
 <body>
 <h2>Auto Fix Full Image</h2>
-<div class="swiper-container" id="autoFixFullImg">
+
+<div id="autoFixFullImg" class="swiper swiper-container">
   <div class="swiper-wrapper">
     <div class="swiper-slide">
-      <a class="swiper-full-img" href="javascript:;"><img src="p1.jpg"></a>
+      <a class="swiper-full-bg"
+         style="background-image: url(https://cycjimmy.github.io/staticFiles/images/demo/p0001.jpg)"
+         href="javascript:"></a>
     </div>
     <div class="swiper-slide">
-      <a class="swiper-full-img" href="javascript:;"><img src="p2.jpg"></a>
+      <a class="swiper-full-bg"
+         style="background-image: url(https://cycjimmy.github.io/staticFiles/images/demo/p0002.jpg)"
+         href="javascript:"></a>
     </div>
     <div class="swiper-slide">
-      <a class="swiper-full-img" href="javascript:;"><img src="p3.jpg"></a>
+      <a class="swiper-full-bg"
+         style="background-image: url(https://cycjimmy.github.io/staticFiles/images/demo/p0003.jpg)"
+         href="javascript:"></a>
     </div>
     <div class="swiper-slide">
-      <a class="swiper-full-img" href="javascript:;"><img src="p4.jpg"></a>
+      <a class="swiper-full-bg"
+         style="background-image: url(https://cycjimmy.github.io/staticFiles/images/demo/p0004.jpg)"
+         href="javascript:"></a>
     </div>
     <div class="swiper-slide">
-      <a class="swiper-full-img" href="javascript:;"><img src="p5.jpg"></a>
+      <a class="swiper-full-bg"
+         style="background-image: url(https://cycjimmy.github.io/staticFiles/images/demo/p0005.jpg)"
+         href="javascript:"></a>
     </div>
   </div>
 </div>
 
-<script src="awesome-swiper.standalone.min.js"></script>
+<script src="./awesome-swiper.standalone.umd.min.js"></script>
 <script>
   new AwesomeSwiper().init('#autoFixFullImg', {
     autoFixFullImg: true,
     pagination: {
-      color: 'white'
+      color: 'white',
     },
     navigation: {
-      color: 'white'
-    }
+      color: 'white',
+    },
   });
 </script>
 </body>

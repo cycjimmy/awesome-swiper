@@ -1,7 +1,8 @@
+/* eslint no-undef: off */
 import Swiper from 'swiper';
-import AwesomeSwiper from '../standalone/awesome-swiper.standalone.min';
+import AwesomeSwiper from '../src/index';
 
-describe('ui spec', () => {
+describe('basic ui test', () => {
   const wrapper = document.createElement('div');
 
   wrapper.style.width = '360px';
@@ -10,7 +11,7 @@ describe('ui spec', () => {
   const basic = new AwesomeSwiper(Swiper).init(wrapper);
 
   test('basic test', () => {
-    expect(basic.swiper._constructor).toBe(Swiper);
+    expect(basic.swiper.constructor).toBe(Swiper);
     expect(basic.el.mainContainer).toBe(wrapper);
   });
 });
