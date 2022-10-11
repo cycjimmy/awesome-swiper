@@ -54,7 +54,7 @@
     "gulp": "^4.0.2",
     "html-webpack-plugin": "^4.5.0",
     "jest": "^26.4.2",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.3",
     "postcss-loader": "^4.0.2",
     "pug": "^3.0.0",
     "pug-loader": "^2.4.0",
