@@ -302,6 +302,7 @@
           slidesPerView: 1,
           mousewheel: false,
           autoFixFullImg: false,
+          autoHeight: false,
           themeColor: '',
           pagination: {
             color: '',
@@ -325,7 +326,8 @@
           direction: this.config.mainOrigin.direction,
           spaceBetween: this.config.mainOrigin.spaceBetween,
           slidesPerView: this.config.mainOrigin.slidesPerView,
-          mousewheel: this.config.mainOrigin.mousewheel
+          mousewheel: this.config.mainOrigin.mousewheel,
+          autoHeight: this.config.mainOrigin.autoHeight
         }; // set customConfig.autoplay
 
         if (this.config.mainOrigin.autoplay) {

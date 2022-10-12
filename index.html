@@ -627,6 +627,91 @@
   <hr>
 </section>
 
+<!--Auto Height-->
+<section>
+  <h2>Auto Height</h2>
+
+  <style>
+    #autoHeight {
+      width: 800px;
+    }
+
+    .small-img-wrapper {
+      width: 800px;
+      height: 300px;
+    }
+
+    .middle-img-wrapper {
+      width: 800px;
+      height: 450px;
+    }
+
+    .big-img-wrapper {
+      width: 800px;
+      height: 600px;
+    }
+  </style>
+
+  <div id="autoHeight" class="swiper swiper-container">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <div class="small-img-wrapper">
+          <a class="swiper-full-bg"
+             style="background-image: url(https://cycjimmy.github.io/staticFiles/images/demo/p0001.jpg)"
+             href="javascript:"></a>
+        </div>
+      </div>
+      <div class="swiper-slide">
+        <div class="big-img-wrapper">
+          <a class="swiper-full-bg"
+             style="background-image: url(https://cycjimmy.github.io/staticFiles/images/demo/p0002.jpg)"
+             href="javascript:"></a>
+        </div>
+      </div>
+      <div class="swiper-slide">
+        <div class="middle-img-wrapper">
+          <a class="swiper-full-bg"
+             style="background-image: url(https://cycjimmy.github.io/staticFiles/images/demo/p0003.jpg)"
+             href="javascript:"></a>
+        </div>
+      </div>
+      <div class="swiper-slide">
+        <div class="small-img-wrapper">
+          <a class="swiper-full-bg"
+             style="background-image: url(https://cycjimmy.github.io/staticFiles/images/demo/p0004.jpg)"
+             href="javascript:"></a>
+        </div>
+      </div>
+      <div class="swiper-slide">
+        <div class="middle-img-wrapper">
+          <a class="swiper-full-bg"
+             style="background-image: url(https://cycjimmy.github.io/staticFiles/images/demo/p0005.jpg)"
+             href="javascript:"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    new AwesomeSwiper().init('#autoHeight', {
+      autoFixFullImg: true,
+      autoHeight: true,
+      pagination: {
+        color: 'white',
+      },
+      navigation: {
+        color: 'white',
+      },
+    });
+  </script>
+
+  <a class="code-button"
+     href="https://github.com/cycjimmy/awesome-swiper/blob/main/demo/autoHeight.html"
+     target="_blank">CODE</a>
+
+  <hr>
+</section>
+
 <!--Allow Mouse Wheel-->
 <section>
   <h2>Allow Mouse Wheel</h2>
