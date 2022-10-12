@@ -1,3 +1,10 @@
+# [3.1.0](https://github.com/cycjimmy/awesome-swiper/compare/v3.0.1...v3.1.0) (2022-10-12)
+
+
+### Features
+
+* support autoHeight param for init config ([6165df4](https://github.com/cycjimmy/awesome-swiper/commit/6165df42048e916e56f11493209a41ff661b8e96))
+
 ## [3.0.1](https://github.com/cycjimmy/awesome-swiper/compare/v3.0.0...v3.0.1) (2022-10-12)
 
 
