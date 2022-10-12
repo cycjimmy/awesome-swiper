@@ -108,7 +108,7 @@ const awesomeSwiper = new AwesomeSwiper([SwiperModule])
 </div>
 
 <script src="swiper.min.js"></script>
-<script src="awesome-swiper.min.js"></script>
+<script src="awesome-swiper.umd.min.js"></script>
 <script>
   new AwesomeSwiper().init('#basic');
 </script>
