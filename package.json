@@ -1,6 +1,6 @@
 {
   "name": "@cycjimmy/awesome-swiper",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "description": "awesome-swiper based on swiper",
   "type": "module",
   "main": "dist/awesome-swiper.cjs",

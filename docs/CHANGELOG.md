@@ -1,3 +1,17 @@
+# [3.0.0](https://github.com/cycjimmy/awesome-swiper/compare/v2.1.0...v3.0.0) (2022-10-12)
+
+
+### Features
+
+* return the version of swiper to v5 ([74d94fa](https://github.com/cycjimmy/awesome-swiper/commit/74d94faa3c4e64b2f757676fe6fc4400780c83bb))
+* upgrade swiper to v6 ([6fa30de](https://github.com/cycjimmy/awesome-swiper/commit/6fa30de6d0b7e8478467757f8c707ede85556f75))
+* use rollup refactor project ([9aac5bb](https://github.com/cycjimmy/awesome-swiper/commit/9aac5bb6b51762a13f9993cdd2c4807e262e7efd))
+
+
+### BREAKING CHANGES
+
+* use rollup refactor project
+
 # [2.1.0](https://github.com/cycjimmy/awesome-swiper/compare/v2.0.5...v2.1.0) (2020-09-27)
 
 
