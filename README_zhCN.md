@@ -100,7 +100,7 @@ const awesomeSwiper = new AwesomeSwiper([SwiperModule])
 ```html
 <link href="swiper.min.css" rel="stylesheet">
 
-<div id="basic" class="swiper-container">
+<div id="basic" class="swiper swiper-container">
   <div class="swiper-wrapper">
     <div class="swiper-slide">slide1</div>
     ...
@@ -116,7 +116,7 @@ const awesomeSwiper = new AwesomeSwiper([SwiperModule])
 
 或者使用独立版本:
 ```html
-<div id="basic" class="swiper-container">
+<div id="basic" class="swiper swiper-container">
   ...
 </div>
 
