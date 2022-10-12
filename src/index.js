@@ -5,6 +5,8 @@ import addStyles from '@cycjimmy/awesome-js-funcs/esm/dom/addStyles';
 import siblingFilter from '@cycjimmy/awesome-js-funcs/esm/dom/siblingFilter';
 import nodeListToArray from '@cycjimmy/awesome-js-funcs/esm/typeConversion/nodeListToArray';
 
+// services
+import { fixFullImg } from './tools';
 // style
 import style from './style/main.module.scss';
 
@@ -15,53 +17,6 @@ const STYLE_PROPERTY_NAME = {
   navigationColor: '--swiper-navigation-color',
   navigationSize: '--swiper-navigation-size',
   paginationColor: '--swiper-pagination-color',
-};
-
-/**
- * getImgNaturalDimensions
- * @param img
- * @returns {{width: number, height: number}}
- */
-const getImgNaturalDimensions = (img) => {
-  let width;
-  let
-    height;
-  if (img.naturalWidth) {
-    width = img.naturalWidth;
-    height = img.naturalHeight;
-  } else {
-    width = img.offsetWidth;
-    height = img.offsetHeight;
-  }
-  return {
-    width,
-    height,
-  };
-};
-
-/**
- * fixFullImg
- * @param eContainer
- */
-const fixFullImg = (eContainer) => {
-  const eSide = eContainer.querySelector('.swiper-slide');
-  // fix empty swiper
-  if (!eSide) {
-    return;
-  }
-
-  const slideClientRect = eSide.getBoundingClientRect();
-  const aImgEls = nodeListToArray(eContainer.querySelectorAll('.swiper-full-img > img'));
-
-  aImgEls.forEach((img) => {
-    const imgNaturalDimensions = getImgNaturalDimensions(img);
-    if (
-      slideClientRect.width / slideClientRect.height
-      < imgNaturalDimensions.width / imgNaturalDimensions.height
-    ) {
-      img.classList.add(style.basedOnHeight);
-    }
-  });
 };
 
 export default class AwesomeSwiper {
@@ -152,34 +107,11 @@ export default class AwesomeSwiper {
   }
 
   /**
-   * initMainSwiper
-   * @private
-   */
-  initMainSwiper() {
-    const { themeColor } = this.config.mainOrigin;
-
-    if (themeColor) {
-      this.el.mainContainer.style.setProperty(
-        STYLE_PROPERTY_NAME.themeColor,
-        themeColor,
-      );
-    }
-
-    this.swiper.main = new this.swiper.constructor(this.el.mainContainer, this.config.main);
-
-    // fix full img
-    if (this.config.mainOrigin.autoFixFullImg) {
-      fixFullImg(this.el.mainContainer);
-    }
-  }
-
-  /**
    * addThumbs
    * @param thumbsContainer
    * @param customThumbsConfig
    * @param extraConfig
    * @returns {AwesomeSwiper}
-   * @private
    */
   addThumbs(thumbsContainer, customThumbsConfig = {}, extraConfig = {}) {
     this.el.thumbsContainer = isString(thumbsContainer)
@@ -209,7 +141,9 @@ export default class AwesomeSwiper {
 
     this.swiper.thumbs = new this.swiper.constructor(this.el.thumbsContainer, this.config.thumbs);
 
-    this.swiper.thumbs.slides[0].classList.add(ACTIVE_THUMB_CLASS);
+    if (this.swiper.thumbs.slides[0]) {
+      this.swiper.thumbs.slides[0].classList.add(ACTIVE_THUMB_CLASS);
+    }
 
     this.thumbsCtrl(this.config.thumbsExtra);
 
@@ -219,6 +153,28 @@ export default class AwesomeSwiper {
     }
 
     return this;
+  }
+
+  /**
+   * initMainSwiper
+   * @private
+   */
+  initMainSwiper() {
+    const { themeColor } = this.config.mainOrigin;
+
+    if (themeColor) {
+      this.el.mainContainer.style.setProperty(
+        STYLE_PROPERTY_NAME.themeColor,
+        themeColor,
+      );
+    }
+
+    this.swiper.main = new this.swiper.constructor(this.el.mainContainer, this.config.main);
+
+    // fix full img
+    if (this.config.mainOrigin.autoFixFullImg) {
+      fixFullImg(this.el.mainContainer);
+    }
   }
 
   /**
@@ -269,34 +225,36 @@ export default class AwesomeSwiper {
   initPagination() {
     const { pagination } = this.config.mainOrigin;
 
-    if (pagination) {
-      // add to Dom
-      this.el.pagination = this.emptyDiv.cloneNode();
-      this.el.pagination.classList.add('swiper-pagination');
-      this.el.mainContainer.appendChild(this.el.pagination);
-
-      // set swiperConfig
-      if (pagination.color) {
-        this.el.mainContainer.style.setProperty(
-          STYLE_PROPERTY_NAME.paginationColor,
-          pagination.color,
-        );
-      }
-
-      this.config.main.pagination = {
-        el: this.el.pagination,
-        clickable: true,
-        dynamicBullets: this.config.mainOrigin.pagination.dynamicBullets,
-      };
-
-      // set custom styles
-      if (pagination.style) {
-        addStyles(this.el.pagination, pagination.style);
-      }
-
-      // Fix Explain Space
-      this.fixExplainSpace();
+    if (!pagination) {
+      return;
     }
+
+    // add to Dom
+    this.el.pagination = this.emptyDiv.cloneNode();
+    this.el.pagination.classList.add('swiper-pagination');
+    this.el.mainContainer.appendChild(this.el.pagination);
+
+    // set swiperConfig
+    if (pagination.color) {
+      this.el.mainContainer.style.setProperty(
+        STYLE_PROPERTY_NAME.paginationColor,
+        pagination.color,
+      );
+    }
+
+    this.config.main.pagination = {
+      el: this.el.pagination,
+      clickable: true,
+      dynamicBullets: this.config.mainOrigin.pagination.dynamicBullets,
+    };
+
+    // set custom styles
+    if (pagination.style) {
+      addStyles(this.el.pagination, pagination.style);
+    }
+
+    // Fix Explain Space
+    this.fixExplainSpace();
   }
 
   /**
