@@ -1,3 +1,10 @@
+## [3.0.1](https://github.com/cycjimmy/awesome-swiper/compare/v3.0.0...v3.0.1) (2022-10-12)
+
+
+### Bug Fixes
+
+* fix style file path for swiper8 ([79a1673](https://github.com/cycjimmy/awesome-swiper/commit/79a16733bb62dc4d1ccfc249643be3ae604d3e60))
+
 # [3.0.0](https://github.com/cycjimmy/awesome-swiper/compare/v2.1.0...v3.0.0) (2022-10-12)
 
 
