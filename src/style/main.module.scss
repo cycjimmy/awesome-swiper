@@ -1,8 +1,8 @@
 @import "~@cycjimmy/sass-lib";
 
-@import "navigation";
-@import "pagination";
-@import "thumb";
+@import "navigation.module";
+@import "pagination.module";
+@import "thumb.module";
 
 // Extra
 $space: 10px;

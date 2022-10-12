@@ -22,56 +22,78 @@
 </head>
 <body>
 <h2>Add Bottom Thumbs</h2>
-<div class="swiper-container" id="bottomThumbsDemo">
+
+<div id="bottomThumbsDemo" class="swiper swiper-container">
   <div class="swiper-wrapper">
     <div class="swiper-slide">
-      <a class="swiper-full-bg" href="javascript:;" style="background-image: url(p1.jpg);"></a>
+      <a class="swiper-full-bg"
+         style="background-image: url(https://cycjimmy.github.io/staticFiles/images/demo/p0001.jpg)"
+         href="javascript:"></a>
     </div>
     <div class="swiper-slide">
-      <a class="swiper-full-bg" href="javascript:;" style="background-image: url(p2.jpg);"></a>
+      <a class="swiper-full-bg"
+         style="background-image: url(https://cycjimmy.github.io/staticFiles/images/demo/p0002.jpg)"
+         href="javascript:"></a>
     </div>
     <div class="swiper-slide">
-      <a class="swiper-full-bg" href="javascript:;" style="background-image: url(p3.jpg);"></a>
+      <a class="swiper-full-bg"
+         style="background-image: url(https://cycjimmy.github.io/staticFiles/images/demo/p0003.jpg)"
+         href="javascript:"></a>
     </div>
     <div class="swiper-slide">
-      <a class="swiper-full-bg" href="javascript:;" style="background-image: url(p4.jpg);"></a>
+      <a class="swiper-full-bg"
+         style="background-image: url(https://cycjimmy.github.io/staticFiles/images/demo/p0004.jpg)"
+         href="javascript:"></a>
     </div>
     <div class="swiper-slide">
-      <a class="swiper-full-bg" href="javascript:;" style="background-image: url(p5.jpg);"></a>
+      <a class="swiper-full-bg"
+         style="background-image: url(https://cycjimmy.github.io/staticFiles/images/demo/p0005.jpg)"
+         href="javascript:"></a>
     </div>
   </div>
 </div>
 
-<div class="swiper-container" id="bottomThumbs">
+<div id="bottomThumbs" class="swiper swiper-container">
   <div class="swiper-wrapper">
     <div class="swiper-slide">
-      <a class="swiper-full-bg" href="javascript:;" style="background-image: url(p1.jpg);"></a>
+      <a class="swiper-full-bg"
+         style="background-image: url(https://cycjimmy.github.io/staticFiles/images/demo/p0001.jpg)"
+         href="javascript:"></a>
     </div>
     <div class="swiper-slide">
-      <a class="swiper-full-bg" href="javascript:;" style="background-image: url(p2.jpg);"></a>
+      <a class="swiper-full-bg"
+         style="background-image: url(https://cycjimmy.github.io/staticFiles/images/demo/p0002.jpg)"
+         href="javascript:"></a>
     </div>
     <div class="swiper-slide">
-      <a class="swiper-full-bg" href="javascript:;" style="background-image: url(p3.jpg);"></a>
+      <a class="swiper-full-bg"
+         style="background-image: url(https://cycjimmy.github.io/staticFiles/images/demo/p0003.jpg)"
+         href="javascript:"></a>
     </div>
     <div class="swiper-slide">
-      <a class="swiper-full-bg" href="javascript:;" style="background-image: url(p4.jpg);"></a>
+      <a class="swiper-full-bg"
+         style="background-image: url(https://cycjimmy.github.io/staticFiles/images/demo/p0004.jpg)"
+         href="javascript:"></a>
     </div>
     <div class="swiper-slide">
-      <a class="swiper-full-bg" href="javascript:;" style="background-image: url(p5.jpg);"></a>
+      <a class="swiper-full-bg"
+         style="background-image: url(https://cycjimmy.github.io/staticFiles/images/demo/p0005.jpg)"
+         href="javascript:"></a>
     </div>
   </div>
 </div>
 
+<script src="./awesome-swiper.standalone.umd.min.js"></script>
 <script>
   new AwesomeSwiper()
     .init('#bottomThumbsDemo', {
       pagination: null,
       navigation: {
-        color: 'white'
-      }
+        color: 'white',
+      },
     })
     .addThumbs('#bottomThumbs', {
-      slidesPerView: 5
+      slidesPerView: 5,
     });
 </script>
 </body>
