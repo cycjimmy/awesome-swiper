@@ -64,6 +64,7 @@ const awesomeSwiper = new AwesomeSwiper([SwiperModule])
   * `slidesPerView`: [Number | 'auto'] Number of slides per view. Default `1`.
   * `mousewheel`: [Boolean] Set to `true` to enable navigation through slides using mouse wheel. Default `false`.
   * `autoFixFullImg`: [Boolean] Set `true` to auto fix full images. Default `false`. Tip: Due to the impact of performance, not necessary not to set it.
+  * `autoHeight`: [Boolean] Set to `true` and slider wrapper will adapt its height to the height of the currently active slide. Default `false`.
   * `pagination`: [Object] Set pagination. If you do not want a pagination, set `null`.
     * `color`: [String] Set color for pagination with a color name or a hex value. Default `''` is blue.
     * `style`: [Object] Custom pagination style. Recommended to only adjust the position here.

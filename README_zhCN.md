@@ -65,6 +65,7 @@ const awesomeSwiper = new AwesomeSwiper([SwiperModule])
   * `slidesPerView`: [Number | 'auto'] 视框中能同时看到slide的数量. 默认值为 `1`.
   * `mousewheel`: [Boolean] 设为 `true` 来允许通过鼠标滚轮控制. 默认值为 `false`.
   * `autoFixFullImg`: [Boolean] 设置 `true` 来自动适应满图片. 默认值为 `false`. 提示: 由于对性能有影响, 非必要情况请勿设置.
+  * `autoHeight`: [Boolean] 设置 `true` 时，wrapper和container会随着当前slide的高度而发生变化. 默认值为 `false`.
   * `pagination`: [Object] 设置分页器. 如果你不想要分页器, 将其设为 `null`.
     * `color`: [String] 设置分页器的颜色（可使用颜色名称、十六进制值等）. 默认为蓝色.
     * `dynamicBullets`: [Boolean] 动态分页器. 默认值为 `false`. 查看[Swiper Pagination](http://idangero.us/swiper/api/#pagination)

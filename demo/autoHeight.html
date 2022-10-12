@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Awesome Swiper Demo</title>
+  <style>
+    h2 {
+      text-align: center;
+    }
+
+    #autoHeight {
+      width: 800px;
+    }
+
+    .small-img-wrapper {
+      width: 800px;
+      height: 300px;
+    }
+
+    .middle-img-wrapper {
+      width: 800px;
+      height: 450px;
+    }
+
+    .big-img-wrapper {
+      width: 800px;
+      height: 600px;
+    }
+  </style>
+</head>
+<body>
+<h2>Add Bottom Thumbs</h2>
+
+<div id="autoHeight" class="swiper swiper-container">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide">
+      <div class="small-img-wrapper">
+        <a class="swiper-full-bg"
+           style="background-image: url(https://cycjimmy.github.io/staticFiles/images/demo/p0001.jpg)"
+           href="javascript:"></a>
+      </div>
+    </div>
+    <div class="swiper-slide">
+      <div class="big-img-wrapper">
+        <a class="swiper-full-bg"
+           style="background-image: url(https://cycjimmy.github.io/staticFiles/images/demo/p0002.jpg)"
+           href="javascript:"></a>
+      </div>
+    </div>
+    <div class="swiper-slide">
+      <div class="middle-img-wrapper">
+        <a class="swiper-full-bg"
+           style="background-image: url(https://cycjimmy.github.io/staticFiles/images/demo/p0003.jpg)"
+           href="javascript:"></a>
+      </div>
+    </div>
+    <div class="swiper-slide">
+      <div class="small-img-wrapper">
+        <a class="swiper-full-bg"
+           style="background-image: url(https://cycjimmy.github.io/staticFiles/images/demo/p0004.jpg)"
+           href="javascript:"></a>
+      </div>
+    </div>
+    <div class="swiper-slide">
+      <div class="middle-img-wrapper">
+        <a class="swiper-full-bg"
+           style="background-image: url(https://cycjimmy.github.io/staticFiles/images/demo/p0005.jpg)"
+           href="javascript:"></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@cycjimmy/awesome-swiper@3/dist/awesome-swiper.standalone.umd.min.js"></script>
+<script>
+  new AwesomeSwiper().init('#autoHeight', {
+    autoFixFullImg: true,
+    autoHeight: true,
+    pagination: {
+      color: 'white',
+    },
+    navigation: {
+      color: 'white',
+    },
+  });
+</script>
+</body>
+</html>

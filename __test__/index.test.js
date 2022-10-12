@@ -61,6 +61,7 @@ describe('index test', () => {
         autoplay: 5e3,
         themeColor: 'white',
         autoFixFullImg: true,
+        autoHeight: true,
       });
   });
 

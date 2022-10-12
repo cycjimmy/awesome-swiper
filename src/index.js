@@ -63,6 +63,7 @@ export default class AwesomeSwiper {
       slidesPerView: 1,
       mousewheel: false,
       autoFixFullImg: false,
+      autoHeight: false,
       themeColor: '',
       pagination: {
         color: '',
@@ -89,6 +90,7 @@ export default class AwesomeSwiper {
       spaceBetween: this.config.mainOrigin.spaceBetween,
       slidesPerView: this.config.mainOrigin.slidesPerView,
       mousewheel: this.config.mainOrigin.mousewheel,
+      autoHeight: this.config.mainOrigin.autoHeight,
     };
 
     // set customConfig.autoplay
