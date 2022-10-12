@@ -6,7 +6,7 @@ module.exports = makeConfig({
   githubOptions: {
     assets: [
       pkg.browser,
-      pkg.standalone,
+      pkg['browser:standalone'],
     ],
   },
 });
