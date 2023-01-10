@@ -381,6 +381,21 @@
         return this;
       }
       /**
+       * setInitialSlide
+       * @param initialSlide: Index number of initial slide.
+       * @returns {AwesomeSwiper}
+       */
+
+    }, {
+      key: "setInitialSlide",
+      value: function setInitialSlide(initialSlide) {
+        if (this.swiper.main) {
+          this.swiper.main.slideTo(initialSlide, 0);
+        }
+
+        return this;
+      }
+      /**
        * on
        * @param event
        * @param handler
