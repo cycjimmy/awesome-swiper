@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Awesome Swiper Demo</title>
+  <style>
+    h2 {
+      text-align: center;
+    }
+
+    #setInitialSlideDemo {
+      width: 800px;
+      height: 450px;
+    }
+
+    #setInitialSlideThumbs {
+      width: 800px;
+      height: 100px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+<h2>Add Bottom Thumbs</h2>
+
+<div id="setInitialSlideDemo" class="swiper swiper-container">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide">
+      <a class="swiper-full-bg"
+         style="background-image: url(https://cycjimmy.github.io/staticFiles/images/demo/p0001.jpg)"
+         href="javascript:"></a>
+    </div>
+    <div class="swiper-slide">
+      <a class="swiper-full-bg"
+         style="background-image: url(https://cycjimmy.github.io/staticFiles/images/demo/p0002.jpg)"
+         href="javascript:"></a>
+    </div>
+    <div class="swiper-slide">
+      <a class="swiper-full-bg"
+         style="background-image: url(https://cycjimmy.github.io/staticFiles/images/demo/p0003.jpg)"
+         href="javascript:"></a>
+    </div>
+    <div class="swiper-slide">
+      <a class="swiper-full-bg"
+         style="background-image: url(https://cycjimmy.github.io/staticFiles/images/demo/p0004.jpg)"
+         href="javascript:"></a>
+    </div>
+    <div class="swiper-slide">
+      <a class="swiper-full-bg"
+         style="background-image: url(https://cycjimmy.github.io/staticFiles/images/demo/p0005.jpg)"
+         href="javascript:"></a>
+    </div>
+  </div>
+</div>
+
+<div id="setInitialSlideThumbs" class="swiper swiper-container">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide">
+      <a class="swiper-full-bg"
+         style="background-image: url(https://cycjimmy.github.io/staticFiles/images/demo/p0001.jpg)"
+         href="javascript:"></a>
+    </div>
+    <div class="swiper-slide">
+      <a class="swiper-full-bg"
+         style="background-image: url(https://cycjimmy.github.io/staticFiles/images/demo/p0002.jpg)"
+         href="javascript:"></a>
+    </div>
+    <div class="swiper-slide">
+      <a class="swiper-full-bg"
+         style="background-image: url(https://cycjimmy.github.io/staticFiles/images/demo/p0003.jpg)"
+         href="javascript:"></a>
+    </div>
+    <div class="swiper-slide">
+      <a class="swiper-full-bg"
+         style="background-image: url(https://cycjimmy.github.io/staticFiles/images/demo/p0004.jpg)"
+         href="javascript:"></a>
+    </div>
+    <div class="swiper-slide">
+      <a class="swiper-full-bg"
+         style="background-image: url(https://cycjimmy.github.io/staticFiles/images/demo/p0005.jpg)"
+         href="javascript:"></a>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@cycjimmy/awesome-swiper@3/dist/awesome-swiper.standalone.umd.min.js"></script>
+<script>
+  new AwesomeSwiper()
+    .init('#setInitialSlideDemo', {
+      pagination: null,
+      navigation: {
+        color: 'white',
+      },
+    })
+    .addThumbs('#setInitialSlideThumbs', {
+      slidesPerView: 5,
+    })
+    .setInitialSlide(2);
+</script>
+</body>
+</html>

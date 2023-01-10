@@ -97,6 +97,11 @@ const awesomeSwiper = new AwesomeSwiper([SwiperModule])
     * `autoFixFullImg`: [Boolean] 设置 `true` 来自动适应满图片. 默认值为 `false`. 提示: 由于对性能有影响, 非必要情况请勿设置.
 * 返回 `awesomeSwiper` 实例对象
 
+#### `setInitialSlide(initialSlide)`: 设定初始slide的索引
+* 参数:
+  * `initialSlide`: [Number] 初始slide的索引
+* 返回 `awesomeSwiper` 实例对象
+
 #### `on(event, handler)`: 添加事件处理器
 * 同`swiper.on(event, handler)`
 * 返回 `awesomeSwiper` 实例对象

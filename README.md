@@ -96,6 +96,11 @@ const awesomeSwiper = new AwesomeSwiper([SwiperModule])
     * `autoFixFullImg`: [Boolean] Set `true` to auto fix full images. Default `false`. Tip: Due to the impact of performance, not necessary not to set it.
 * Return `awesomeSwiper` instance
 
+#### `setInitialSlide(initialSlide)`: Set index number of initial slide.
+* Params:
+  * `initialSlide`: [Number] Index number of initial slide.
+* Return `awesomeSwiper` instance
+
 #### `on(event, handler)`: Add event handler
 * Same as `swiper.on(event, handler)`
 * Return `awesomeSwiper` instance

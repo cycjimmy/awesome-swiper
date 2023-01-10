@@ -151,6 +151,14 @@ describe('index test', () => {
       });
   });
 
+  test('setInitialSlide', () => {
+    new AwesomeSwiper(Swiper).setInitialSlide(1);
+
+    new AwesomeSwiper(Swiper)
+      .init(commonWrapper)
+      .setInitialSlide(1);
+  });
+
   test('on and off', () => {
     new AwesomeSwiper(Swiper).on(commonEventName, commonEventHandler);
     new AwesomeSwiper(Swiper).off(commonEventName, commonEventHandler);

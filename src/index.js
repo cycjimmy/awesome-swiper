@@ -158,6 +158,18 @@ export default class AwesomeSwiper {
   }
 
   /**
+   * setInitialSlide
+   * @param initialSlide: Index number of initial slide.
+   * @returns {AwesomeSwiper}
+   */
+  setInitialSlide(initialSlide) {
+    if (this.swiper.main) {
+      this.swiper.main.slideTo(initialSlide, 0);
+    }
+    return this;
+  }
+
+  /**
    * on
    * @param event
    * @param handler
