@@ -15,8 +15,7 @@
 [English](https://github.com/cycjimmy/awesome-swiper/blob/main/README.md) | [中文](https://github.com/cycjimmy/awesome-swiper/blob/main/README_zhCN.md)
 ***
 
-## 如何使用
-### 安装
+## 安装
 [![NPM version][npm-image]][npm-url]
 [![NPM bundle size][npm-bundle-size-image]][npm-url]
 [![npm download][download-image]][download-url]
@@ -29,7 +28,7 @@ $ npm install @cycjimmy/awesome-swiper --save
 $ yarn add @cycjimmy/awesome-swiper
 ```
 
-### 使用
+## 使用
 **Awesome Swiper 基于 [Swiper 5+](https://github.com/nolimits4web/Swiper). 首先将 swiper 加入你的工程**
 
 ```javascript
@@ -50,48 +49,63 @@ const awesomeSwiper = new AwesomeSwiper([SwiperModule])
                         .addThumbs(thumbsContext [, ...thumbsConfig] [, ...thumbsExtraConfig]);
 ```
 
-#### `AwesomeSwiper()` 参数:
-* `SwiperModule`: [Object] 可设置自定义的 swiper 构造函数. 注意确保swiper版本为5以上
+### `new AwesomeSwiper([SwiperModule])`: 新建实例
+* 参数:
+  * `SwiperModule`: [Object] 可设置自定义的 swiper 构造函数. 注意确保swiper版本为5以上
+* 返回 `awesomeSwiper` 实例对象
 
-#### `AwesomeSwiper().init()` 参数:
-* `context`: [String | Element] swiper的包裹层. 该包裹层的宽高大小必须提前设定.
-* config: [Object]
-  * `speed`: [Number] 设置slide切换速度(单位:毫秒). 默认值为 `300`.
-  * `loop`: [Boolean] 设为 `true` 来允许循环播放. 默认值为 `false`.
-  * `autoplay`: [Number] 设置自动播放延迟的毫秒数. `0` 表示关闭自动播放. 默认值为 `0`.
-  * `direction`: [String] 设置方向. 可选项: `'horizontal'` 和 `'vertical'`. 默认为 `'horizontal'`
-  * `themeColor`: [String] 设置swiper实例的主题颜色（可使用颜色名称、十六进制值等）. 默认为蓝色.
-  * `spaceBetween`: [Number] 每个slide之前的距离, 单位为px. 默认值为 `0`.
-  * `slidesPerView`: [Number | 'auto'] 视框中能同时看到slide的数量. 默认值为 `1`.
-  * `mousewheel`: [Boolean] 设为 `true` 来允许通过鼠标滚轮控制. 默认值为 `false`.
-  * `autoFixFullImg`: [Boolean] 设置 `true` 来自动适应满图片. 默认值为 `false`. 提示: 由于对性能有影响, 非必要情况请勿设置.
-  * `autoHeight`: [Boolean] 设置 `true` 时，wrapper和container会随着当前slide的高度而发生变化. 默认值为 `false`.
-  * `pagination`: [Object] 设置分页器. 如果你不想要分页器, 将其设为 `null`.
-    * `color`: [String] 设置分页器的颜色（可使用颜色名称、十六进制值等）. 默认为蓝色.
-    * `dynamicBullets`: [Boolean] 动态分页器. 默认值为 `false`. 查看[Swiper Pagination](http://idangero.us/swiper/api/#pagination)
-    * `style`: [Object] 自定义分页器样式. 建议再此只对位置样式进行调整.
-  * `navigation`: [Object] 设置导航按钮. 如果你不想要导航按钮, 将其设为 `null`.
-    * `color`: [String] 设置导航按钮的颜色（可使用颜色名称、十六进制值等）. 默认为蓝色.
-    * `size`: [String | Number] 设置导航按钮的尺寸
-    * `styles`: [Object] 自定义样式
-      * `prev` [Object] 向前按钮的自定义样式.
-      * `next` [Object] 向后按钮的自定义样式.
-    * `custom`: [Object] 设置自定义的导航按钮元素. 默认值为 `null`.
-      * `prevEl`: [String | Element] 自定义向前按钮元素.
-      * `nextEl`: [String | Element] 自定义向后按钮元素.
-* overlayConfig: [Object] 使用自定义的 swiper api 设置来覆盖.
+### `awesomeSwiper` 实例方法:
+#### `init(context [, ...config] [, ...overlayConfig])`: 初始化主要swiper实例
+* 参数:
+  * `context`: [String | Element] swiper的包裹层. 该包裹层的宽高大小必须提前设定.
+  * config: [Object]
+    * `speed`: [Number] 设置slide切换速度(单位:毫秒). 默认值为 `300`.
+    * `loop`: [Boolean] 设为 `true` 来允许循环播放. 默认值为 `false`.
+    * `autoplay`: [Number] 设置自动播放延迟的毫秒数. `0` 表示关闭自动播放. 默认值为 `0`.
+    * `direction`: [String] 设置方向. 可选项: `'horizontal'` 和 `'vertical'`. 默认为 `'horizontal'`
+    * `themeColor`: [String] 设置swiper实例的主题颜色（可使用颜色名称、十六进制值等）. 默认为蓝色.
+    * `spaceBetween`: [Number] 每个slide之前的距离, 单位为px. 默认值为 `0`.
+    * `slidesPerView`: [Number | 'auto'] 视框中能同时看到slide的数量. 默认值为 `1`.
+    * `mousewheel`: [Boolean] 设为 `true` 来允许通过鼠标滚轮控制. 默认值为 `false`.
+    * `autoFixFullImg`: [Boolean] 设置 `true` 来自动适应满图片. 默认值为 `false`. 提示: 由于对性能有影响, 非必要情况请勿设置.
+    * `autoHeight`: [Boolean] 设置 `true` 时，wrapper和container会随着当前slide的高度而发生变化. 默认值为 `false`.
+    * `pagination`: [Object] 设置分页器. 如果你不想要分页器, 将其设为 `null`.
+      * `color`: [String] 设置分页器的颜色（可使用颜色名称、十六进制值等）. 默认为蓝色.
+      * `dynamicBullets`: [Boolean] 动态分页器. 默认值为 `false`. 查看[Swiper Pagination](http://idangero.us/swiper/api/#pagination)
+      * `style`: [Object] 自定义分页器样式. 建议再此只对位置样式进行调整.
+    * `navigation`: [Object] 设置导航按钮. 如果你不想要导航按钮, 将其设为 `null`.
+      * `color`: [String] 设置导航按钮的颜色（可使用颜色名称、十六进制值等）. 默认为蓝色.
+      * `size`: [String | Number] 设置导航按钮的尺寸
+      * `styles`: [Object] 自定义样式
+        * `prev` [Object] 向前按钮的自定义样式.
+        * `next` [Object] 向后按钮的自定义样式.
+      * `custom`: [Object] 设置自定义的导航按钮元素. 默认值为 `null`.
+        * `prevEl`: [String | Element] 自定义向前按钮元素.
+        * `nextEl`: [String | Element] 自定义向后按钮元素.
+  * overlayConfig: [Object] 使用自定义的 swiper api 设置来覆盖.
+* 返回 `awesomeSwiper` 实例对象
 
-#### `AwesomeSwiper().addThumbs()` 参数:
-* `thumbsContext`: [String | Element] 缩略图的包裹层. 该包裹层的宽高大小必须提前设定.
-* thumbsConfig: [Object] 可参照 swiper api 进行设置
-  * `direction`: [String] 设置方向. 可选项: `'horizontal'` 和 `'vertical'`.
-  * `spaceBetween`: [Number] 每个slide之前的距离, 单位为px. 默认值为 `10`.
-  * `slidesPerView`: [Number | 'auto'] 视框中能同时看到slide的数量. 默认值为 `'auto'`.
-* thumbsExtraConfig: [Object] 缩略图的额外配置项.
-  * `mouseOverMode`: [Boolean] 设置 `true` 来使用mouseover模式. 默认值为 `false`.
-  * `autoFixFullImg`: [Boolean] 设置 `true` 来自动适应满图片. 默认值为 `false`. 提示: 由于对性能有影响, 非必要情况请勿设置.
+#### `addThumbs(thumbsContext [, ...thumbsConfig] [, ...thumbsExtraConfig])`: 添加缩略图swiper实例
+* 参数: 
+  * `thumbsContext`: [String | Element] 缩略图的包裹层. 该包裹层的宽高大小必须提前设定.
+  * thumbsConfig: [Object] 可参照 swiper api 进行设置
+    * `direction`: [String] 设置方向. 可选项: `'horizontal'` 和 `'vertical'`.
+    * `spaceBetween`: [Number] 每个slide之前的距离, 单位为px. 默认值为 `10`.
+    * `slidesPerView`: [Number | 'auto'] 视框中能同时看到slide的数量. 默认值为 `'auto'`.
+  * thumbsExtraConfig: [Object] 缩略图的额外配置项.
+    * `mouseOverMode`: [Boolean] 设置 `true` 来使用mouseover模式. 默认值为 `false`.
+    * `autoFixFullImg`: [Boolean] 设置 `true` 来自动适应满图片. 默认值为 `false`. 提示: 由于对性能有影响, 非必要情况请勿设置.
+* 返回 `awesomeSwiper` 实例对象
 
-#### AwesomeSwiper中新增的css类
+#### `on(event, handler)`: 添加事件处理器
+* 同`swiper.on(event, handler)`
+* 返回 `awesomeSwiper` 实例对象
+
+#### `off(event, handler)`: 移除事件处理器
+* 同`swiper.off(event, handler)`
+* 返回 `awesomeSwiper` 实例对象
+
+### AwesomeSwiper中新增的css类
 * `.swiper-full-img`: 满照片容器.
 * `.swiper-full-bg`: 满背景容器.
 * `.swiper-explain`: 解释说明文字容器.

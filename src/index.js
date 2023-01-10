@@ -158,6 +158,32 @@ export default class AwesomeSwiper {
   }
 
   /**
+   * on
+   * @param event
+   * @param handler
+   * @returns {AwesomeSwiper}
+   */
+  on(event, handler) {
+    if (this.swiper.main) {
+      this.swiper.main.on(event, handler);
+    }
+    return this;
+  }
+
+  /**
+   * off
+   * @param event
+   * @param handler
+   * @returns {AwesomeSwiper}
+   */
+  off(event, handler) {
+    if (this.swiper.main) {
+      this.swiper.main.off(event, handler);
+    }
+    return this;
+  }
+
+  /**
    * initMainSwiper
    * @private
    */
@@ -186,9 +212,7 @@ export default class AwesomeSwiper {
    */
   thumbsCtrl(thumbsExtraConfig) {
     // mainSwiper ctrl
-    this.swiper.main.on('slideChange', () => {
-      // console.log('mainSwiper slideChange');
-
+    this.on('slideChange', () => {
       const swiperIndex = this.swiper.main.realIndex;
       const targetThumb = this.swiper.thumbs.slides[swiperIndex];
 
@@ -198,7 +222,7 @@ export default class AwesomeSwiper {
       this.swiper.thumbs.slideTo(swiperIndex);
     });
 
-    Array.prototype.slice.call(this.swiper.thumbs.slides).forEach((el, index) => {
+    nodeListToArray(this.swiper.thumbs.slides).forEach((el, index) => {
       const uiChange = () => {
         siblingFilter(el, ACTIVE_THUMB_CLASS)[0].classList.remove(ACTIVE_THUMB_CLASS);
         this.swiper.thumbs.slides[index].classList.add(ACTIVE_THUMB_CLASS);

@@ -39,6 +39,11 @@ describe('index test', () => {
 
   const commonWrapper = document.createElement('div');
 
+  const commonEventName = 'slideChange';
+  const commonEventHandler = () => {
+    console.log('run event');
+  };
+
   commonWrapper.style.width = '360px';
   commonWrapper.style.height = '640px';
   commonWrapper.innerHTML = commonInnerHtml;
@@ -144,5 +149,15 @@ describe('index test', () => {
       }, {
         autoFixFullImg: true,
       });
+  });
+
+  test('on and off', () => {
+    new AwesomeSwiper(Swiper).on(commonEventName, commonEventHandler);
+    new AwesomeSwiper(Swiper).off(commonEventName, commonEventHandler);
+
+    new AwesomeSwiper(Swiper)
+      .init(commonWrapper)
+      .on(commonEventName, commonEventHandler)
+      .off(commonEventName, commonEventHandler);
   });
 });

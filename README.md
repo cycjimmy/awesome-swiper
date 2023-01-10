@@ -14,8 +14,7 @@
 [English](https://github.com/cycjimmy/awesome-swiper/blob/main/README.md) | [中文](https://github.com/cycjimmy/awesome-swiper/blob/main/README_zhCN.md)
 ***
 
-## How to use
-### Install
+## Install
 [![NPM version][npm-image]][npm-url]
 [![NPM bundle size][npm-bundle-size-image]][npm-url]
 [![npm download][download-image]][download-url]
@@ -28,7 +27,7 @@ $ npm install @cycjimmy/awesome-swiper --save
 $ yarn add @cycjimmy/awesome-swiper
 ```
 
-### Usage
+## Usage
 **Awesome Swiper based on [Swiper 5+](https://github.com/nolimits4web/Swiper). Add Script of swiper in your project first**
 
 ```javascript
@@ -49,46 +48,61 @@ const awesomeSwiper = new AwesomeSwiper([SwiperModule])
                         .addThumbs(thumbsContext [, ...thumbsConfig] [, ...thumbsExtraConfig]);
 ```
 
-#### `AwesomeSwiper()` params:
-* `SwiperModule`: [Object] Set custom swiper constructor. Make sure the swiper version is 5+.
+### `new AwesomeSwiper([SwiperModule])`: Create new instance
+* Params:
+  * `SwiperModule`: [Object] Set custom swiper constructor. Make sure the swiper version is 5+.
+* Return `awesomeSwiper` instance
 
-#### `AwesomeSwiper().init()` params:
-* `context`: [String | Element] the wrapper of swiper. Height and width of wrapper must be initialized.
-* config: [Object]
-  * `speed`: [Number] Duration of transition between slides (in ms). Default `300`.
-  * `loop`: [Boolean] Set to `true` to enable loop. Default `false`.
-  * `autoplay`: [Number] Set autoplay delay. `0` means close. Default `0`.
-  * `direction`: [String] Set direction. Could be `'horizontal'` or `'vertical'`. Default `'horizontal'`.
-  * `themeColor`: [String] Set theme color for the swiper instance with a color name or a hex value. Default `''` is blue.
-  * `spaceBetween`: [Number] Distance between slides in px. Default `0`.
-  * `slidesPerView`: [Number | 'auto'] Number of slides per view. Default `1`.
-  * `mousewheel`: [Boolean] Set to `true` to enable navigation through slides using mouse wheel. Default `false`.
-  * `autoFixFullImg`: [Boolean] Set `true` to auto fix full images. Default `false`. Tip: Due to the impact of performance, not necessary not to set it.
-  * `autoHeight`: [Boolean] Set to `true` and slider wrapper will adapt its height to the height of the currently active slide. Default `false`.
-  * `pagination`: [Object] Set pagination. If you do not want a pagination, set `null`.
-    * `color`: [String] Set color for pagination with a color name or a hex value. Default `''` is blue.
-    * `style`: [Object] Custom pagination style. Recommended to only adjust the position here.
-    * `dynamicBullets`: [Boolean] Good to enable if you use bullets pagination with a lot of slides. So it will keep only few bullets visible at the same time. Default `false`. See [Swiper Pagination](http://idangero.us/swiper/api/#pagination)
-  * `navigation`: [Object] Set navigation. If you do not want a navigation, set `null`.
-    * `color`: [String] Set color for navigation with a color name or a hex value. Default `''` is blue.
-    * `size`: [String | Number] Set size for navigation.
-    * `styles`: [Object] Custom style
-      * `prev`: [Object] Custom style for prevEl.
-      * `next`: [Object] Custom style for nextEl.
-    * `custom`: [Object] Set custom navigation elements. Default `null`.
-      * `prevEl`: [String | Element] Custom prev button element.
-      * `nextEl`: [String | Element] Custom next button element.
-* overlayConfig: [Object] Use Custom swiper api to overlay config.
+### Methods of `awesomeSwiper` instance:
+#### `init(context [, ...config] [, ...overlayConfig])`: Initialize the main swiper instance:
+* Params:
+  * `context`: [String | Element] the wrapper of swiper. Height and width of wrapper must be initialized.
+  * config: [Object]
+    * `speed`: [Number] Duration of transition between slides (in ms). Default `300`.
+    * `loop`: [Boolean] Set to `true` to enable loop. Default `false`.
+    * `autoplay`: [Number] Set autoplay delay. `0` means close. Default `0`.
+    * `direction`: [String] Set direction. Could be `'horizontal'` or `'vertical'`. Default `'horizontal'`.
+    * `themeColor`: [String] Set theme color for the swiper instance with a color name or a hex value. Default `''` is blue.
+    * `spaceBetween`: [Number] Distance between slides in px. Default `0`.
+    * `slidesPerView`: [Number | 'auto'] Number of slides per view. Default `1`.
+    * `mousewheel`: [Boolean] Set to `true` to enable navigation through slides using mouse wheel. Default `false`.
+    * `autoFixFullImg`: [Boolean] Set `true` to auto fix full images. Default `false`. Tip: Due to the impact of performance, not necessary not to set it.
+    * `autoHeight`: [Boolean] Set to `true` and slider wrapper will adapt its height to the height of the currently active slide. Default `false`.
+    * `pagination`: [Object] Set pagination. If you do not want a pagination, set `null`.
+      * `color`: [String] Set color for pagination with a color name or a hex value. Default `''` is blue.
+      * `style`: [Object] Custom pagination style. Recommended to only adjust the position here.
+      * `dynamicBullets`: [Boolean] Good to enable if you use bullets pagination with a lot of slides. So it will keep only few bullets visible at the same time. Default `false`. See [Swiper Pagination](http://idangero.us/swiper/api/#pagination)
+    * `navigation`: [Object] Set navigation. If you do not want a navigation, set `null`.
+      * `color`: [String] Set color for navigation with a color name or a hex value. Default `''` is blue.
+      * `size`: [String | Number] Set size for navigation.
+      * `styles`: [Object] Custom style
+        * `prev`: [Object] Custom style for prevEl.
+        * `next`: [Object] Custom style for nextEl.
+      * `custom`: [Object] Set custom navigation elements. Default `null`.
+        * `prevEl`: [String | Element] Custom prev button element.
+        * `nextEl`: [String | Element] Custom next button element.
+  * overlayConfig: [Object] Use Custom swiper api to overlay config.
+* Return `awesomeSwiper` instance
 
-#### `AwesomeSwiper().addThumbs()` params:
-* `thumbsContext`: [String | Element] the wrapper of thumbs. Height and width of wrapper must be initialized.
-* thumbsConfig: [Object] You can set it follow swiper api.
-  * `direction`: [String] Set direction. Could be `'horizontal'` or `'vertical'`.
-  * `spaceBetween`: [Number] Distance between slides in px. Default `10`.
-  * `slidesPerView`: [Number | 'auto'] Number of slides per view. Default `'auto'`.
-* thumbsExtraConfig: [Object] Extra config for thumbs.
-  * `mouseOverMode`: [Boolean] set `true` to use mouse over mode. Default `false`.
-  * `autoFixFullImg`: [Boolean] Set `true` to auto fix full images. Default `false`. Tip: Due to the impact of performance, not necessary not to set it.
+#### `addThumbs(thumbsContext [, ...thumbsConfig] [, ...thumbsExtraConfig])`: Add thumbs swiper instance
+* Params:
+  * `thumbsContext`: [String | Element] the wrapper of thumbs. Height and width of wrapper must be initialized.
+  * thumbsConfig: [Object] You can set it follow swiper api.
+    * `direction`: [String] Set direction. Could be `'horizontal'` or `'vertical'`.
+    * `spaceBetween`: [Number] Distance between slides in px. Default `10`.
+    * `slidesPerView`: [Number | 'auto'] Number of slides per view. Default `'auto'`.
+  * thumbsExtraConfig: [Object] Extra config for thumbs.
+    * `mouseOverMode`: [Boolean] set `true` to use mouse over mode. Default `false`.
+    * `autoFixFullImg`: [Boolean] Set `true` to auto fix full images. Default `false`. Tip: Due to the impact of performance, not necessary not to set it.
+* Return `awesomeSwiper` instance
+
+#### `on(event, handler)`: Add event handler
+* Same as `swiper.on(event, handler)`
+* Return `awesomeSwiper` instance
+
+#### `off(event, handler)`: Remove event handler
+* Same as `swiper.off(event, handler)`
+* Return `awesomeSwiper` instance
 
 #### new css classes in AwesomeSwiper
 * `.swiper-full-img`: Full images container.
