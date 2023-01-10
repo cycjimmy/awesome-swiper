@@ -1,3 +1,10 @@
+# [3.2.0](https://github.com/cycjimmy/awesome-swiper/compare/v3.1.0...v3.2.0) (2023-01-10)
+
+
+### Features
+
+* add on() and off() methods ([b0998ff](https://github.com/cycjimmy/awesome-swiper/commit/b0998ff1b2de932bd10e4b75e8f04764eb5ec4a4))
+
 # [3.1.0](https://github.com/cycjimmy/awesome-swiper/compare/v3.0.1...v3.1.0) (2022-10-12)
 
 
