@@ -381,6 +381,38 @@
         return this;
       }
       /**
+       * on
+       * @param event
+       * @param handler
+       * @returns {AwesomeSwiper}
+       */
+
+    }, {
+      key: "on",
+      value: function on(event, handler) {
+        if (this.swiper.main) {
+          this.swiper.main.on(event, handler);
+        }
+
+        return this;
+      }
+      /**
+       * off
+       * @param event
+       * @param handler
+       * @returns {AwesomeSwiper}
+       */
+
+    }, {
+      key: "off",
+      value: function off(event, handler) {
+        if (this.swiper.main) {
+          this.swiper.main.off(event, handler);
+        }
+
+        return this;
+      }
+      /**
        * initMainSwiper
        * @private
        */
@@ -412,8 +444,7 @@
         var _this = this;
 
         // mainSwiper ctrl
-        this.swiper.main.on('slideChange', function () {
-          // console.log('mainSwiper slideChange');
+        this.on('slideChange', function () {
           var swiperIndex = _this.swiper.main.realIndex;
           var targetThumb = _this.swiper.thumbs.slides[swiperIndex]; // ui change
 
@@ -423,7 +454,7 @@
 
           _this.swiper.thumbs.slideTo(swiperIndex);
         });
-        Array.prototype.slice.call(this.swiper.thumbs.slides).forEach(function (el, index) {
+        nodeListToArray(this.swiper.thumbs.slides).forEach(function (el, index) {
           var uiChange = function uiChange() {
             siblingFilter(el, ACTIVE_THUMB_CLASS)[0].classList.remove(ACTIVE_THUMB_CLASS);
 
