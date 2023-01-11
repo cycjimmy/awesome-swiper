@@ -147,13 +147,11 @@ const awesomeSwiper = new AwesomeSwiper([SwiperModule])
 ```
 
 ## CDN
-[![jsdelivr][jsdelivr-image]][jsdelivr-url]
-
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@cycjimmy/awesome-swiper@3/dist/awesome-swiper.umd.min.js"></script>
+<script src="https://unpkg.com/npm/@cycjimmy/awesome-swiper@3/dist/awesome-swiper.umd.min.js"></script>
 
 // 独立版本
-<script src="https://cdn.jsdelivr.net/npm/@cycjimmy/awesome-swiper@3/dist/awesome-swiper.standalone.umd.min.js"></script>
+<script src="https://unpkg.com/npm/@cycjimmy/awesome-swiper@3/dist/awesome-swiper.standalone.umd.min.js"></script>
 ```
 
 ## 兼容性
@@ -173,9 +171,6 @@ const awesomeSwiper = new AwesomeSwiper([SwiperModule])
 
 [download-image]: https://img.shields.io/npm/dt/@cycjimmy/awesome-swiper
 [download-url]: https://npmjs.org/package/@cycjimmy/awesome-swiper
-
-[jsdelivr-image]: https://img.shields.io/jsdelivr/npm/hy/@cycjimmy/awesome-swiper
-[jsdelivr-url]: https://www.jsdelivr.com/package/npm/@cycjimmy/awesome-swiper
 
 [workflows-badge-image]: https://github.com/cycjimmy/awesome-swiper/workflows/Test%20CI/badge.svg
 
