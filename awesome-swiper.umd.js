@@ -10,17 +10,14 @@
 
   function ownKeys(object, enumerableOnly) {
     var keys = Object.keys(object);
-
     if (Object.getOwnPropertySymbols) {
       var symbols = Object.getOwnPropertySymbols(object);
       enumerableOnly && (symbols = symbols.filter(function (sym) {
         return Object.getOwnPropertyDescriptor(object, sym).enumerable;
       })), keys.push.apply(keys, symbols);
     }
-
     return keys;
   }
-
   function _objectSpread2(target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = null != arguments[i] ? arguments[i] : {};
@@ -30,16 +27,13 @@
         Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
       });
     }
-
     return target;
   }
-
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
     }
   }
-
   function _defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
       var descriptor = props[i];
@@ -49,7 +43,6 @@
       Object.defineProperty(target, descriptor.key, descriptor);
     }
   }
-
   function _createClass(Constructor, protoProps, staticProps) {
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
@@ -58,7 +51,6 @@
     });
     return Constructor;
   }
-
   function _defineProperty(obj, key, value) {
     if (key in obj) {
       Object.defineProperty(obj, key, {
@@ -70,7 +62,6 @@
     } else {
       obj[key] = value;
     }
-
     return obj;
   }
 
@@ -101,11 +92,9 @@
       });
       return arr;
     };
-
     if (Object.entries) {
       return Object.entries(obj);
     }
-
     return replaceFunc(obj);
   });
 
@@ -114,11 +103,9 @@
    * @param element
    * @param styles(obj)
    */
-
   var addStyles = ((element, styles) => {
     entries(styles).forEach(_ref => {
       var [k, v] = _ref;
-
       if (Object.prototype.hasOwnProperty.call(styles, k)) {
         // eslint-disable-next-line no-param-reassign
         element.style[k] = v;
@@ -155,31 +142,25 @@
    * @param nodeList
    * @returns {Array}
    */
-
   var nodeListToArray = (nodeList => {
     if (isArray(nodeList)) {
       return nodeList;
     }
-
     if (!isNodeList(nodeList)) {
       return new Array(nodeList);
     }
-
     return Array.from ? Array.from(nodeList) : Array.prototype.slice.call(nodeList);
   });
 
   function styleInject(css, ref) {
     if (ref === void 0) ref = {};
     var insertAt = ref.insertAt;
-
     if (!css || typeof document === 'undefined') {
       return;
     }
-
     var head = document.head || document.getElementsByTagName('head')[0];
     var style = document.createElement('style');
     style.type = 'text/css';
-
     if (insertAt === 'top') {
       if (head.firstChild) {
         head.insertBefore(style, head.firstChild);
@@ -189,7 +170,6 @@
     } else {
       head.appendChild(style);
     }
-
     if (style.styleSheet) {
       style.styleSheet.cssText = css;
     } else {
@@ -206,11 +186,9 @@
    * @param img
    * @returns {{width: number, height: number}}
    */
-
   var getImgNaturalDimensions = function getImgNaturalDimensions(img) {
     var width;
     var height;
-
     if (img.naturalWidth) {
       width = img.naturalWidth;
       height = img.naturalHeight;
@@ -218,35 +196,33 @@
       width = img.offsetWidth;
       height = img.offsetHeight;
     }
-
     return {
       width: width,
       height: height
     };
   };
+
   /**
    * fixFullImg
    * @param eContainer
    */
-
   var fixFullImg = function fixFullImg(eContainer) {
-    var eSide = eContainer.querySelector('.swiper-slide'); // fix empty swiper
-
+    var eSide = eContainer.querySelector('.swiper-slide');
+    // fix empty swiper
     if (!eSide) {
       return;
     }
-
     var slideClientRect = eSide.getBoundingClientRect();
     var aImgEls = nodeListToArray(eContainer.querySelectorAll('.swiper-full-img > img'));
     aImgEls.forEach(function (img) {
       var imgNaturalDimensions = getImgNaturalDimensions(img);
-
       if (slideClientRect.width / slideClientRect.height < imgNaturalDimensions.width / imgNaturalDimensions.height) {
         img.classList.add(style.basedOnHeight);
       }
     });
   };
 
+  // static
   var ACTIVE_THUMB_CLASS = 'active-thumb';
   var STYLE_PROPERTY_NAME = {
     themeColor: '--swiper-theme-color',
@@ -254,7 +230,6 @@
     navigationSize: '--swiper-navigation-size',
     paginationColor: '--swiper-pagination-color'
   };
-
   var AwesomeSwiper = /*#__PURE__*/function () {
     /**
      * AwesomeSwiper constructor
@@ -262,7 +237,6 @@
      */
     function AwesomeSwiper(SwiperModule) {
       _classCallCheck(this, AwesomeSwiper);
-
       this.emptyDiv = document.createElement('div');
       this.el = {
         mainContainer: null,
@@ -278,6 +252,7 @@
       };
       this.config = {};
     }
+
     /**
      * init
      * @param container
@@ -285,8 +260,6 @@
      * @param overlaySwiperConfig
      * @returns {AwesomeSwiper}
      */
-
-
     _createClass(AwesomeSwiper, [{
       key: "init",
       value: function init(container) {
@@ -328,19 +301,20 @@
           slidesPerView: this.config.mainOrigin.slidesPerView,
           mousewheel: this.config.mainOrigin.mousewheel,
           autoHeight: this.config.mainOrigin.autoHeight
-        }; // set customConfig.autoplay
+        };
 
+        // set customConfig.autoplay
         if (this.config.mainOrigin.autoplay) {
           this.config.main.autoplay = {};
           this.config.main.autoplay.delay = this.config.mainOrigin.autoplay;
         }
-
         this.initPagination();
         this.initNavigation();
         this.config.main = Object.assign(this.config.main, overlaySwiperConfig);
         this.initMainSwiper();
         return this;
       }
+
       /**
        * addThumbs
        * @param thumbsContainer
@@ -348,15 +322,15 @@
        * @param extraConfig
        * @returns {AwesomeSwiper}
        */
-
     }, {
       key: "addThumbs",
       value: function addThumbs(thumbsContainer) {
         var customThumbsConfig = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
         var extraConfig = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
         this.el.thumbsContainer = isString(thumbsContainer) ? document.querySelector(thumbsContainer) : thumbsContainer;
-        this.el.thumbsContainer.classList.add(style.thumbsWrapper); // config
+        this.el.thumbsContainer.classList.add(style.thumbsWrapper);
 
+        // config
         var thumbsDefault = {
           spaceBetween: 10,
           slidesPerView: 'auto'
@@ -367,123 +341,111 @@
         this.config.thumbs = _objectSpread2(_objectSpread2({}, thumbsDefault), customThumbsConfig);
         this.config.thumbsExtra = _objectSpread2(_objectSpread2({}, thumbsExtraDefault), extraConfig);
         this.swiper.thumbs = new this.swiper.constructor(this.el.thumbsContainer, this.config.thumbs);
-
         if (this.swiper.thumbs.slides[0]) {
           this.swiper.thumbs.slides[0].classList.add(ACTIVE_THUMB_CLASS);
         }
+        this.thumbsCtrl(this.config.thumbsExtra);
 
-        this.thumbsCtrl(this.config.thumbsExtra); // fix full img
-
+        // fix full img
         if (this.config.thumbsExtra.autoFixFullImg) {
           fixFullImg(this.el.thumbsContainer);
         }
-
         return this;
       }
+
       /**
        * setInitialSlide
        * @param initialSlide: Index number of initial slide.
        * @returns {AwesomeSwiper}
        */
-
     }, {
       key: "setInitialSlide",
       value: function setInitialSlide(initialSlide) {
         if (this.swiper.main) {
           this.swiper.main.slideTo(initialSlide, 0);
         }
-
         return this;
       }
+
       /**
        * on
        * @param event
        * @param handler
        * @returns {AwesomeSwiper}
        */
-
     }, {
       key: "on",
       value: function on(event, handler) {
         if (this.swiper.main) {
           this.swiper.main.on(event, handler);
         }
-
         return this;
       }
+
       /**
        * off
        * @param event
        * @param handler
        * @returns {AwesomeSwiper}
        */
-
     }, {
       key: "off",
       value: function off(event, handler) {
         if (this.swiper.main) {
           this.swiper.main.off(event, handler);
         }
-
         return this;
       }
+
       /**
        * initMainSwiper
        * @private
        */
-
     }, {
       key: "initMainSwiper",
       value: function initMainSwiper() {
         var themeColor = this.config.mainOrigin.themeColor;
-
         if (themeColor) {
           this.el.mainContainer.style.setProperty(STYLE_PROPERTY_NAME.themeColor, themeColor);
         }
+        this.swiper.main = new this.swiper.constructor(this.el.mainContainer, this.config.main);
 
-        this.swiper.main = new this.swiper.constructor(this.el.mainContainer, this.config.main); // fix full img
-
+        // fix full img
         if (this.config.mainOrigin.autoFixFullImg) {
           fixFullImg(this.el.mainContainer);
         }
       }
+
       /**
        * thumbsCtrl
        * @param thumbsExtraConfig
        * @private
        */
-
     }, {
       key: "thumbsCtrl",
       value: function thumbsCtrl(thumbsExtraConfig) {
         var _this = this;
-
         // mainSwiper ctrl
         this.on('slideChange', function () {
           var swiperIndex = _this.swiper.main.realIndex;
-          var targetThumb = _this.swiper.thumbs.slides[swiperIndex]; // ui change
+          var targetThumb = _this.swiper.thumbs.slides[swiperIndex];
 
+          // ui change
           siblingFilter(targetThumb, ACTIVE_THUMB_CLASS)[0].classList.remove(ACTIVE_THUMB_CLASS);
-
           _this.swiper.thumbs.slides[swiperIndex].classList.add(ACTIVE_THUMB_CLASS);
-
           _this.swiper.thumbs.slideTo(swiperIndex);
         });
         nodeListToArray(this.swiper.thumbs.slides).forEach(function (el, index) {
           var uiChange = function uiChange() {
             siblingFilter(el, ACTIVE_THUMB_CLASS)[0].classList.remove(ACTIVE_THUMB_CLASS);
-
             _this.swiper.thumbs.slides[index].classList.add(ACTIVE_THUMB_CLASS);
-
             _this.swiper.thumbs.slideTo(index);
-
             if (_this.swiper.main.params.loop) {
               _this.swiper.main.slideToLoop(index);
             } else {
               _this.swiper.main.slideTo(index);
             }
           };
-
           if (thumbsExtraConfig.mouseOverMode) {
             el.addEventListener('mouseover', function () {
               return uiChange();
@@ -498,65 +460,61 @@
           }
         });
       }
+
       /**
        * initPagination
        * @private
        */
-
     }, {
       key: "initPagination",
       value: function initPagination() {
         var pagination = this.config.mainOrigin.pagination;
-
         if (!pagination) {
           return;
-        } // add to Dom
+        }
 
-
+        // add to Dom
         this.el.pagination = this.emptyDiv.cloneNode();
         this.el.pagination.classList.add('swiper-pagination');
-        this.el.mainContainer.appendChild(this.el.pagination); // set swiperConfig
+        this.el.mainContainer.appendChild(this.el.pagination);
 
+        // set swiperConfig
         if (pagination.color) {
           this.el.mainContainer.style.setProperty(STYLE_PROPERTY_NAME.paginationColor, pagination.color);
         }
-
         this.config.main.pagination = {
           el: this.el.pagination,
           clickable: true,
           dynamicBullets: this.config.mainOrigin.pagination.dynamicBullets
-        }; // set custom styles
+        };
 
+        // set custom styles
         if (pagination.style) {
           addStyles(this.el.pagination, pagination.style);
-        } // Fix Explain Space
+        }
 
-
+        // Fix Explain Space
         this.fixExplainSpace();
       }
+
       /**
        * initNavigation
        * @private
        */
-
     }, {
       key: "initNavigation",
       value: function initNavigation() {
         var _this2 = this;
-
         var navigation = this.config.mainOrigin.navigation;
-
         if (!navigation) {
           return;
         }
-
         var setSwiperConfig = function setSwiperConfig() {
           _this2.config.main.navigation = {
             nextEl: _this2.el.navigation.nextEl,
             prevEl: _this2.el.navigation.prevEl
           };
         };
-
         if (navigation.custom) {
           // Set custom navigation
           this.el.navigation.prevEl = isString(navigation.custom.prevEl) ? document.querySelector(navigation.custom.prevEl) : navigation.custom.prevEl;
@@ -565,46 +523,41 @@
           this.el.navigation.nextEl.classList.add(style.customNavigationEl);
           setSwiperConfig();
           return;
-        } // add to Dom
+        }
 
-
+        // add to Dom
         this.el.navigation.prevEl = this.emptyDiv.cloneNode();
         this.el.navigation.nextEl = this.emptyDiv.cloneNode();
         this.el.navigation.prevEl.classList.add('swiper-button-prev');
         this.el.navigation.nextEl.classList.add('swiper-button-next');
-
         if (navigation.color) {
           this.el.mainContainer.style.setProperty(STYLE_PROPERTY_NAME.navigationColor, navigation.color);
         }
-
         if (navigation.size) {
           if (isNumber(navigation.size)) {
             navigation.size += 'px';
           }
-
           this.el.mainContainer.style.setProperty(STYLE_PROPERTY_NAME.navigationSize, navigation.size);
-        } // set custom styles
+        }
 
-
+        // set custom styles
         if (navigation.styles) {
           if (navigation.styles.next) {
             addStyles(this.el.navigation.nextEl, navigation.styles.next);
           }
-
           if (navigation.styles.prev) {
             addStyles(this.el.navigation.prevEl, navigation.styles.prev);
           }
         }
-
         this.el.mainContainer.appendChild(this.el.navigation.nextEl);
         this.el.mainContainer.appendChild(this.el.navigation.prevEl);
         setSwiperConfig();
       }
+
       /**
        * fixExplainSpace
        * @private
        */
-
     }, {
       key: "fixExplainSpace",
       value: function fixExplainSpace() {
@@ -613,7 +566,6 @@
         });
       }
     }]);
-
     return AwesomeSwiper;
   }();
 
