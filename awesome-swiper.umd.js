@@ -4,10 +4,28 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.AwesomeSwiper = factory(global.Swiper));
 })(this, (function (Swiper) { 'use strict';
 
-  function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
-
-  var Swiper__default = /*#__PURE__*/_interopDefaultLegacy(Swiper);
-
+  function _classCallCheck(a, n) {
+    if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function");
+  }
+  function _defineProperties(e, r) {
+    for (var t = 0; t < r.length; t++) {
+      var o = r[t];
+      o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o);
+    }
+  }
+  function _createClass(e, r, t) {
+    return r && _defineProperties(e.prototype, r), Object.defineProperty(e, "prototype", {
+      writable: !1
+    }), e;
+  }
+  function _defineProperty(e, r, t) {
+    return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, {
+      value: t,
+      enumerable: !0,
+      configurable: !0,
+      writable: !0
+    }) : e[r] = t, e;
+  }
   function ownKeys(e, r) {
     var t = Object.keys(e);
     if (Object.getOwnPropertySymbols) {
@@ -33,51 +51,15 @@
     if ("object" != typeof t || !t) return t;
     var e = t[Symbol.toPrimitive];
     if (void 0 !== e) {
-      var i = e.call(t, r || "default");
+      var i = e.call(t, r );
       if ("object" != typeof i) return i;
       throw new TypeError("@@toPrimitive must return a primitive value.");
     }
-    return ("string" === r ? String : Number)(t);
+    return (String )(t);
   }
   function _toPropertyKey(t) {
     var i = _toPrimitive(t, "string");
-    return "symbol" == typeof i ? i : String(i);
-  }
-  function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError("Cannot call a class as a function");
-    }
-  }
-  function _defineProperties(target, props) {
-    for (var i = 0; i < props.length; i++) {
-      var descriptor = props[i];
-      descriptor.enumerable = descriptor.enumerable || false;
-      descriptor.configurable = true;
-      if ("value" in descriptor) descriptor.writable = true;
-      Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor);
-    }
-  }
-  function _createClass(Constructor, protoProps, staticProps) {
-    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-    if (staticProps) _defineProperties(Constructor, staticProps);
-    Object.defineProperty(Constructor, "prototype", {
-      writable: false
-    });
-    return Constructor;
-  }
-  function _defineProperty(obj, key, value) {
-    key = _toPropertyKey(key);
-    if (key in obj) {
-      Object.defineProperty(obj, key, {
-        value: value,
-        enumerable: true,
-        configurable: true,
-        writable: true
-      });
-    } else {
-      obj[key] = value;
-    }
-    return obj;
+    return "symbol" == typeof i ? i : i + "";
   }
 
   /**
@@ -170,7 +152,7 @@
   function styleInject(css, ref) {
     if (ref === void 0) ref = {};
     var insertAt = ref.insertAt;
-    if (!css || typeof document === 'undefined') {
+    if (typeof document === 'undefined') {
       return;
     }
     var head = document.head || document.getElementsByTagName('head')[0];
@@ -263,7 +245,7 @@
         }
       };
       this.swiper = {
-        constructor: SwiperModule || Swiper__default["default"]
+        constructor: SwiperModule || Swiper
       };
       this.config = {};
     }
@@ -275,7 +257,7 @@
      * @param overlaySwiperConfig
      * @returns {AwesomeSwiper}
      */
-    _createClass(AwesomeSwiper, [{
+    return _createClass(AwesomeSwiper, [{
       key: "init",
       value: function init(container) {
         var customMainConfig = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
@@ -581,7 +563,6 @@
         });
       }
     }]);
-    return AwesomeSwiper;
   }();
 
   return AwesomeSwiper;
