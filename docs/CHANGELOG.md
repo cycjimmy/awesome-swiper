@@ -1,3 +1,10 @@
+## [3.3.1](https://github.com/cycjimmy/awesome-swiper/compare/v3.3.0...v3.3.1) (2024-07-17)
+
+
+### Bug Fixes
+
+* upgrade rollup to v4 ([2243111](https://github.com/cycjimmy/awesome-swiper/commit/22431110690962905be8ab581f69a94340ba5e19))
+
 # [3.3.0](https://github.com/cycjimmy/awesome-swiper/compare/v3.2.0...v3.3.0) (2023-01-10)
 
 
