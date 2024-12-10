@@ -67,21 +67,21 @@
    * @param str
    * @returns {boolean}
    */
-  var isString = (str => typeof str === 'string' && str.constructor === String);
+  var isString = str => typeof str === 'string' && str.constructor === String;
 
   /**
    * determine a number type
    * @param num
    * @returns {boolean}
    */
-  var isNumber = (num => Object.prototype.toString.call(num).slice(8, -1) === 'Number');
+  var isNumber = num => Object.prototype.toString.call(num).slice(8, -1) === 'Number';
 
   /**
    * compatibility scheme for traversing object property methods Object.entries
    * @param obj
    * @returns {Iterator.<*>|*}
    */
-  var entries = (obj => {
+  var entries = obj => {
     var replaceFunc = o => {
       var arr = [];
       Object.keys(o).forEach(key => {
@@ -93,14 +93,14 @@
       return Object.entries(obj);
     }
     return replaceFunc(obj);
-  });
+  };
 
   /**
    * element add styles
    * @param element
    * @param styles(obj)
    */
-  var addStyles = ((element, styles) => {
+  var addStyles = (element, styles) => {
     entries(styles).forEach(_ref => {
       var [k, v] = _ref;
       if (Object.prototype.hasOwnProperty.call(styles, k)) {
@@ -108,7 +108,7 @@
         element.style[k] = v;
       }
     });
-  });
+  };
 
   /**
    * sibling filter（mainly used to select active objects in a same group）
@@ -125,21 +125,21 @@
    * determine nodeList type
    * @param nodeList
    */
-  var isNodeList = (nodeList => Object.prototype.toString.call(nodeList) === '[object NodeList]');
+  var isNodeList = nodeList => Object.prototype.toString.call(nodeList) === '[object NodeList]';
 
   /**
    * determine an array type
    * @param arr
    * @returns {boolean}
    */
-  var isArray = (arr => Object.prototype.toString.call(arr).slice(8, -1) === 'Array');
+  var isArray = arr => Object.prototype.toString.call(arr).slice(8, -1) === 'Array';
 
   /**
    * nodeList into array
    * @param nodeList
    * @returns {Array}
    */
-  var nodeListToArray = (nodeList => {
+  var nodeListToArray = nodeList => {
     if (isArray(nodeList)) {
       return nodeList;
     }
@@ -147,7 +147,7 @@
       return new Array(nodeList);
     }
     return Array.from ? Array.from(nodeList) : Array.prototype.slice.call(nodeList);
-  });
+  };
 
   function styleInject(css, ref) {
     if (ref === void 0) ref = {};
