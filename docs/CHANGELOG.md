@@ -1,3 +1,25 @@
+# [4.0.0](https://github.com/cycjimmy/awesome-swiper/compare/v3.3.1...v4.0.0) (2026-11-19)
+
+
+* feat!: rewrite the library as ESM-only TypeScript on Vite ([3785cc9](https://github.com/cycjimmy/awesome-swiper/commit/3785cc9762a37a494b5c1ab0a90dba9fa7d2df83))
+
+
+### BREAKING CHANGES
+
+* the package is ESM only. `exports` resolves a single ESM
+entry, the `browser` field and every CommonJS artefact are gone, and
+`engines` now requires Node `^22.22.2 || ^24.15.0 || >=26.0.0`.
+* `swiper` is a peer dependency. Consumers must install
+`swiper@^14` themselves, and the UMD build expects the global `Swiper`
+instead of bundling it; use `awesome-swiper.standalone.umd.min.js` when the
+library has to ship swiper itself.
+* swiper 14 renamed `.swiper-container` to `.swiper` and
+`.swiper-container-vertical` to `.swiper-vertical`, so existing markup and
+selectors have to be updated.
+* `init()` throws when a selector matches nothing, and
+`navigation.custom` throws unless both `prevEl` and `nextEl` are provided,
+instead of failing silently.
+
 ## [3.3.1](https://github.com/cycjimmy/awesome-swiper/compare/v3.3.0...v3.3.1) (2024-07-17)
 
 
