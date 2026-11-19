@@ -1,15 +1,15 @@
-.thumbsWrapper {
+.thumbs-wrapper {
   :global(.swiper-slide) {
     height: 100%;
-    opacity: 0.4;
     cursor: pointer;
+    opacity: 0.4;
 
     &:global(.active-thumb) {
       opacity: 1;
     }
   }
 
-  &:global(.swiper-container-vertical) {
+  &:global(.swiper-vertical) {
     :global(.swiper-full-img) {
       > img {
         width: auto;

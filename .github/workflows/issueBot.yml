@@ -1,0 +1,234 @@
+name: Issue Bot
+
+# Rule-based triage for issues: label/reply on newly opened issues, and
+# release the needs-info label once the reporter comes back with details.
+# All untrusted issue content is passed through environment variables (never
+# interpolated into a shell command) so it cannot break out of the workflow.
+
+on:
+  issues:
+    types: [opened, edited]
+  issue_comment:
+    types: [created]
+
+permissions:
+  issues: write
+
+# Serialize the per-issue handlers: label checks and replies are not atomic, so
+# parallel edits or comments would answer the reporter twice.
+concurrency:
+  group: issue-triage-${{ github.repository }}-${{ github.event.issue.number }}
+  cancel-in-progress: false
+  # `single` would let a newer queued run replace a waiting one: a reply from the
+  # reporter could be dropped because a maintainer commented right after it.
+  queue: max
+
+jobs:
+  triage:
+    name: Triage new issue
+    runs-on: ubuntu-latest
+    steps:
+      - name: Apply triage rules
+        uses: actions/github-script@v9
+        env:
+          ISSUE_AUTHOR: ${{ github.event.issue.user.login }}
+          COMMENT_AUTHOR: ${{ github.event.comment.user.login }}
+          SENDER: ${{ github.event.sender.login }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
+        with:
+          script: |
+            const issueAuthor = process.env.ISSUE_AUTHOR || '';
+            const commentAuthor = process.env.COMMENT_AUTHOR || '';
+            const sender = process.env.SENDER || '';
+            // Never react to bot activity to avoid loops
+            if ([issueAuthor, commentAuthor, sender].some((login) => login.endsWith('[bot]'))) return;
+            // `issue_comment` also fires for pull requests; only issues are triaged
+            if (context.payload.issue?.pull_request) return;
+            // Only getting back from the reporter counts as engagement: a
+            // maintainer asking for logs must not release the needs-info label
+            const isReporter = sender === issueAuthor;
+
+            const body = process.env.ISSUE_BODY || '';
+            const issueNumber = context.issue.number;
+            const isCommentEvent = context.payload.comment != null;
+            const isOpened = context.payload.action === 'opened' && !isCommentEvent;
+            const isEdited = context.payload.action === 'edited' && !isCommentEvent;
+
+            const labels = (names) => github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issueNumber,
+              labels: names,
+            }).catch((error) => {
+              // A label missing from the repository is a configuration problem,
+              // it must not take the whole triage run down with it
+              if (error.status !== 422) throw error;
+              core.warning(`Label missing from the repository: ${names.join(', ')}`);
+            });
+
+            const removeLabel = (name) => github.rest.issues.removeLabel({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issueNumber,
+              name,
+            }).catch((error) => {
+              // The label is already gone, nothing to do
+              if (error.status !== 404) throw error;
+            });
+
+            const reply = (message) => github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issueNumber,
+              body: message,
+            });
+
+            // The stale workflow closes a needs-info issue and leaves a comment
+            // that starts with this sentence. The marker is never looked for in the
+            // newest comment of the thread: by the time this runs the reporter's
+            // own reply is newer than the notification, so the whole close cycle
+            // is scanned instead (see `closedAutomatically`).
+            const AUTO_CLOSE_NOTE = 'This issue was closed because the requested information was not provided within 7 days.';
+            const closedAutomatically = async (issue) => {
+              if (issue.state !== 'closed') return false;
+
+              const timeline = await github.paginate(github.rest.issues.listEventsForTimeline, {
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issueNumber,
+                per_page: 100,
+              });
+
+              const indexed = timeline.map((event, index) => ({ event, index }));
+
+              // The most recent close is the one that matters: an issue can be
+              // closed, reopened and closed again.
+              const lastClose = indexed.filter(({ event }) => event.event === 'closed').pop();
+
+              // Closing through `GITHUB_TOKEN` is attributed to the actions bot,
+              // so anything else is a maintainer's decision and stays closed.
+              if (!lastClose || lastClose.event.actor?.login !== 'github-actions[bot]') return false;
+
+              // The notification is searched for across the whole cycle that ends
+              // with this close. The reporter can answer after the notification was
+              // posted and before the close landed, and looking at a single "last
+              // comment" would pick that reply up - losing the marker for good,
+              // because the history before the close never changes again.
+              const cycleStart = indexed
+                .filter(({ event, index }) => index < lastClose.index && event.event === 'reopened')
+                .pop()?.index ?? -1;
+
+              return indexed.some(({ event, index }) => index > cycleStart
+                && index < lastClose.index
+                && event.event === 'commented'
+                && typeof event.body === 'string'
+                && event.body.startsWith(AUTO_CLOSE_NOTE));
+            };
+
+            // One handler for both ways the reporter can come back - a comment or
+            // an edit of the issue body. Both re-read the issue, because the
+            // payload is a snapshot taken before this run got the concurrency lock.
+            const handleReporterFollowUp = async (message) => {
+              const { data: live } = await github.rest.issues.get({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issueNumber,
+              });
+              const liveLabels = live.labels
+                .map((label) => (typeof label === 'string' ? label : label.name));
+              if (!liveLabels.includes('needs-info')) return;
+
+              // Closed automatically: the missing information has arrived, so the
+              // closure is undone. This runs before the label is dropped, which
+              // is what lets a later comment still find the markers it needs.
+              if (liveLabels.includes('stale') && (await closedAutomatically(live))) {
+                await github.rest.issues.update({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issueNumber,
+                  state: 'open',
+                });
+                await removeLabel('stale');
+                await removeLabel('needs-info');
+                await reply(
+                  'Thanks for the follow-up! This issue had been closed automatically, ' +
+                  'so it has been reopened and is back in the normal review queue.'
+                );
+                return;
+              }
+
+              // Closed by a maintainer: the activity is noted but the decision
+              // stands. An open issue only needs the label removed.
+              if (live.state !== 'open') return;
+              await removeLabel('needs-info');
+              await reply(message);
+            };
+
+            // Drop only the scaffolding the issue forms generate: their own
+            // "### <label>" headings and the "_No response_" placeholders.
+            // Everything else - including headings, issue references and code
+            // comments written by the reporter - counts as information.
+            const formHeading = /^###\s+(Describe the bug|Version|Swiper version|How do you use the library|Environment|Steps to reproduce|Relevant configuration|Expected behavior|Relevant log output|Additional context|Is your feature request related to a problem\?|Describe the solution you'd like|Describe alternatives you've considered)$/i;
+            const userContent = body
+              .split('\n')
+              .map((line) => line.trim())
+              .filter((line) => line && !formHeading.test(line) && !/^_no response_$/i.test(line))
+              .join('\n');
+
+            // Rule 1 looks at what the reporter wrote, never at the raw body: the
+            // bug form ships a "How do you use the library" dropdown, and matching
+            // that heading would turn every bug report into a usage question.
+            const questionLike = (process.env.ISSUE_TITLE + '\n' + userContent).toLowerCase();
+            // A submission that carries the bug form scaffolding is a bug report by
+            // construction, so it skips Rule 1 entirely and goes to the check below.
+            const isBugForm = /^###\s+Steps to reproduce$/im.test(body);
+
+            if (isOpened || isEdited) {
+              // Rule 1: question about how to use the wrapper or the demo
+              if (isOpened && !isBugForm && /how (do|to|can i)|use (this|the) (lib|library|wrapper)|usage/.test(questionLike)) {
+                await labels(['usage']);
+                await reply(
+                  'This looks like a usage question about the wrapper.\n\n' +
+                  'The [README](../blob/main/README.md) documents `init()`, `addThumbs()`, ' +
+                  '`setInitialSlide()`, `on()` and `off()`, and the ' +
+                  '[demo page](https://cycjimmy.github.io/awesome-swiper/) runs every ' +
+                  'feature against a working page. The snippet behind each demo section is ' +
+                  'linked from the demo page as well.\n\n' +
+                  'If that does not answer your question, let us know what you are ' +
+                  'trying to achieve and where you got stuck.'
+                );
+                return;
+              }
+
+              // Rule 2: low-information report (nearly every form field left empty)
+              if (isOpened && userContent.length < 200) {
+                await labels(['needs-info']);
+                await reply(
+                  'Thanks for opening this issue! Unfortunately, there is not enough ' +
+                  'information to investigate it yet. Please edit the issue and add:\n\n' +
+                  '- The version of `@cycjimmy/awesome-swiper` and of `swiper`\n' +
+                  '- How the library is loaded (bundler, CDN or the standalone build)\n' +
+                  '- The configuration passed to `init()` / `addThumbs()`\n' +
+                  '- A minimal reproduction, ideally a link to a demo page or a sandbox\n\n' +
+                  'The issue will be closed automatically if there is no response within 7 days.'
+                );
+              } else if (isEdited && isReporter && context.payload.changes?.body) {
+                // The reporter came back with details on edit. A title-only edit
+                // says nothing about the missing details, and an issue that was
+                // closed in the meantime is reopened by the same handler.
+                await handleReporterFollowUp(
+                  'Thanks for the additional details! The `needs-info` label has ' +
+                  'been removed, so this issue is back in the normal review queue.'
+                );
+              }
+              return;
+            }
+
+            // Comment event: a reply from the reporter also counts as engagement.
+            if (isCommentEvent && isReporter) {
+              await handleReporterFollowUp(
+                'Thanks for the reply! The `needs-info` label has been removed, so ' +
+                'this issue is back in the normal review queue.'
+              );
+            }

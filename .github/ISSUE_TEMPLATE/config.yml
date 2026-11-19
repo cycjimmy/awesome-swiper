@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Usage and API documentation
+    url: https://github.com/cycjimmy/awesome-swiper/blob/main/README.md
+    about: Every method, option and CSS class is documented in the README.
+  - name: Live demo
+    url: https://cycjimmy.github.io/awesome-swiper/
+    about: The demo page runs every feature; each section links to its snippet.

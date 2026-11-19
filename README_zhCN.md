@@ -1,18 +1,19 @@
 # Awesome Swiper
 
-![][workflows-badge-image]
+[![Test CI][workflows-badge-image]][workflows-url]
 [![libraries dependency status][libraries-status-image]][libraries-status-url]
 [![libraries sourcerank][libraries-sourcerank-image]][libraries-sourcerank-url]
+[![Coverage Status][coverage-image]][coverage-url]
 [![Release date][release-date-image]][release-url]
-[![rollup][rollup-image]][rollup-url]
+[![vite][vite-image]][vite-url]
 [![semantic-release][semantic-image]][semantic-url]
+[![vitest][vitest-image]][vitest-url]
 [![npm license][license-image]][download-url]
 
 * **[awesome-swiper](https://github.com/cycdpo/awesome-swiper) 已经迁移到 @cycjimmy/awesome-swiper**
-* awesome-swiper 基于 [swiper 5+](https://github.com/nolimits4web/Swiper). ([Releases](https://github.com/cycjimmy/awesome-swiper/releases) | [Demo](https://cycjimmy.github.io/awesome-swiper/))
+* awesome-swiper 基于 [swiper 14](https://github.com/nolimits4web/Swiper). ([Releases][release-url] | [Demo][github-pages-url])
 
-
-[English](https://github.com/cycjimmy/awesome-swiper/blob/main/README.md) | [中文](https://github.com/cycjimmy/awesome-swiper/blob/main/README_zhCN.md)
+[English](https://github.com/cycjimmy/awesome-swiper/blob/main/README.md) | [中 文](https://github.com/cycjimmy/awesome-swiper/blob/main/README_zhCN.md)
 ***
 
 ## 安装
@@ -28,115 +29,132 @@ $ npm install @cycjimmy/awesome-swiper --save
 $ yarn add @cycjimmy/awesome-swiper
 ```
 
+`swiper` 是 peer 依赖（`^14`），npm 7+ 会自动安装；如果你的包管理器不安装 peer，请自行安装。
+
+## 模块形态
+
+包为 **纯 ESM**：
+
+| 文件 | 格式 | 用途 |
+| --- | --- | --- |
+| `dist/awesome-swiper.esm.js` | ESM | `main`、`module` 与 `exports` 入口（打包工具、`import`） |
+| `dist/awesome-swiper.umd.js` | UMD | 未压缩的浏览器构建，依赖全局 `Swiper` |
+| `dist/awesome-swiper.umd.min.js` | UMD | 压缩后的浏览器/CDN 构建，依赖全局 `Swiper` |
+| `dist/awesome-swiper.standalone.umd.min.js` | UMD | 压缩构建，已内置 `swiper` 及其样式 |
+| `dist/index.d.ts` | 类型 | 供 `types` 与 `exports` 的 `types` 条件使用 |
+
+* 不再提供 CommonJS 产物。Node.js 22.12+ / 24 可以直接 `require()` 这个 ESM 入口，因为这些版本会同步加载 ES 模块。
+* 样式不再产出独立 `.css` 文件：CSS Modules 的结果被内联进入口 chunk，并在模块执行时以 `<style>` 注入，因此 `<script>` 标签无需额外文件。详见 `vite.config.ts` 中的 `injectCss` 插件。
+* 默认使用 `swiper/bundle` 构造函数，因此 navigation、pagination、mousewheel、autoplay 开箱可用。如需精简，可用 `new AwesomeSwiper(SwiperModule)` 传入自己的构造函数。
+* 工具链本身要求 Node.js `^22.22.2 || ^24.15.0 || >=26.0.0`（见 `package.json` 的 `engines` 与 [CONTRIBUTING.md](CONTRIBUTING.md)）。
+
 ## 使用
-**Awesome Swiper 基于 [Swiper 5+](https://github.com/nolimits4web/Swiper). 首先将 swiper 加入你的工程**
+**Awesome Swiper 基于 [Swiper 14](https://github.com/nolimits4web/Swiper)。请先在工程中安装同主版本的 Swiper**
 
 ```javascript
-import Swiper from 'swiper';
-import AwesomeSwiper from '@cycjimmy/awesome-swiper';
+import AwesomeSwiper from '@cycjimmy/awesome-swiper'
+// 需要 swiper 样式时再引入：
+import 'swiper/css/bundle'
 
-// 或者
-const Swiper = require('swiper');
-const AwesomeSwiper = require('@cycjimmy/awesome-swiper');
-```
-
-```javascript
-const awesomeSwiper = new AwesomeSwiper([SwiperModule]).init(context [, ...config] [, ...overlayConfig]);
+const awesomeSwiper = new AwesomeSwiper().init(context)
 
 // 如果需要缩略图
-const awesomeSwiper = new AwesomeSwiper([SwiperModule])
-                        .init(context [, ...config] [, ...overlayConfig])
-                        .addThumbs(thumbsContext [, ...thumbsConfig] [, ...thumbsExtraConfig]);
+const awesomeSwiperWithThumbs = new AwesomeSwiper()
+  .init(context)
+  .addThumbs(thumbsContext)
 ```
+
+`init()` 与 `addThumbs()` 都接受可选的配置对象：`init(context, config,
+overlayConfig)` 与 `addThumbs(thumbsContext, thumbsConfig, thumbsExtraConfig)`。
 
 ### `new AwesomeSwiper([SwiperModule])`: 新建实例
 * 参数:
-  * `SwiperModule`: [Object] 可设置自定义的 swiper 构造函数. 注意确保swiper版本为5以上
+  * `SwiperModule`: [Object] 可设置自定义的 swiper 构造函数。默认是 `swiper/bundle`（已装好本库用到的模块），任何 swiper 14+ 的构造函数都可以。
 * 返回 `awesomeSwiper` 实例对象
 
 ### `awesomeSwiper` 实例方法:
-#### `init(context [, ...config] [, ...overlayConfig])`: 初始化主要swiper实例
+#### `init(context [, ...config] [, ...overlayConfig])`: 初始化主要 swiper 实例
 * 参数:
-  * `context`: [String | Element] swiper的包裹层. 该包裹层的宽高大小必须提前设定.
+  * `context`: [String | Element] swiper 的包裹层。该包裹层的宽高必须提前设定。选择器匹配不到元素时会抛出异常。
   * config: [Object]
-    * `speed`: [Number] 设置slide切换速度(单位:毫秒). 默认值为 `300`.
-    * `loop`: [Boolean] 设为 `true` 来允许循环播放. 默认值为 `false`.
-    * `autoplay`: [Number] 设置自动播放延迟的毫秒数. `0` 表示关闭自动播放. 默认值为 `0`.
-    * `direction`: [String] 设置方向. 可选项: `'horizontal'` 和 `'vertical'`. 默认为 `'horizontal'`
-    * `themeColor`: [String] 设置swiper实例的主题颜色（可使用颜色名称、十六进制值等）. 默认为蓝色.
-    * `spaceBetween`: [Number] 每个slide之前的距离, 单位为px. 默认值为 `0`.
-    * `slidesPerView`: [Number | 'auto'] 视框中能同时看到slide的数量. 默认值为 `1`.
-    * `mousewheel`: [Boolean] 设为 `true` 来允许通过鼠标滚轮控制. 默认值为 `false`.
-    * `autoFixFullImg`: [Boolean] 设置 `true` 来自动适应满图片. 默认值为 `false`. 提示: 由于对性能有影响, 非必要情况请勿设置.
-    * `autoHeight`: [Boolean] 设置 `true` 时，wrapper和container会随着当前slide的高度而发生变化. 默认值为 `false`.
-    * `pagination`: [Object] 设置分页器. 如果你不想要分页器, 将其设为 `null`.
-      * `color`: [String] 设置分页器的颜色（可使用颜色名称、十六进制值等）. 默认为蓝色.
-      * `dynamicBullets`: [Boolean] 动态分页器. 默认值为 `false`. 查看[Swiper Pagination](http://idangero.us/swiper/api/#pagination)
-      * `style`: [Object] 自定义分页器样式. 建议再此只对位置样式进行调整.
-    * `navigation`: [Object] 设置导航按钮. 如果你不想要导航按钮, 将其设为 `null`.
-      * `color`: [String] 设置导航按钮的颜色（可使用颜色名称、十六进制值等）. 默认为蓝色.
-      * `size`: [String | Number] 设置导航按钮的尺寸
+    * `speed`: [Number] 切换动画时长（毫秒）。默认 `300`。
+    * `loop`: [Boolean] 设为 `true` 开启循环。默认 `false`。swiper 14 需要足够的 slide（至少 `slidesPerView + slidesPerGroup`，开启 `centeredSlides` 时再加一）。
+    * `autoplay`: [Number] 自动播放间隔，`0` 表示关闭。默认 `0`。
+    * `direction`: [String] 方向，`'horizontal'` 或 `'vertical'`。默认 `'horizontal'`。
+    * `themeColor`: [String] 主题色（颜色名或十六进制值）。默认 `''` 为蓝色。
+    * `spaceBetween`: [Number] slide 间距（px）。默认 `0`。
+    * `slidesPerView`: [Number | 'auto'] 同时显示的 slide 数。默认 `1`。
+    * `mousewheel`: [Boolean] 是否启用鼠标滚轮切换。默认 `false`。
+    * `autoFixFullImg`: [Boolean] 是否自动修正全屏图片。默认 `false`。提示：有性能开销，非必要不要开启。
+    * `autoHeight`: [Boolean] 是否让包裹层高度自适应当前 slide。默认 `false`。
+    * `pagination`: [Object] 分页配置，设为 `null` 则不显示分页。
+      * `color`: [String] 分页颜色。默认 `''` 为蓝色。
+      * `style`: [Object] 自定义分页样式，建议只调整位置。
+      * `dynamicBullets`: [Boolean] 幻灯片很多时建议开启，只显示少量圆点。默认 `false`。
+    * `navigation`: [Object] 导航配置，设为 `null` 则不显示导航。
+      * `color`: [String] 导航颜色。默认 `''` 为蓝色。
+      * `size`: [String | Number] 导航尺寸，数字按像素处理。
       * `styles`: [Object] 自定义样式
-        * `prev` [Object] 向前按钮的自定义样式.
-        * `next` [Object] 向后按钮的自定义样式.
-      * `custom`: [Object] 设置自定义的导航按钮元素. 默认值为 `null`.
-        * `prevEl`: [String | Element] 自定义向前按钮元素.
-        * `nextEl`: [String | Element] 自定义向后按钮元素.
-  * overlayConfig: [Object] 使用自定义的 swiper api 设置来覆盖.
+        * `prev`: [Object] prevEl 的自定义样式。
+        * `next`: [Object] nextEl 的自定义样式。
+      * `custom`: [Object] 自定义导航元素，默认 `null`。`prevEl` 与 `nextEl` 都必填。
+        * `prevEl`: [String | Element] 自定义上一个按钮元素。
+        * `nextEl`: [String | Element] 自定义下一个按钮元素。
+  * overlayConfig: [Object] 使用 swiper 原生 api 覆盖配置。
 * 返回 `awesomeSwiper` 实例对象
 
-#### `addThumbs(thumbsContext [, ...thumbsConfig] [, ...thumbsExtraConfig])`: 添加缩略图swiper实例
-* 参数: 
-  * `thumbsContext`: [String | Element] 缩略图的包裹层. 该包裹层的宽高大小必须提前设定.
-  * thumbsConfig: [Object] 可参照 swiper api 进行设置
-    * `direction`: [String] 设置方向. 可选项: `'horizontal'` 和 `'vertical'`.
-    * `spaceBetween`: [Number] 每个slide之前的距离, 单位为px. 默认值为 `10`.
-    * `slidesPerView`: [Number | 'auto'] 视框中能同时看到slide的数量. 默认值为 `'auto'`.
-  * thumbsExtraConfig: [Object] 缩略图的额外配置项.
-    * `mouseOverMode`: [Boolean] 设置 `true` 来使用mouseover模式. 默认值为 `false`.
-    * `autoFixFullImg`: [Boolean] 设置 `true` 来自动适应满图片. 默认值为 `false`. 提示: 由于对性能有影响, 非必要情况请勿设置.
-* 返回 `awesomeSwiper` 实例对象
-
-#### `setInitialSlide(initialSlide)`: 设定初始slide的索引
+#### `addThumbs(thumbsContext [, ...thumbsConfig] [, ...thumbsExtraConfig])`: 添加缩略图 swiper 实例
 * 参数:
-  * `initialSlide`: [Number] 初始slide的索引
+  * `thumbsContext`: [String | Element] 缩略图的包裹层。该包裹层的宽高必须提前设定。
+  * thumbsConfig: [Object] 按 swiper api 设置。
+    * `direction`: [String] 方向，`'horizontal'` 或 `'vertical'`。
+    * `spaceBetween`: [Number] slide 间距（px）。默认 `10`。
+    * `slidesPerView`: [Number | 'auto'] 同时显示的 slide 数。默认 `'auto'`。
+  * thumbsExtraConfig: [Object] 缩略图额外配置。
+    * `mouseOverMode`: [Boolean] 设为 `true` 使用鼠标悬停模式。默认 `false`。
+    * `autoFixFullImg`: [Boolean] 是否自动修正全屏图片。默认 `false`。提示：有性能开销，非必要不要开启。
 * 返回 `awesomeSwiper` 实例对象
 
-#### `on(event, handler)`: 添加事件处理器
-* 同`swiper.on(event, handler)`
+#### `setInitialSlide(initialSlide)`: 设置初始 slide 下标
+* 参数:
+  * `initialSlide`: [Number] 初始 slide 下标。
 * 返回 `awesomeSwiper` 实例对象
 
-#### `off(event, handler)`: 移除事件处理器
-* 同`swiper.off(event, handler)`
+#### `on(event, handler)`: 添加事件处理
+* 等同 `swiper.on(event, handler)`
 * 返回 `awesomeSwiper` 实例对象
 
-### AwesomeSwiper中新增的css类
-* `.swiper-full-img`: 满照片容器.
-* `.swiper-full-bg`: 满背景容器.
-* `.swiper-explain`: 解释说明文字容器.
-* `.active-thumb`: 正处在激活状态的缩略图.
+#### `off(event, handler)`: 移除事件处理
+* 等同 `swiper.off(event, handler)`
+* 返回 `awesomeSwiper` 实例对象
 
-### 快速体验（在浏览器中使用）
+#### AwesomeSwiper 新增的 css 类
+* `.swiper-full-img`: 全屏图片容器。
+* `.swiper-full-bg`: 全屏背景容器。
+* `.swiper-explain`: 说明文字容器。
+* `.active-thumb`: 当前缩略图。
+
+### 快速体验（直接在浏览器中使用）
 ```html
-<link href="swiper.min.css" rel="stylesheet">
+<link href="https://unpkg.com/swiper@14/swiper-bundle.min.css" rel="stylesheet">
 
-<div id="basic" class="swiper swiper-container">
+<div id="basic" class="swiper">
   <div class="swiper-wrapper">
     <div class="swiper-slide">slide1</div>
     ...
   </div>
 </div>
 
-<script src="swiper.min.js"></script>
+<script src="https://unpkg.com/swiper@14/swiper-bundle.min.js"></script>
 <script src="awesome-swiper.umd.min.js"></script>
 <script>
   new AwesomeSwiper().init('#basic');
 </script>
 ```
 
-或者使用独立版本:
+或使用内置 swiper 与样式的 standalone 版本：
 ```html
-<div id="basic" class="swiper swiper-container">
+<div id="basic" class="swiper">
   ...
 </div>
 
@@ -148,21 +166,26 @@ const awesomeSwiper = new AwesomeSwiper([SwiperModule])
 
 ## CDN
 ```html
-<script src="https://unpkg.com/npm/@cycjimmy/awesome-swiper@3/dist/awesome-swiper.umd.min.js"></script>
+<script src="https://unpkg.com/@cycjimmy/awesome-swiper@4/dist/awesome-swiper.umd.min.js"></script>
 
-// 独立版本
-<script src="https://unpkg.com/npm/@cycjimmy/awesome-swiper@3/dist/awesome-swiper.standalone.umd.min.js"></script>
+<!-- standalone -->
+<script src="https://unpkg.com/@cycjimmy/awesome-swiper@4/dist/awesome-swiper.standalone.umd.min.js"></script>
 ```
 
-## 兼容性
-* chrome >= 49
-* safari >= 11
-* firefox >= 31
-* ios >= 11
-* android >= 7
-* Samsung >= 5
+## 从 v3 迁移
 
-**注意: 不支持IE，如需兼容IE，请退回到[awesome-swiper](https://github.com/cycdpo/awesome-swiper)**
+* 不再提供 CommonJS 产物（`dist/awesome-swiper.cjs`）。打包工具与 Node 22+ 使用 `dist/awesome-swiper.esm.js`，`import` 无需额外配置。
+* `swiper` 从 dependencies 改为 peer dependency，版本为 `^14`。`navigation`、`pagination`、`mousewheel`、`autoplay` 相关参数由 `swiper/bundle` 提供，默认构造函数已使用它。
+* swiper 9 起把 `.swiper-container` 改名为 `.swiper`；文档与 demo 现在只使用 `class="swiper"`，本库样式也改为 swiper 14 的类名（`.swiper-vertical`、`.swiper-pagination-bullet` 等）。
+* `navigation.size` 现在作用于 swiper 14 的 SVG 箭头，而不再是旧的字体图标。
+* 选择器匹配不到元素时 `init()` 会直接抛出异常（不再延迟到后续 `TypeError`），`navigation.custom` 要求 `prevEl` 与 `nextEl` 都存在。
+* `setInitialSlide()` 使用兼容 loop 的切换方法，开启 `loop: true` 时同样有效。
+
+## 兼容性
+* 构建目标为 ES2020（`chrome >= 87`、`safari >= 14`、`firefox >= 78`），与 swiper 14 的浏览器基线一致。
+* 不支持 IE。如需兼容 IE，请使用 [awesome-swiper v2](https://github.com/cycjimmy/awesome-swiper/tree/v2)。
+
+开发、测试与发布流程见 [CONTRIBUTING.md](CONTRIBUTING.md)。
 
 <!-- Links: -->
 [npm-image]: https://img.shields.io/npm/v/@cycjimmy/awesome-swiper
@@ -173,20 +196,27 @@ const awesomeSwiper = new AwesomeSwiper([SwiperModule])
 [download-url]: https://npmjs.org/package/@cycjimmy/awesome-swiper
 
 [workflows-badge-image]: https://github.com/cycjimmy/awesome-swiper/workflows/Test%20CI/badge.svg
+[workflows-url]: https://github.com/cycjimmy/awesome-swiper/actions/workflows/nodeTestCI.yml
 
 [libraries-status-image]: https://img.shields.io/librariesio/release/npm/@cycjimmy/awesome-swiper
 [libraries-sourcerank-image]: https://img.shields.io/librariesio/sourcerank/npm/@cycjimmy/awesome-swiper
 [libraries-status-url]: https://libraries.io/github/cycjimmy/awesome-swiper
 [libraries-sourcerank-url]: https://libraries.io/npm/@cycjimmy%2Fawesome-swiper
 
+[coverage-image]: https://coveralls.io/repos/github/cycjimmy/awesome-swiper/badge.svg?branch=main
+[coverage-url]: https://coveralls.io/github/cycjimmy/awesome-swiper?branch=main
+
 [release-date-image]: https://img.shields.io/github/release-date/cycjimmy/awesome-swiper
 [release-url]: https://github.com/cycjimmy/awesome-swiper/releases
 
-[rollup-image]: https://img.shields.io/github/package-json/dependency-version/cycjimmy/awesome-swiper/dev/rollup
-[rollup-url]: https://github.com/rollup/rollup
+[vite-image]: https://img.shields.io/github/package-json/dependency-version/cycjimmy/awesome-swiper/dev/vite
+[vite-url]: https://vite.dev
 
-[semantic-image]: https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
+[semantic-image]: https://img.shields.io/badge/%20%20%F0%9F%93%A6%20%F0%9F%9A%80-semantic--release-e10079.svg
 [semantic-url]: https://github.com/semantic-release/semantic-release
+
+[vitest-image]: https://img.shields.io/github/package-json/dependency-version/cycjimmy/awesome-swiper/dev/vitest
+[vitest-url]: https://vitest.dev
 
 [license-image]: https://img.shields.io/npm/l/@cycjimmy/awesome-swiper
 

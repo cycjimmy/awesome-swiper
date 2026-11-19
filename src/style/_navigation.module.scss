@@ -1,7 +1,7 @@
-.customNavigationEl {
+.custom-navigation-el {
   &:global(.swiper-button-disabled) {
-    opacity: .35;
     cursor: auto;
+    opacity: 0.35;
     pointer-events: none;
   }
 }
