@@ -36,10 +36,6 @@
 <h1>Awesome Swiper Demo</h1>
 <hr>
 
-<link href="https://unpkg.com/swiper@8/swiper-bundle.min.css" rel="stylesheet">
-<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
-<script src="./awesome-swiper.umd.js"></script>
-
 <!--Basic-->
 <section>
   <h2>Basic</h2>
@@ -51,7 +47,7 @@
     }
   </style>
 
-  <div id="basic" class="swiper swiper-container">
+  <div id="basic" class="swiper">
     <div class="swiper-wrapper">
       <div class="swiper-slide">
         <a class="swiper-full-bg"
@@ -80,10 +76,6 @@
       </div>
     </div>
   </div>
-
-  <script>
-    new AwesomeSwiper().init('#basic');
-  </script>
 
   <a class="code-button"
      href="https://github.com/cycjimmy/awesome-swiper/blob/main/demo/basic.html"
@@ -103,7 +95,7 @@
     }
   </style>
 
-  <div id="changeColor" class="swiper swiper-container">
+  <div id="changeColor" class="swiper">
     <div class="swiper-wrapper">
       <div class="swiper-slide">
         <a class="swiper-full-bg"
@@ -132,17 +124,6 @@
       </div>
     </div>
   </div>
-
-  <script>
-    new AwesomeSwiper().init('#changeColor', {
-      pagination: {
-        color: '#71b4c5',
-      },
-      navigation: {
-        color: '#71b4c5',
-      },
-    });
-  </script>
 
   <a class="code-button"
      href="https://github.com/cycjimmy/awesome-swiper/blob/main/demo/changeColor.html"
@@ -162,7 +143,7 @@
     }
   </style>
 
-  <div id="changeThemeColor" class="swiper swiper-container">
+  <div id="changeThemeColor" class="swiper">
     <div class="swiper-wrapper">
       <div class="swiper-slide">
         <a class="swiper-full-bg"
@@ -191,12 +172,6 @@
       </div>
     </div>
   </div>
-
-  <script>
-    new AwesomeSwiper().init('#changeThemeColor', {
-      themeColor: 'green',
-    });
-  </script>
 
   <a class="code-button"
      href="https://github.com/cycjimmy/awesome-swiper/blob/main/demo/changeThemeColor.html"
@@ -216,7 +191,7 @@
     }
   </style>
 
-  <div id="dynamicBulletsPagination" class="swiper swiper-container">
+  <div id="dynamicBulletsPagination" class="swiper">
     <div class="swiper-wrapper">
       <div class="swiper-slide">
         <a class="swiper-full-bg"
@@ -245,18 +220,6 @@
       </div>
     </div>
   </div>
-
-  <script>
-    new AwesomeSwiper().init('#dynamicBulletsPagination', {
-      pagination: {
-        color: 'white',
-        dynamicBullets: true,
-      },
-      navigation: {
-        color: 'white',
-      },
-    });
-  </script>
 
   <a class="code-button"
      href="https://github.com/cycjimmy/awesome-swiper/blob/main/demo/dynamicBulletsPagination.html"
@@ -276,7 +239,7 @@
     }
   </style>
 
-  <div id="changeNavigationStyle" class="swiper swiper-container">
+  <div id="changeNavigationStyle" class="swiper">
     <div class="swiper-wrapper">
       <div class="swiper-slide">
         <a class="swiper-full-bg"
@@ -305,30 +268,6 @@
       </div>
     </div>
   </div>
-
-  <script>
-    new AwesomeSwiper().init('#changeNavigationStyle', {
-      pagination: {
-        color: 'white',
-      },
-      navigation: {
-        color: '#27340a',
-        size: '60px',
-        styles: {
-          prev: {
-            width: '60px',
-            height: '120px',
-            backgroundColor: 'rgba(255, 255, 255, .4)',
-          },
-          next: {
-            width: '60px',
-            height: '120px',
-            backgroundColor: 'rgba(255, 255, 255, .4)',
-          },
-        },
-      },
-    });
-  </script>
 
   <a class="code-button"
      href="https://github.com/cycjimmy/awesome-swiper/blob/main/demo/changeNavigationStyle.html"
@@ -377,7 +316,7 @@
 
   <div class="customNavigationDemo">
     <div id="customPrevEl"></div>
-    <div id="customNavigationElements" class="swiper swiper-container">
+    <div id="customNavigationElements" class="swiper">
       <div class="swiper-wrapper">
         <div class="swiper-slide">
           <a class="swiper-full-bg"
@@ -409,21 +348,6 @@
     <div id="customNextEl"></div>
   </div>
 
-  <script>
-    new AwesomeSwiper().init('#customNavigationElements', {
-      autoFixFullImg: true,
-      pagination: {
-        color: 'white',
-      },
-      navigation: {
-        custom: {
-          prevEl: '#customPrevEl',
-          nextEl: document.getElementById('customNextEl'),
-        },
-      },
-    });
-  </script>
-
   <a class="code-button"
      href="https://github.com/cycjimmy/awesome-swiper/blob/main/demo/customNavigationElements.html"
      target="_blank">CODE</a>
@@ -442,7 +366,7 @@
     }
   </style>
 
-  <div id="multipleSlidesPerView" class="swiper swiper-container">
+  <div id="multipleSlidesPerView" class="swiper">
     <div class="swiper-wrapper">
       <div class="swiper-slide">
         <a class="swiper-full-bg"
@@ -472,20 +396,6 @@
     </div>
   </div>
 
-  <script>
-    new AwesomeSwiper().init('#multipleSlidesPerView', {
-      spaceBetween: 10,
-      slidesPerView: 3,
-      autoFixFullImg: true,
-      pagination: {
-        color: 'white',
-      },
-      navigation: {
-        color: 'white',
-      },
-    });
-  </script>
-
   <a class="code-button"
      href="https://github.com/cycjimmy/awesome-swiper/blob/main/demo/multipleSlidesPerView.html"
      target="_blank">CODE</a>
@@ -504,7 +414,7 @@
     }
   </style>
 
-  <div id="addExplain" class="swiper swiper-container">
+  <div id="addExplain" class="swiper">
     <div class="swiper-wrapper">
       <div class="swiper-slide">
         <a class="swiper-full-bg"
@@ -549,17 +459,6 @@
     </div>
   </div>
 
-  <script>
-    new AwesomeSwiper().init('#addExplain', {
-      pagination: {
-        color: 'white',
-      },
-      navigation: {
-        color: 'white',
-      },
-    });
-  </script>
-
   <a class="code-button"
      href="https://github.com/cycjimmy/awesome-swiper/blob/main/demo/addExplain.html"
      target="_blank">CODE</a>
@@ -578,7 +477,7 @@
     }
   </style>
 
-  <div id="autoFixFullImg" class="swiper swiper-container">
+  <div id="autoFixFullImg" class="swiper">
     <div class="swiper-wrapper">
       <div class="swiper-slide">
         <a class="swiper-full-bg"
@@ -607,18 +506,6 @@
       </div>
     </div>
   </div>
-
-  <script>
-    new AwesomeSwiper().init('#autoFixFullImg', {
-      autoFixFullImg: true,
-      pagination: {
-        color: 'white',
-      },
-      navigation: {
-        color: 'white',
-      },
-    });
-  </script>
 
   <a class="code-button"
      href="https://github.com/cycjimmy/awesome-swiper/blob/main/demo/autoFixFullImg.html"
@@ -652,7 +539,7 @@
     }
   </style>
 
-  <div id="autoHeight" class="swiper swiper-container">
+  <div id="autoHeight" class="swiper">
     <div class="swiper-wrapper">
       <div class="swiper-slide">
         <div class="small-img-wrapper">
@@ -692,19 +579,6 @@
     </div>
   </div>
 
-  <script>
-    new AwesomeSwiper().init('#autoHeight', {
-      autoFixFullImg: true,
-      autoHeight: true,
-      pagination: {
-        color: 'white',
-      },
-      navigation: {
-        color: 'white',
-      },
-    });
-  </script>
-
   <a class="code-button"
      href="https://github.com/cycjimmy/awesome-swiper/blob/main/demo/autoHeight.html"
      target="_blank">CODE</a>
@@ -723,7 +597,7 @@
     }
   </style>
 
-  <div id="allowMouseWheel" class="swiper swiper-container">
+  <div id="allowMouseWheel" class="swiper">
     <div class="swiper-wrapper">
       <div class="swiper-slide">
         <a class="swiper-full-bg"
@@ -752,18 +626,6 @@
       </div>
     </div>
   </div>
-
-  <script>
-    new AwesomeSwiper().init('#allowMouseWheel', {
-      mousewheel: true,
-      pagination: {
-        color: 'white',
-      },
-      navigation: {
-        color: 'white',
-      },
-    });
-  </script>
 
   <a class="code-button"
      href="https://github.com/cycjimmy/awesome-swiper/blob/main/demo/allowMouseWheel.html"
@@ -783,7 +645,7 @@
     }
   </style>
 
-  <div id="autoPlay" class="swiper swiper-container">
+  <div id="autoPlay" class="swiper">
     <div class="swiper-wrapper">
       <div class="swiper-slide">
         <a class="swiper-full-bg"
@@ -812,19 +674,6 @@
       </div>
     </div>
   </div>
-
-  <script>
-    new AwesomeSwiper().init('#autoPlay', {
-      loop: true,
-      autoplay: 5000,
-      pagination: {
-        color: 'white',
-      },
-      navigation: {
-        color: 'white',
-      },
-    });
-  </script>
 
   <a class="code-button"
      href="https://github.com/cycjimmy/awesome-swiper/blob/main/demo/autoPlay.html"
@@ -850,7 +699,7 @@
     }
   </style>
 
-  <div id="bottomThumbsDemo" class="swiper swiper-container">
+  <div id="bottomThumbsDemo" class="swiper">
     <div class="swiper-wrapper">
       <div class="swiper-slide">
         <a class="swiper-full-bg"
@@ -880,7 +729,7 @@
     </div>
   </div>
 
-  <div id="bottomThumbs" class="swiper swiper-container">
+  <div id="bottomThumbs" class="swiper">
     <div class="swiper-wrapper">
       <div class="swiper-slide">
         <a class="swiper-full-bg"
@@ -909,19 +758,6 @@
       </div>
     </div>
   </div>
-
-  <script>
-    new AwesomeSwiper()
-      .init('#bottomThumbsDemo', {
-        pagination: null,
-        navigation: {
-          color: 'white',
-        },
-      })
-      .addThumbs('#bottomThumbs', {
-        slidesPerView: 5,
-      });
-  </script>
 
   <a class="code-button"
      href="https://github.com/cycjimmy/awesome-swiper/blob/main/demo/addBottomThumbs.html"
@@ -955,7 +791,7 @@
   </style>
 
   <div class="addRightThumbsDemo">
-    <div id="rightThumbsDemo" class="swiper swiper-container">
+    <div id="rightThumbsDemo" class="swiper">
       <div class="swiper-wrapper">
         <div class="swiper-slide">
           <a class="swiper-full-bg"
@@ -1000,7 +836,7 @@
       </div>
     </div>
 
-    <div id="rightThumbs" class="swiper swiper-container">
+    <div id="rightThumbs" class="swiper">
       <div class="swiper-wrapper">
         <div class="swiper-slide">
           <a class="swiper-full-bg"
@@ -1031,20 +867,6 @@
     </div>
   </div>
 
-  <script>
-    new AwesomeSwiper()
-      .init('#rightThumbsDemo', {
-        pagination: null,
-        navigation: {
-          color: 'white',
-        },
-      })
-      .addThumbs('#rightThumbs', {
-        direction: 'vertical',
-        slidesPerView: 5,
-      });
-  </script>
-
   <a class="code-button"
      href="https://github.com/cycjimmy/awesome-swiper/blob/main/demo/addRightThumbs.html"
      target="_blank">CODE</a>
@@ -1069,7 +891,7 @@
     }
   </style>
 
-  <div id="mouseOverDemo" class="swiper swiper-container">
+  <div id="mouseOverDemo" class="swiper">
     <div class="swiper-wrapper">
       <div class="swiper-slide">
         <a class="swiper-full-bg"
@@ -1099,7 +921,7 @@
     </div>
   </div>
 
-  <div id="mouseOverThumbs" class="swiper swiper-container">
+  <div id="mouseOverThumbs" class="swiper">
     <div class="swiper-wrapper">
       <div class="swiper-slide">
         <a class="swiper-full-bg"
@@ -1128,21 +950,6 @@
       </div>
     </div>
   </div>
-
-  <script>
-    new AwesomeSwiper()
-      .init('#mouseOverDemo', {
-        pagination: null,
-        navigation: {
-          color: 'white',
-        },
-      })
-      .addThumbs('#mouseOverThumbs', {
-        slidesPerView: 5,
-      }, {
-        mouseOverMode: true,
-      });
-  </script>
 
   <a class="code-button"
      href="https://github.com/cycjimmy/awesome-swiper/blob/main/demo/thumbsMouseOverMode.html"
@@ -1168,7 +975,7 @@
     }
   </style>
 
-  <div id="setInitialSlideDemo" class="swiper swiper-container">
+  <div id="setInitialSlideDemo" class="swiper">
     <div class="swiper-wrapper">
       <div class="swiper-slide">
         <a class="swiper-full-bg"
@@ -1198,7 +1005,7 @@
     </div>
   </div>
 
-  <div id="setInitialSlideThumbs" class="swiper swiper-container">
+  <div id="setInitialSlideThumbs" class="swiper">
     <div class="swiper-wrapper">
       <div class="swiper-slide">
         <a class="swiper-full-bg"
@@ -1227,20 +1034,6 @@
       </div>
     </div>
   </div>
-
-  <script>
-    new AwesomeSwiper()
-      .init('#setInitialSlideDemo', {
-        pagination: null,
-        navigation: {
-          color: 'white',
-        },
-      })
-      .addThumbs('#setInitialSlideThumbs', {
-        slidesPerView: 5,
-      })
-      .setInitialSlide(2);
-  </script>
 
   <a class="code-button"
      href="https://github.com/cycjimmy/awesome-swiper/blob/main/demo/setInitialSlide.html"
@@ -1252,5 +1045,181 @@
 <a style="display:block; margin: 20px; text-align: center;"
    href="https://github.com/cycjimmy/awesome-swiper"
    target="_blank">Read More on GitHub</a>
+
+<script type="module">
+  // The source is imported directly: the dev server and the Pages build share
+  // this page, and the wrapper is created with the `swiper/bundle` constructor
+  // so every module the demos use (navigation, pagination, mousewheel, autoplay)
+  // is installed.
+  import 'swiper/css/bundle'
+  import Swiper from 'swiper/bundle'
+  import AwesomeSwiper from '../src/index'
+
+  const init = (selector, config) => new AwesomeSwiper(Swiper).init(selector, config)
+
+  init('#basic')
+
+  init('#changeColor', {
+    pagination: {
+      color: '#71b4c5',
+    },
+    navigation: {
+      color: '#71b4c5',
+    },
+  })
+
+  init('#changeThemeColor', {
+    themeColor: 'green',
+  })
+
+  init('#dynamicBulletsPagination', {
+    pagination: {
+      color: 'white',
+      dynamicBullets: true,
+    },
+    navigation: {
+      color: 'white',
+    },
+  })
+
+  init('#changeNavigationStyle', {
+    pagination: {
+      color: 'white',
+    },
+    navigation: {
+      color: '#27340a',
+      size: '60px',
+      styles: {
+        prev: {
+          width: '60px',
+          height: '120px',
+          backgroundColor: 'rgba(255, 255, 255, .4)',
+        },
+        next: {
+          width: '60px',
+          height: '120px',
+          backgroundColor: 'rgba(255, 255, 255, .4)',
+        },
+      },
+    },
+  })
+
+  init('#customNavigationElements', {
+    autoFixFullImg: true,
+    pagination: {
+      color: 'white',
+    },
+    navigation: {
+      custom: {
+        prevEl: '#customPrevEl',
+        nextEl: document.getElementById('customNextEl'),
+      },
+    },
+  })
+
+  init('#multipleSlidesPerView', {
+    spaceBetween: 10,
+    slidesPerView: 3,
+    autoFixFullImg: true,
+    pagination: {
+      color: 'white',
+    },
+    navigation: {
+      color: 'white',
+    },
+  })
+
+  init('#addExplain', {
+    pagination: {
+      color: 'white',
+    },
+    navigation: {
+      color: 'white',
+    },
+  })
+
+  init('#autoFixFullImg', {
+    autoFixFullImg: true,
+    pagination: {
+      color: 'white',
+    },
+    navigation: {
+      color: 'white',
+    },
+  })
+
+  init('#autoHeight', {
+    autoFixFullImg: true,
+    autoHeight: true,
+    pagination: {
+      color: 'white',
+    },
+    navigation: {
+      color: 'white',
+    },
+  })
+
+  init('#allowMouseWheel', {
+    mousewheel: true,
+    pagination: {
+      color: 'white',
+    },
+    navigation: {
+      color: 'white',
+    },
+  })
+
+  init('#autoPlay', {
+    loop: true,
+    autoplay: 5000,
+    pagination: {
+      color: 'white',
+    },
+    navigation: {
+      color: 'white',
+    },
+  })
+
+  init('#bottomThumbsDemo', {
+    pagination: null,
+    navigation: {
+      color: 'white',
+    },
+  }).addThumbs('#bottomThumbs', {
+    slidesPerView: 5,
+  })
+
+  init('#rightThumbsDemo', {
+    pagination: null,
+    navigation: {
+      color: 'white',
+    },
+  }).addThumbs('#rightThumbs', {
+    direction: 'vertical',
+    slidesPerView: 5,
+  })
+
+  init('#mouseOverDemo', {
+    pagination: null,
+    navigation: {
+      color: 'white',
+    },
+  }).addThumbs('#mouseOverThumbs', {
+    slidesPerView: 5,
+  }, {
+    mouseOverMode: true,
+  })
+
+  init('#setInitialSlideDemo', {
+    pagination: null,
+    navigation: {
+      color: 'white',
+    },
+  })
+    .addThumbs('#setInitialSlideThumbs', {
+      slidesPerView: 5,
+    })
+    .setInitialSlide(2)
+</script>
 </body>
 </html>

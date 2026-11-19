@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "noEmit": false,
+    "outDir": "dist"
+  },
+  "include": ["src"],
+  // `standalone.ts` is a UMD-only entry: emitting a declaration for it would
+  // reference `swiper/css/bundle` from a `.d.ts`, which no consumer resolves.
+  "exclude": ["src/standalone.ts"]
+}

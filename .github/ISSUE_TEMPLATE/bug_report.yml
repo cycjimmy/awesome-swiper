@@ -1,0 +1,100 @@
+name: Bug report
+description: Create a report to help us improve
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug! Please fill out the sections below so the issue can be triaged quickly.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the bug
+      description: A clear and concise description of what the bug is.
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: The version of `@cycjimmy/awesome-swiper` you are using.
+      placeholder: 4.0.0
+    validations:
+      required: true
+
+  - type: input
+    id: swiper-version
+    attributes:
+      label: Swiper version
+      description: The version of the `swiper` package installed next to it.
+      placeholder: 14.4.0
+    validations:
+      required: true
+
+  - type: dropdown
+    id: usage
+    attributes:
+      label: How do you use the library
+      description: Pick the entry point that reproduces the problem.
+      options:
+        - Bundler with the ESM entry (`import '@cycjimmy/awesome-swiper'`)
+        - Script tag with `awesome-swiper.umd.min.js`
+        - Script tag with `awesome-swiper.standalone.umd.min.js`
+        - Other (describe it below)
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: OS, browser, and the bundler or dev server if the problem is build related.
+      placeholder: |
+        OS: macOS 15
+        Browser: Chrome 130
+        Bundler: Vite 8 / webpack 5 / none
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      description: Steps to reproduce the behavior, or a minimal demo (repository / demo page / code sandbox) that shows the problem.
+      placeholder: |
+        1. Go to '...'
+        2. Click on '....'
+        3. See error
+      render: text
+    validations:
+      required: true
+
+  - type: textarea
+    id: configuration
+    attributes:
+      label: Relevant configuration
+      description: The markup of the swiper plus the object passed to `init()` / `addThumbs()`.
+      render: ts
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected behavior
+      description: A clear and concise description of what you expected to happen.
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log output
+      description: Console errors, a stack trace, or a link to the failing demo, if available.
+      render: shell
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional context
+      description: Add any other context about the problem here.

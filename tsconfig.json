@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+    "moduleDetection": "force",
+    "module": "preserve",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "types": ["node"],
+    "strict": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noEmit": true,
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+    // `tasks/*.ts` run through Node's type stripping, which only erases syntax.
+    // `erasableSyntaxOnly` rejects enum/namespace/parameter properties at
+    // type-check time instead of at runtime.
+    "erasableSyntaxOnly": true,
+    "skipLibCheck": true
+  },
+  // Listed explicitly: a directory glob would also pull generated output
+  // (`dist/`, `.release/`, `.publish/`, `coverage/`) into the type check.
+  "include": [
+    "src",
+    "__test__",
+    "tasks",
+    "vite.config.ts",
+    "vitest.config.ts",
+    "eslint.config.ts",
+    "stylelint.config.ts"
+  ]
+}
